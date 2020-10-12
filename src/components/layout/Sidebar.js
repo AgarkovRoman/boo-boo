@@ -16,8 +16,9 @@ export const Sidebar = () => {
          </div>
 
          <ul className='sidebar__projects'>
-            Projjjjects
+            Projects will be here!
          </ul>
+         Add project component here
      </div>
  )
 }
