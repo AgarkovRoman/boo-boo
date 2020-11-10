@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {useProjectsValue, useSelectedProjectsValue} from "../context";
+import {IndividualProject} from "./IndividualProject";
 
 export const Projects = ({activeNull = true}) => {
     const [active, setActive] = useState(activeNull)
     const {setSelectedProject} = useSelectedProjectsValue()
     const {projects} = useProjectsValue()
+
+    console.log("projects", projects)
 
     return (
         projects && projects.map(project => (
@@ -20,7 +23,7 @@ export const Projects = ({activeNull = true}) => {
                     setSelectedProject(project.projectId)
                 }}
             >
-                {('Projects', JSON.stringify(project))}
+                <IndividualProject project={project}/>
             </li>
         ))
     )
