@@ -34,7 +34,7 @@ $generic-bg: #db4c3f;
 
 /*Mixins
 ==============================*/
-@mixin box-overlay {
+@mixin  box-overlay {
   box-shadow: $generic-box-shadow;
   position: absolute;
   width: 100%;
