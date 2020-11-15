@@ -14,14 +14,23 @@ export const Projects = ({activeNull = true}) => {
                 data-doc-id={project.docId}
                 data-testid='project-action'
                 className={active === project.projectId
-                        ? 'active__sidebar__project'
+                        ? 'active sidebar__project'
                         : 'sidebar__project'}
-                onClick={() => {
-                    setActive(project.projectId)
-                    setSelectedProject(project.projectId)
-                }}
             >
-                <IndividualProject project={project}/>
+                <div
+                    role='button'
+                    tabIndex={0}
+                    onClick={() => {
+                        setActive(project.projectId)
+                        setSelectedProject(project.projectId)
+                    }}
+                    onKeyDown={() => {
+                        setActive(project.projectId)
+                        setSelectedProject(project.projectId)
+                    }}
+                >
+                    <IndividualProject project={project}/>
+                </div>
             </li>
         ))
     )

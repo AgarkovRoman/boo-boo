@@ -7,7 +7,8 @@ export const AddProject = ({shouldShow = false}) => {
     const [show, setShow] = useState(shouldShow)
     const [projectName, setProjectName] = useState('')
     const projectId = generatePushId()
-    const {setProjects} = useProjectsValue()
+    const {projects, setProjects} = useProjectsValue()
+
     const addProject = () =>
         projectName && firebase
             .firestore()
@@ -17,7 +18,7 @@ export const AddProject = ({shouldShow = false}) => {
                 name: projectName,
                 userId: 'RM6FGvtHAMviaIDJNas'
             }).then(() => {
-                setProjects([])
+                setProjects([...projects])
                 setProjectName('')
                 setShow(false)
             })
