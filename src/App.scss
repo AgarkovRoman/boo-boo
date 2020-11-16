@@ -230,7 +230,7 @@ header {
             font-size: 30px;
 
             button {
-              //@include transparent-button();
+              @include transparent-button();
               color: white;
               cursor: pointer;
             }
@@ -238,7 +238,7 @@ header {
 
           &.settings__darkmode {
             button {
-              //@include transparent-button();
+              @include transparent-button();
               color: white;
               cursor: pointer;
               display: -webkit-box;

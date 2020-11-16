@@ -27,6 +27,9 @@ export const IndividualProject = ({project}) => {
             <span className='sidebar__project-delete'
                   data-testid='delete-project'
                   onClick={() => setShowConfirm(!showConfirm)}
+                  onKeyDown={() => setShowConfirm(!showConfirm)}
+                  tabIndex={0}
+                  role='button'
             ><FaTrashAlt/>
                 {showConfirm && (<div className='project-delete-modal'>
                     <div className='project-delete-modal__inner'>
@@ -34,9 +37,15 @@ export const IndividualProject = ({project}) => {
                         <button
                             type='button'
                             onClick={() => deleteProject(project.docId)}
+                            onKeyDown={() => deleteProject(project.docId)}
                         >Delete
                         </button>
-                        <span onClick={() => setShowConfirm(!showConfirm)}>Cancel</span>
+                        <span
+                            onClick={() => setShowConfirm(!showConfirm)}
+                            onKeyDown={() => setShowConfirm(!showConfirm)}
+                            role='button'
+                            tabIndex={0}
+                        >Cancel</span>
                     </div>
                 </div>)}
             </span>
