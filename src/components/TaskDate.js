@@ -8,6 +8,7 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
             <ul className='task-date__list'>
                 <li data-testid='task-date-overlay'>
                     <div
+                        aria-label='Select today as the task date'
                         onClick={() => {
                             setShowTaskDate(false)
                             setTaskDate(moment().format('DD/MM/YYYY'))
@@ -25,6 +26,7 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
 
                 <li data-testid='task-date-tomorrow'>
                     <div
+                        aria-label='Select tomorrow as the task date'
                         onClick={() => {
                             setShowTaskDate(false)
                             setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
@@ -45,6 +47,7 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
                     data-testid='task-date-next-week'
                 >
                     <div
+                        aria-label='Select next week as the task date'
                         onClick={() => {
                         setShowTaskDate(false)
                         setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))

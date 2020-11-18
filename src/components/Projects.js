@@ -18,7 +18,9 @@ export const Projects = ({activeNull = true}) => {
                         : 'sidebar__project'}
             >
                 <div
+                    aria-label='Add task'
                     role='button'
+                    aria-label={`Select ${project.name} as the task project`}
                     tabIndex={0}
                     onClick={() => {
                         setActive(project.projectId)

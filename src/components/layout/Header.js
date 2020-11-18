@@ -14,7 +14,9 @@ export const Header = ({darkMode, setDarkMode}) => {
                 </div>
                 <div className="settings">
                     <ul>
-                        <li data-testid="quick-add-task-action"
+                        <li
+                            aria-label='Quick add task'
+                            data-testid="quick-add-task-action"
                             className="settings__add">
                             <button
                             type='button'
@@ -28,6 +30,7 @@ export const Header = ({darkMode, setDarkMode}) => {
                             }}>+</button>
                         </li>
                         <li
+                            aria-label='Toggle dark mode'
                             data-testid="dark-mode-action"
                             className="settings__darkmode"
                         >

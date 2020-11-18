@@ -15,6 +15,7 @@ export const ProjectOverlay = ({setProject, showProjectOverlay, setShowProjectOv
                             data-testid='project-overlay-action'
                         >
                             <div
+                                aria-label='Select the task project '
                                 onClick={() => {
                                     setProject(project.projectId)
                                     setShowProjectOverlay(false)

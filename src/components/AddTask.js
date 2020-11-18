@@ -59,6 +59,7 @@ export const AddTask = ({
             {showAddTaskMain && (
                 <div
                     className='add-task__shallow'
+                    aria-label='Add task'
                     data-testid='show-main-action'
                     onClick={() => setShowMain(!showMain)}
                     onKeyDown={() => setShowMain(!showMain)}
@@ -77,6 +78,7 @@ export const AddTask = ({
                             <div data-testid='quick-add-task'>
                                 <h2 className='header'>Quick Add Task</h2>
                                 <span className='add-task__cancel-x'
+                                      aria-label='Cancel adding a task'
                                       data-testid='add-task-quick-cancel'
                                       onClick={() => {
                                           setShowMain(false)
@@ -99,7 +101,9 @@ export const AddTask = ({
                     />
                     <TaskDate setTaskDate={setTaskDate} showTaskDate={showTaskDate} setShowTaskDate={setShowTaskDate}/>
                     <input
-                        className='add-task__content' data-testid='add-task-content'
+                        className='add-task__content'
+                        aria-label='Enter your task'
+                        data-testid='add-task-content'
                         type='text'
                         value={task}
                         onChange={e => setTask(e.target.value)}
@@ -121,6 +125,7 @@ export const AddTask = ({
                     </button>
                     {!showQuickAddTask && (
                         <span
+                            aria-label='Cancel adding a task'
                             className='add-task__cancel'
                             data-testid='add-task-main-cancel'
                             onClick={() => {
@@ -138,6 +143,7 @@ export const AddTask = ({
                         </span>
                     )}
                     <span
+                        aria-label='Select project for the task'
                         className='add-task__project'
                         data-testid='show-project-overlay'
                         onClick={() => setShowProjectOverlay(!showProjectOverlay)}
@@ -149,6 +155,7 @@ export const AddTask = ({
                     </span>
 
                     <span
+                        aria-label='Select deadline for the task'
                         className='add-task__date'
                         data-testid='show-task-date-overlay'
                         onClick={() => setShowTaskDate(!showTaskDate)}

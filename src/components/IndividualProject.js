@@ -25,6 +25,7 @@ export const IndividualProject = ({project}) => {
             <span className='sidebar__dot'>•</span>
             <span className='sidebar__project-name'>{project.name}</span>
             <span className='sidebar__project-delete'
+                  aria-label='Confirm deletion of project'
                   data-testid='delete-project'
                   onClick={() => setShowConfirm(!showConfirm)}
                   onKeyDown={() => setShowConfirm(!showConfirm)}
@@ -41,6 +42,7 @@ export const IndividualProject = ({project}) => {
                         >Delete
                         </button>
                         <span
+                            aria-label='Cancel deletion of project'
                             onClick={() => setShowConfirm(!showConfirm)}
                             onKeyDown={() => setShowConfirm(!showConfirm)}
                             role='button'
