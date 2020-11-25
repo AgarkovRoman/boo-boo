@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {FaRegPaperPlane, FaSpaceShuttle, FaSun} from "react-icons/all";
+import {FaRegPaperPlane, FaSpaceShuttle, FaSun} from "react-icons/fa";
 
 export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
     return (
