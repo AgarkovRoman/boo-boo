@@ -90,9 +90,20 @@ describe('< AddTask />', () => {
 
         it('render the < AddTask /> and add task to the inbox and clears the state', () => {
             useSelectedProjectsValue.mockImplementation(() => ({
-                selectedProject: 'TODAY'
+                selectedProject: 'INBOX'
             }))
+
+            const setShowQuickAddTask = jest.fn
+            const { queryByTestId } = render(<AddTask showQuickAddTask/>)
+            fireEvent.click(queryByTestId('show-main-action'))
+            expect(queryByTestId('add-task-content')).toBeTruthy()
+            fireEvent.change(queryByTestId('add-task-content'), {
+                target: {value: 'I am a new task'}
+            })
+            expect(queryByTestId('add-task-content').value).toBe('I am a new task')
+
+            fireEvent.click(queryByTestId('add-task'))
+            expect(queryByTestId('add-task-main')).toBeTruthy()
         })
     })
-
 })
