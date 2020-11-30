@@ -6,7 +6,7 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
     return (
         showTaskDate && <div className='task-date' data-tesid='task-date-overlay'>
             <ul className='task-date__list'>
-                <li data-testid='task-date-today'>
+                <li>
                     <div
                         aria-label='Select today as the task date'
                         onClick={() => {
@@ -18,13 +18,14 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
                             setTaskDate(moment().format('DD/MM/YYYY'))
                         }}
                         role='button'
+                        data-testid='task-date-today'
                         tabIndex={0}>
                         <span><FaSpaceShuttle/></span>
                         <span>Today</span>
                     </div>
                 </li>
 
-                <li data-testid='task-date-tomorrow'>
+                <li>
                     <div
                         aria-label='Select tomorrow as the task date'
                         onClick={() => {
@@ -37,15 +38,14 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
                         }}
                         role='button'
                         tabIndex={0}
+                        data-testid='task-date-tomorrow'
                     >
                         <span><FaSun/></span>
                         <span>Tomorrow</span>
                     </div>
                 </li>
 
-                <li
-                    data-testid='task-date-next-week'
-                >
+                <li>
                     <div
                         aria-label='Select next week as the task date'
                         onClick={() => {
@@ -58,6 +58,7 @@ export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
                         }}
                         role='button'
                         tabIndex={0}
+                        data-testid='task-date-next-week'
                     >
                     <span><FaRegPaperPlane/></span>
                     <span>Next week</span>
