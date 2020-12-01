@@ -12,9 +12,9 @@ export const ProjectOverlay = ({setProject, showProjectOverlay, setShowProjectOv
                     {projects.map(project => (
                         <li
                             key={project.projectId}
-                            data-testid='project-overlay-action'
                         >
                             <div
+                                data-testid='project-overlay-action'
                                 aria-label='Select the task project '
                                 onClick={() => {
                                     setProject(project.projectId)
