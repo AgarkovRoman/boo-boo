@@ -58,13 +58,43 @@ describe('< AddTask />', () => {
             expect(queryByTestId('add-task-main')).toBeTruthy()
         })
 
-        it('render the < AddTask /> date overlay when clicked', () => {
+        it('render the < AddTask/> project overlay when using onClick', () => {
+            const {queryByTestId} = render(<AddTask showAddTaskMain />)
+
+            fireEvent.click(queryByTestId('show-main-action'))
+            expect(queryByTestId('add-task-main')).toBeTruthy()
+
+            fireEvent.click(queryByTestId('show-project-overlay'))
+            expect(queryByTestId('project-overlay')).toBeTruthy()
+        })
+
+        it('render the < AddTask/> project overlay when using onKeyDown', () => {
+            const {queryByTestId} = render(<AddTask showAddTaskMain />)
+
+            fireEvent.keyDown(queryByTestId('show-main-action'))
+            expect(queryByTestId('add-task-main')).toBeTruthy()
+
+            fireEvent.keyDown(queryByTestId('show-project-overlay'))
+            expect(queryByTestId('project-overlay')).toBeTruthy()
+        })
+
+        it('render the < AddTask /> date overlay when using onClick', () => {
             const {queryByTestId} = render(<AddTask showAddTaskMain />)
 
             fireEvent.click(queryByTestId('show-main-action'))
             expect(queryByTestId('add-task-main')).toBeTruthy()
 
             fireEvent.click(queryByTestId('show-task-date-overlay'))
+            expect(queryByTestId('task-date-overlay')).toBeFalsy()
+        })
+
+        it('render the < AddTask /> date overlay when using onKeyDown', () => {
+            const {queryByTestId} = render(<AddTask showAddTaskMain />)
+
+            fireEvent.keyDown(queryByTestId('show-main-action'))
+            expect(queryByTestId('add-task-main')).toBeTruthy()
+
+            fireEvent.keyDown(queryByTestId('show-task-date-overlay'))
             expect(queryByTestId('task-date-overlay')).toBeFalsy()
         })
 
