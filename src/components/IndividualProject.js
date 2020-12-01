@@ -43,6 +43,7 @@ export const IndividualProject = ({project}) => {
                         </button>
                         <span
                             aria-label='Cancel deletion of project'
+                            data-testid='cancel-project-delete'
                             onClick={() => setShowConfirm(!showConfirm)}
                             onKeyDown={() => setShowConfirm(!showConfirm)}
                             role='button'
