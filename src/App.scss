@@ -287,7 +287,7 @@ header {
   &__project {
     cursor: pointer;
 
-    div:nth-child(1) {
+    &-item {
       padding: 5px 0;
       padding-left: 10px;
       padding-right: 15px;
@@ -432,7 +432,10 @@ header {
 /* Show Confirm Delete
   ============================================ */
 .project-delete-modal {
-  position: relative;
+  //position: relative;
+  position: absolute;
+  width: 250px;
+  right: 5px;
 
   &__inner {
     @include box-overlay();
@@ -684,6 +687,8 @@ header {
 .project-overlay {
   @include box-overlay();
   background-color: white;
+  width: 200px;
+  right: 0;
 
   @include mq('900px') {
     width: 200px;
