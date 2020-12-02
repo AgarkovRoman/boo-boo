@@ -8,33 +8,38 @@ export const Projects = ({activeNull = true}) => {
     const {projects} = useProjectsValue()
 
     return (
-        projects && projects.map(project => (
+        projects &&
+        projects.map((project) => (
             <li
                 key={project.projectId}
+                data-testid="project-action-parent"
                 data-doc-id={project.docId}
-                data-testid='project-action-parent'
-                className={active === project.projectId
+                className={
+                    active === project.projectId
                         ? 'active sidebar__project'
-                        : 'sidebar__project'}
+                        : 'sidebar__project'
+                }
             >
                 <div
-                    data-testid='project-action'
-                    aria-label='Add task'
-                    role='button'
-                    aria-label={`Select ${project.name} as the task project`}
+                    className='sidebar__project-item'
+                    role="button"
+                    data-testid="project-action"
                     tabIndex={0}
+                    aria-label={`Select ${project.name} as the task project`}
                     onClick={() => {
-                        setActive(project.projectId)
-                        setSelectedProject(project.projectId)
+                        setActive(project.projectId);
+                        setSelectedProject(project.projectId);
                     }}
-                    onKeyDown={() => {
-                        setActive(project.projectId)
-                        setSelectedProject(project.projectId)
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            setActive(project.projectId);
+                            setSelectedProject(project.projectId);
+                        }
                     }}
                 >
-                    <IndividualProject project={project}/>
+                    <IndividualProject project={project} />
                 </div>
             </li>
         ))
-    )
-}
+    );
+};
