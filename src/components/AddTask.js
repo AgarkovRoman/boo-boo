@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {FaRegListAlt, FaRegCalendarAlt} from "react-icons/fa"
+import {FaRegListAlt, FaRegCalendarAlt, FaRegTimesCircle} from "react-icons/fa"
 import firebase from "firebase"
 import moment from 'moment'
 import {useSelectedProjectsValue} from "../context";
@@ -96,9 +96,7 @@ export const AddTask = ({
                                     }}
                                     tabIndex={0}
                                     role="button"
-                                >
-                  X
-                </span>
+                                ><FaRegTimesCircle/></span>
                             </div>
                         </>
                     )}
