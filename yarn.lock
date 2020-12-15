@@ -4085,7 +4085,7 @@ destroy@~1.0.4:
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
   integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
 
-detect-libc@^1.0.2:
+detect-libc@^1.0.2, detect-libc@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
@@ -5927,6 +5927,11 @@ inquirer@^7.0.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+  integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
+
 internal-ip@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -7588,7 +7593,7 @@ mkdirp@0.5.1:
   dependencies:
     minimist "0.0.8"
 
-"mkdirp@>=0.5 0", mkdirp@^0.5.0:
+"mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.5:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
@@ -7684,7 +7689,7 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-needle@^2.2.1:
+needle@^2.2.1, needle@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.5.2.tgz#cf1a8fce382b5a280108bba90a14993c00e4010a"
   integrity sha512-LbRIwS9BfkPvNwNHlsA41Q29kL2L/6VaOJ0qisM5lLWsTV3nP15abO5ITL6L81zqFhzjRKDAYjpcBcwM0AVvLQ==
@@ -7818,6 +7823,22 @@ node-pre-gyp@^0.13.0:
     semver "^5.3.0"
     tar "^4"
 
+node-pre-gyp@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.17.0.tgz#5af3f7b4c3848b5ed00edc3d298ff836daae5f1d"
+  integrity sha512-abzZt1hmOjkZez29ppg+5gGqdPLUuJeAEwVPtHYEJgx0qzttCbcKFpxrCQn2HYbwCv2c+7JwH4BgEzFkUGpn4A==
+  dependencies:
+    detect-libc "^1.0.3"
+    mkdirp "^0.5.5"
+    needle "^2.5.2"
+    nopt "^4.0.3"
+    npm-packlist "^1.4.8"
+    npmlog "^4.1.2"
+    rc "^1.2.8"
+    rimraf "^2.7.1"
+    semver "^5.7.1"
+    tar "^4.4.13"
+
 node-releases@^1.1.52:
   version "1.1.52"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.52.tgz#bcffee3e0a758e92e44ecfaecd0a47554b0bcba9"
@@ -7855,7 +7876,7 @@ node-sass@^4.14.1:
   dependencies:
     abbrev "1"
 
-nopt@^4.0.1:
+nopt@^4.0.1, nopt@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-4.0.3.tgz#a375cad9d02fd921278d954c2254d5aa57e15e48"
   integrity sha512-CvaGwVMztSMJLOeXPrez7fyfObdZqNUK1cPAEzLHrTybIua9pMdmmPR5YwtfNftIOMv3DPUhFaxsZMNTQO20Kg==
@@ -7917,7 +7938,7 @@ npm-normalize-package-bin@^1.0.1:
   resolved "https://registry.yarnpkg.com/npm-normalize-package-bin/-/npm-normalize-package-bin-1.0.1.tgz#6e79a41f23fd235c0623218228da7d9c23b8f6e2"
   integrity sha512-EPfafl6JL5/rU+ot6P3gRSCpPDW5VmIzX959Ob1+ySFUuuYHWHekXpwdUZcKP5C+DS4GEtdJluwBjnsNDl+fSA==
 
-npm-packlist@^1.1.6:
+npm-packlist@^1.1.6, npm-packlist@^1.4.8:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.4.8.tgz#56ee6cc135b9f98ad3d51c1c95da22bbb9b2ef3e"
   integrity sha512-5+AZgwru5IevF5ZdnFglB5wNlHG1AOOuw28WhUq8/8emhBmLv6jX5by4WJCh7lW0uSYZYS6DXqIsyZVIXRZU9A==
@@ -7933,7 +7954,7 @@ npm-run-path@^2.0.0:
   dependencies:
     path-key "^2.0.0"
 
-"npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.0, npmlog@^4.0.2:
+"npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.0, npmlog@^4.0.2, npmlog@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"
   integrity sha512-2uUqazuKlTaSI/dC8AzicUck7+IrEaOnN/e0jd3Xtt1KcGpwx30v50mL7oPyr/h9bL3E4aZccVwpwP+5W9Vjkg==
@@ -9528,7 +9549,7 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-rc@^1.2.7:
+rc@^1.2.7, rc@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.8.tgz#cd924bf5200a075b83c188cd6b9e211b7fc0d3ed"
   integrity sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==
@@ -9594,6 +9615,11 @@ react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
+
+react-hook-form@^6.13.1:
+  version "6.13.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.13.1.tgz#b9c0aa61f746db8169ed5e1050de21cacb1947d6"
+  integrity sha512-Q0N7MYcbA8SigYufb02h9z97ZKCpIbe62rywOTPsK4Ntvh6fRTGDXSuzWuRhLHhArLoWbGrWYSNSS4tlb+OFXg==
 
 react-icons@^3.10.0:
   version "3.10.0"
@@ -10285,7 +10311,7 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
+"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0, semver@^5.7.1:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
@@ -11031,7 +11057,7 @@ tar@^2.0.0:
     fstream "^1.0.12"
     inherits "2"
 
-tar@^4:
+tar@^4, tar@^4.4.13:
   version "4.4.13"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
   integrity sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
