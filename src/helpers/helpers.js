@@ -1,4 +1,4 @@
-import {collatedTasks} from '../constants'
+import {collatedTasks} from '../constants/collatedTasks'
 
 export const getTitle = (projects, projectId) => projects.find(project => project.projectId === projectId)
 

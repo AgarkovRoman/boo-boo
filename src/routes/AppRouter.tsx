@@ -4,6 +4,7 @@ import {SignIn} from "../pages/SignIn/SignIn";
 import {Content} from "../components/layout/Content";
 import {Header} from "../components/layout/Header";
 import {SignUp} from "../pages/SignUp/SignUp";
+import * as ROUTER from '../constants/routes'
 
 export const AppRouter: React.FC = () => {
     const [darkMode, setDarkMode] = useState(false)
@@ -11,9 +12,9 @@ export const AppRouter: React.FC = () => {
     return (
         <BrowserRouter>
             <main className={darkMode ? 'darkmode' : ''} data-testid='application'>
-                <Route exact path={'/signin'}><SignIn/></Route>
-                <Route exact path={'/signup'}><SignUp/></Route>
-                <Route exact path={'/'}>
+                <Route exact path={ROUTER.SIGN_IN}><SignIn/></Route>
+                <Route exact path={ROUTER.SIGN_UP}><SignUp/></Route>
+                <Route exact path={ROUTER.HOME}>
                     <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
                     <Content/>
                 </Route>

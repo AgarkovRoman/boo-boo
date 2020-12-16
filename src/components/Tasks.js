@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Checkbox} from "./Checkbox";
 import {useTasks} from "../hooks";
-import {collatedTasks} from "../constants";
+import {collatedTasks} from "../constants/collatedTasks";
 import {getTitle , getCollatedTitle, collatedTasksExist} from "../helpers/helpers";
 import {useSelectedProjectsValue, useProjectsValue} from "../context";
 import {AddTask} from "./AddTask";

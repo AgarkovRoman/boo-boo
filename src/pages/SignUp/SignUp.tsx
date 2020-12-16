@@ -2,6 +2,7 @@ import React from 'react'
 import {useForm} from 'react-hook-form';
 import classes from './SignUp.module.scss'
 import {NavLink} from "react-router-dom";
+import * as ROUTER from '../../constants/routes'
 
 type FormData = {
     Email: string
@@ -43,7 +44,7 @@ export const SignUp: React.FC = () => {
                     type="submit"
                 >Зарегистрироваться</button>
 
-                <p>Уже есть аккаунт? <NavLink to={'/signin'}>Sign in now</NavLink></p>
+                <p>Уже есть аккаунт? <NavLink to={ROUTER.SIGN_IN}>Sign in now</NavLink></p>
             </form>
         </div>
     )
