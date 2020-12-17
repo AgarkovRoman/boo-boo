@@ -1,8 +1,9 @@
-import React from 'react'
-import {useForm} from 'react-hook-form';
+import React, {useContext, useState} from 'react'
 import classes from './SignIn.module.scss'
-import {NavLink} from "react-router-dom";
+import {useForm} from 'react-hook-form';
+import {NavLink, useHistory} from "react-router-dom";
 import * as ROUTER from '../../constants/routes'
+import {FirebaseContext} from "../../context/firebase";
 
 type FormData = {
     Email: string
@@ -10,10 +11,22 @@ type FormData = {
 }
 
 export const SignIn: React.FC = () => {
+    const history = useHistory()
     const {register, handleSubmit, errors} = useForm<FormData>();
+    const {firebase}:any = useContext(FirebaseContext)
+    const [error, setError] = useState()
 
     const onSubmit = (data: FormData) => {
         console.log("data", data);
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(data.Email, data.Password)
+            .then(() => {
+                history.push(ROUTER.HOME)
+            })
+            .catch((error:any) => {
+                setError(error.message)
+            })
     };
 
     console.log(errors);
@@ -21,6 +34,7 @@ export const SignIn: React.FC = () => {
     return (
         <div className={classes.wrapper}>
             <h3>Вход</h3>
+            {error}
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                 <label>Email
                     <input type="text" placeholder="Email" name="Email"
@@ -36,7 +50,8 @@ export const SignIn: React.FC = () => {
                 <button
                     className={classes.button}
                     type="submit"
-                >Войти</button>
+                >Войти
+                </button>
 
                 <p>Еще нет аккаунта? <NavLink to={ROUTER.SIGN_UP}>Sign up now</NavLink></p>
             </form>
