@@ -1,23 +1,37 @@
 import React, {useState} from "react";
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {SignIn} from "../pages/SignIn/SignIn";
 import {Content} from "../components/layout/Content";
 import {Header} from "../components/layout/Header";
 import {SignUp} from "../pages/SignUp/SignUp";
-import * as ROUTER from '../constants/routes'
+import * as ROUTES from '../constants/routes'
+import {IsUserRedirect, ProtectedRoute} from "../helpers/routes";
+import {useAuthListener} from "../hooks";
 
 export const AppRouter: React.FC = () => {
     const [darkMode, setDarkMode] = useState(false)
+    const {user} = useAuthListener()
 
     return (
         <BrowserRouter>
             <main className={darkMode ? 'darkmode' : ''} data-testid='application'>
-                <Route exact path={ROUTER.SIGN_IN}><SignIn/></Route>
-                <Route exact path={ROUTER.SIGN_UP}><SignUp/></Route>
-                <Route exact path={ROUTER.HOME}>
-                    <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
-                    <Content/>
-                </Route>
+                <Switch>
+                    <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.SIGN_IN} exact>
+                        <SignIn/>
+                    </IsUserRedirect>
+                    <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.SIGN_UP} exact>
+                        <SignUp/>
+                    </IsUserRedirect>
+
+                    <ProtectedRoute user={user} path={ROUTES.APP} exact>
+                        <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
+                        <Content/>
+                    </ProtectedRoute>
+
+                    <Route path={ROUTES.HOME}>
+                        <h1>home page</h1>
+                    </Route>
+                </Switch>
             </main>
         </BrowserRouter>
     )
