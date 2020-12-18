@@ -12,8 +12,8 @@ type FormData = {
 
 export const SignIn: React.FC = () => {
     const history = useHistory()
-    const {register, handleSubmit, errors} = useForm<FormData>();
     const {firebase}:any = useContext(FirebaseContext)
+    const {register, handleSubmit, errors} = useForm<FormData>();
     const [error, setError] = useState()
 
     const onSubmit = (data: FormData) => {
@@ -22,7 +22,7 @@ export const SignIn: React.FC = () => {
             .auth()
             .signInWithEmailAndPassword(data.Email, data.Password)
             .then(() => {
-                history.push(ROUTER.HOME)
+                history.push(ROUTER.APP)
             })
             .catch((error:any) => {
                 setError(error.message)

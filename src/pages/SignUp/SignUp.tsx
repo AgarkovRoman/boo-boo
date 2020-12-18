@@ -18,12 +18,11 @@ export const SignUp: React.FC = () => {
     const [error, setError] = useState()
 
     const onSubmit = (data: FormData) => {
-        console.log("data", data);
         firebase
             .auth()
             .createUserWithEmailAndPassword(data.Email, data.Password)
             .then(() => {
-                history.push(ROUTER.HOME)
+                history.push(ROUTER.APP)
             })
             .catch((error:any) => {
                 setError(error.message)
