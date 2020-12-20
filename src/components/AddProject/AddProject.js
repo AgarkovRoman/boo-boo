@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {firebase} from "../firebase";
-import {generatePushId} from "../helpers/helpers";
-import {useProjectsValue} from "../context";
-import {Button} from "./UI/Button/Button";
+import './AddProject.scss'
+import {firebase} from "../../firebase";
+import {generatePushId} from "../../helpers/helpers";
+import {useProjectsValue} from "../../context";
+import {Button} from "../UI/Button/Button";
 
 export const AddProject = ({shouldShow = false}) => {
     const [show, setShow] = useState(shouldShow);
@@ -28,24 +29,23 @@ export const AddProject = ({shouldShow = false}) => {
             });
 
     return (
-        <div className="add-project" data-testid="add-project">
-            {!show && <>
+        <div className="add-project-wrapper">
+            {!show && <div className="add-project"
+                           data-testid="add-project"
+                           aria-label="Add Project"
+                           data-testid="add-project-action"
+                           onClick={() => setShow(!show)}
+                           onKeyDown={(e) => {
+                               if (e.key === 'Enter') setShow(!show);
+                           }}
+                           role="button"
+                           tabIndex={0}
+            >
                 <span className="add-project__plus">+</span>
-                <span
-                    aria-label="Add Project"
-                    data-testid="add-project-action"
-                    className="add-project__text"
-                    onClick={() => setShow(!show)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') setShow(!show);
-                    }}
-                    role="button"
-                    tabIndex={0}
-                > Add Project</span>
-            </>
-
+                <span className="add-project__text">Add Project</span>
+            </div>
             }
-            {show && (
+            {show && <>
                 <div className="add-project__input" data-testid="add-project-inner">
                     <input
                         value={projectName}
@@ -55,12 +55,14 @@ export const AddProject = ({shouldShow = false}) => {
                         type="text"
                         placeholder="Name your project"
                     />
+                </div>
+                <div className={'add-project__buttons'}>
                     <Button color={'primary'} label={'Add Project'} onClick={addProject}
                             dataTestId={'add-project-submit'}/>
                     <Button color={'transparent'} label={'Cancel'} onClick={() => setShow(false)}
                             dataTestId={'hide-project-overlay'}/>
                 </div>
-            )}
+            </>}
         </div>
     );
 };
