@@ -1,10 +1,20 @@
-import React, {useState} from "react";
-import {FaAdjust} from 'react-icons/fa';
+import React, {useContext, useState} from "react";
+import {FaAdjust, FaSignOutAlt, FaPlus} from 'react-icons/fa';
 import {AddTask} from "../AddTask";
+import {FirebaseContext} from "../../context/firebase";
 
 export const Header = ({darkMode, setDarkMode}) => {
     const [shouldShowMain, setShouldShowMain] = useState(false)
     const [showQuickAddTask, setShowQuickAddTask] = useState(false)
+    const {firebase} = useContext(FirebaseContext)
+
+    const logOutHandler = () => {
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+        }).catch(function (error) {
+            console.log(error)
+        });
+    }
 
     return (
         <header className="header" data-testid="header">
@@ -17,30 +27,50 @@ export const Header = ({darkMode, setDarkMode}) => {
                         <li
                             aria-label='Quick add task'
                             data-testid="quick-add-task-action"
-                            className="settings__add">
+                            className="settings__item">
                             <button
-                            type='button'
-                            onClick={() => {
-                                setShowQuickAddTask(true)
-                                setShouldShowMain(true)
-                            }}
-                            onKeyDown={() => {
-                                setShowQuickAddTask(true)
-                                setShouldShowMain(true)
-                            }}>+</button>
+                                type='button'
+                                onClick={() => {
+                                    setShowQuickAddTask(true)
+                                    setShouldShowMain(true)
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        setShowQuickAddTask(true)
+                                        setShouldShowMain(true)
+                                    }
+                                }}><FaPlus/>
+                            </button>
                         </li>
                         <li
                             aria-label='Toggle dark mode'
                             data-testid="dark-mode-action"
-                            className="settings__darkmode"
+                            className="settings__item"
                         >
                             <button
                                 type='button'
                                 onClick={() => setDarkMode(!darkMode)}
-                                onKeyDown={() => setDarkMode(!darkMode)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') setDarkMode(!darkMode)
+                                }}
                             >
-                            <FaAdjust/>
+                                <FaAdjust/>
                             </button>
+                        </li>
+                        <li
+                            aria-label='Sign out'
+                            data-testid=""
+                            className="settings__item"
+                        >
+                            <button
+                                type='button'
+                                onClick={() => logOutHandler()}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') logOutHandler()
+                                }}
+                            ><FaSignOutAlt/></button>
+
+
                         </li>
                     </ul>
                 </div>
