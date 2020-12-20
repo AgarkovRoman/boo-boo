@@ -1,12 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900");
-html {
+*, *:before, *:after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
 }
 
 body {
@@ -109,17 +104,10 @@ header nav div.settings ul li:hover {
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.2);
 }
-header nav div.settings ul li.settings__add {
+header nav div.settings ul li.settings__item:not(:last-child) {
   margin-right: 15px;
-  font-size: 30px;
 }
-header nav div.settings ul li.settings__add button {
-  background-color: transparent;
-  border: 0;
-  color: white;
-  cursor: pointer;
-}
-header nav div.settings ul li.settings__darkmode button {
+header nav div.settings ul li.settings__item button {
   background-color: transparent;
   border: 0;
   color: white;
@@ -128,7 +116,7 @@ header nav div.settings ul li.settings__darkmode button {
   display: -ms-flexbox;
   display: flex;
 }
-header nav div.settings ul li.settings__darkmode button svg {
+header nav div.settings ul li.settings__item button svg {
   width: 20px;
   height: 20px;
 }
@@ -230,8 +218,8 @@ header nav div.settings ul li.settings__darkmode button svg {
   display: -ms-flexbox;
   display: flex;
   border-bottom: 1px solid #f1f1f1;
-  padding-left: 10px;
   cursor: pointer;
+  padding: 11px;
 }
 .sidebar__middle span {
   color: #0000008a;
@@ -246,7 +234,6 @@ header nav div.settings ul li.settings__darkmode button svg {
   color: #333;
   font-size: 15px;
   font-weight: bold;
-  padding-bottom: 20px;
 }
 .sidebar__generic li {
   list-style-type: none;

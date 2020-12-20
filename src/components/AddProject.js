@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {firebase} from "../firebase";
 import {generatePushId} from "../helpers/helpers";
 import {useProjectsValue} from "../context";
+import {Button} from "./UI/Button/Button";
 
 export const AddProject = ({shouldShow = false}) => {
     const [show, setShow] = useState(shouldShow);
@@ -28,6 +29,22 @@ export const AddProject = ({shouldShow = false}) => {
 
     return (
         <div className="add-project" data-testid="add-project">
+            {!show && <>
+                <span className="add-project__plus">+</span>
+                <span
+                    aria-label="Add Project"
+                    data-testid="add-project-action"
+                    className="add-project__text"
+                    onClick={() => setShow(!show)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') setShow(!show);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                > Add Project</span>
+            </>
+
+            }
             {show && (
                 <div className="add-project__input" data-testid="add-project-inner">
                     <input
@@ -38,43 +55,12 @@ export const AddProject = ({shouldShow = false}) => {
                         type="text"
                         placeholder="Name your project"
                     />
-                    <button
-                        className="add-project__submit"
-                        type="button"
-                        onClick={() => addProject()}
-                        data-testid="add-project-submit"
-                    >
-                        Add Project
-                    </button>
-                    <span
-                        aria-label="Cancel adding project"
-                        data-testid="hide-project-overlay"
-                        className="add-project__cancel"
-                        onClick={() => setShow(false)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') setShow(false);
-                        }}
-                        role="button"
-                        tabIndex={0}
-                    >
-            Cancel
-          </span>
+                    <Button color={'primary'} label={'Add Project'} onClick={addProject}
+                            dataTestId={'add-project-submit'}/>
+                    <Button color={'transparent'} label={'Cancel'} onClick={() => setShow(false)}
+                            dataTestId={'hide-project-overlay'}/>
                 </div>
             )}
-            <span className="add-project__plus">+</span>
-            <span
-                aria-label="Add Project"
-                data-testid="add-project-action"
-                className="add-project__text"
-                onClick={() => setShow(!show)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') setShow(!show);
-                }}
-                role="button"
-                tabIndex={0}
-            >
-        Add Project
-      </span>
         </div>
     );
 };
