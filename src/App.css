@@ -273,61 +273,6 @@ header nav div.settings ul li.settings__item button svg {
   background-color: white;
 }
 
-/* Show Confirm Delete
-  ============================================ */
-.project-delete-modal {
-  position: absolute;
-  width: 250px;
-  right: 5px;
-}
-.project-delete-modal__inner {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  top: 85px;
-  border-radius: 3px;
-  z-index: 99;
-  width: 200px;
-  padding: 10px;
-  top: 10px;
-  right: 0;
-  background-color: white;
-}
-.project-delete-modal__inner p {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  line-height: normal;
-  font-weight: normal;
-  font-size: 15px;
-}
-.project-delete-modal__inner button {
-  width: "50px";
-  background-color: #db4c3f;
-  color: #fff !important;
-  border: 1px solid transparent;
-  margin-right: 5px;
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 13px !important;
-  line-height: 17px;
-  padding: 6px 12px 7px 12px;
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
-  border-radius: 3px !important;
-  text-decoration: none !important;
-  text-align: center;
-  cursor: pointer;
-}
-.project-delete-modal__inner span {
-  color: #555;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 2px 5px;
-  font-weight: normal;
-}
-
 /* Main Content
   ============================================ */
 .content {

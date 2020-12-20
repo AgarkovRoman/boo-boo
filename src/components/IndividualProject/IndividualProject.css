@@ -1,0 +1,29 @@
+.project-delete-modal {
+  position: absolute;
+  width: 250px;
+  right: 5px;
+}
+.project-delete-modal__inner {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+  position: absolute;
+  border-radius: 3px;
+  z-index: 99;
+  width: 200px;
+  padding: 10px;
+  top: 10px;
+  right: 0;
+  background-color: white;
+}
+.project-delete-modal__inner p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  line-height: normal;
+  font-weight: normal;
+  font-size: 15px;
+}
+.project-delete-modal__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=IndividualProject.css.map */
