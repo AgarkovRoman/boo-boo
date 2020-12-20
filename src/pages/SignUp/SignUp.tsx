@@ -6,6 +6,7 @@ import * as ROUTER from '../../constants/routes'
 import {FirebaseContext} from "../../context/firebase";
 
 type FormData = {
+    Name: string
     Email: string
     Password: string
     // RepeatPassword: string
@@ -14,17 +15,22 @@ type FormData = {
 export const SignUp: React.FC = () => {
     const history = useHistory()
     const {register, handleSubmit, errors} = useForm<FormData>();
-    const {firebase}:any = useContext(FirebaseContext)
+    const {firebase}: any = useContext(FirebaseContext)
     const [error, setError] = useState()
 
     const onSubmit = (data: FormData) => {
         firebase
             .auth()
             .createUserWithEmailAndPassword(data.Email, data.Password)
+            .then((result: any) => {
+                result.user?.updateProfile({
+                    displayName: data.Name
+                })
+            })
             .then(() => {
                 history.push(ROUTER.APP)
             })
-            .catch((error:any) => {
+            .catch((error: any) => {
                 setError(error.message)
             })
     };
@@ -36,6 +42,11 @@ export const SignUp: React.FC = () => {
             <h3>Регистрация</h3>
             {error}
             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+                <label>Name
+                    <input type="text" placeholder="Name" name="Name"
+                           ref={register({required: true})}/>
+                    {/*{errors.Email && <p>Обязательное поле</p>}*/}
+                </label>
                 <label>Email
                     <input type="text" placeholder="Email" name="Email"
                            ref={register({required: true, pattern: /^\S+@\S+$/i})}/>
@@ -55,7 +66,8 @@ export const SignUp: React.FC = () => {
                 <button
                     className={classes.button}
                     type="submit"
-                >Зарегистрироваться</button>
+                >Зарегистрироваться
+                </button>
 
                 <p>Уже есть аккаунт? <NavLink to={ROUTER.SIGN_IN}>Sign in now</NavLink></p>
             </form>
