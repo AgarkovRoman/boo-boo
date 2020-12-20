@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {FaAdjust, FaSignOutAlt, FaPlus} from 'react-icons/fa';
-import {AddTask} from "../AddTask";
+import {AddTask} from "../AddTask/AddTask";
 import {FirebaseContext} from "../../context/firebase";
 
 export const Header = ({darkMode, setDarkMode}) => {

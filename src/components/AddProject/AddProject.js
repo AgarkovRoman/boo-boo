@@ -31,7 +31,7 @@ export const AddProject = ({shouldShow = false}) => {
     return (
         <div className="add-project-wrapper">
             {!show && <div className="add-project"
-                           data-testid="add-project"
+                           // data-testid="add-project"
                            aria-label="Add Project"
                            data-testid="add-project-action"
                            onClick={() => setShow(!show)}
