@@ -29,3 +29,5 @@ export const generatePushId = (() => {
         return id;
     };
 })();
+
+export const getUser = () => JSON.parse(localStorage.getItem('authUser'))
