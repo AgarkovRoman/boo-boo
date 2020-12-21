@@ -32,5 +32,17 @@
   list-style-type: none;
   border-bottom: 1px solid #f0f0f0;
 }
+.tasks__done {
+  margin: 0 auto;
+  width: 50%;
+  min-height: 250px;
+  background-image: url("notFound.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.tasks__done-text {
+  text-align: center;
+}
 
 /*# sourceMappingURL=Tasks.css.map */

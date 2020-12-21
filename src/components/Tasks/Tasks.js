@@ -40,8 +40,11 @@ export const Tasks = () => {
                     </li>
                 ))}
             </ul>
-
             <AddTask/>
+            {tasks.length === 0 &&
+            <div className={'tasks__done'}>
+                <div className={'tasks__done-text'}>All tasks are done!</div>
+            </div>}
         </div>
     )
 }
