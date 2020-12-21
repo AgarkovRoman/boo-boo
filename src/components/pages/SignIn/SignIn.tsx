@@ -4,7 +4,6 @@ import {useForm} from 'react-hook-form';
 import {NavLink, useHistory} from "react-router-dom";
 import * as ROUTER from '../../../constants/routes'
 import {FirebaseContext} from "../../../context/firebase";
-import signin_img from './signin.svg'
 
 type FormData = {
     Email: string
@@ -56,9 +55,6 @@ export const SignIn: React.FC = () => {
                     </button>
                 </form>
                 <p>Еще нет аккаунта? <NavLink to={ROUTER.SIGN_UP}>Sign up now</NavLink></p>
-            {/*<picture>*/}
-            {/*    <img className={classes.image} src={signin_img} width={'600px'} height={'600px'}/>*/}
-            {/*</picture>*/}
             </div>
         </div>
     )
