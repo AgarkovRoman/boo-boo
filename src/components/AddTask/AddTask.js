@@ -4,8 +4,8 @@ import firebase from "firebase"
 import moment from 'moment'
 import './AddTask.scss'
 import {useSelectedProjectsValue} from "../../context";
-import {ProjectOverlay} from "../ProjectOverlay";
-import {TaskDate} from "../TaskDate";
+import {ProjectOverlay} from "../ProjectOverlay/ProjectOverlay";
+import {TaskDate} from "../TaskDate/TaskDate";
 import {Button} from "../UI/Button/Button";
 
 export const AddTask = ({

@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, cleanup, fireEvent} from "@testing-library/react";
-import {ProjectOverlay} from '../components/ProjectOverlay'
+import {ProjectOverlay} from '../components/ProjectOverlay/ProjectOverlay'
 import {useProjectsValue} from "../context";
 import {useProject} from "../hooks";
 

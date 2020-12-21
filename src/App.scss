@@ -87,20 +87,12 @@ $generic-bg: #db4c3f;
   cursor: pointer;
 }
 
-@mixin cancel() {
-  color: #555;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 2px 5px;
-}
-
 @mixin transparent-button() {
   background-color: transparent;
   border: 0;
 }
 
 @mixin task-item() {
-  list-style-type: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -109,7 +101,7 @@ $generic-bg: #db4c3f;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 14px;
-  list-style-type: none;
+  list-style: none;
   border-bottom: 1px solid #f0f0f0;
   padding-left: 10px;
   cursor: pointer;
@@ -128,26 +120,12 @@ $generic-bg: #db4c3f;
 /*Darkmode
 ==============================*/
 .darkmode {
-  //background-color: #555555;
-  //color: #f5f5f5;
-
   header {
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
     background-color: #282828;
     border-color: transparent;
   }
-
-  //.sidebar {
-  //  background-color: #555555;
-  //  color: #f5f5f5;
-  //}
-  //
-  //.tasks {
-  //  background-color: #555555;
-  //  color: #f5f5f5;
-  //}
-
 }
 
 /* Header
@@ -421,7 +399,6 @@ header {
   }
 }
 
-
 /* Main Content
   ============================================ */
 .content {
@@ -432,129 +409,4 @@ header {
   grid-template-columns: 1fr auto;
   max-width: 922px;
   margin: auto;
-}
-
-/* Tasks
-  ============================================ */
-.tasks {
-  width: 656px;
-  background-color: white;
-  margin-left: 266px;
-  border-right: $generic-border;
-  min-height: calc(100vh);
-  vertical-align: top;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 80px;
-  padding-bottom: 84px;
-
-  @include mq('900px') {
-    margin-left: 0;
-    width: auto;
-  }
-
-  h2 {
-    font-size: 20px;
-    font-weight: normal;
-    margin: 0 30px 20px 0;
-  }
-
-  .add-task {
-    margin-top: 20px;
-  }
-
-  &__list li {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    line-height: 18px;
-    color: #333;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 14px;
-    list-style-type: none;
-    border-bottom: 1px solid #f0f0f0;
-
-    .checkbox-holder {
-      margin-right: 20px;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      line-height: 16px;
-
-      .checkbox {
-        cursor: pointer;
-        border-color: gray;
-        color: #343434;
-        height: 16px;
-        width: 16px;
-        display: block;
-        border: 1px solid gray;
-        border-radius: 16px;
-      }
-    }
-  }
-}
-
-/* Task Date
-  ============================================ */
-.task-date {
-  @include box-overlay();
-  background-color: #fff;
-  width: 200px;
-  right: 0;
-
-  &__list li {
-    @include task-item();
-    padding: 0;
-
-    div:nth-child(1) {
-      padding: 10px;
-      width: 100%;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-
-      span:first-of-type {
-        margin-right: 10px;
-
-        svg {
-          fill: grey;
-        }
-      }
-    }
-  }
-}
-
-/* Project Overlay
-  ============================================ */
-.project-overlay {
-  @include box-overlay();
-  background-color: white;
-  width: 200px;
-  right: 0;
-
-  @include mq('900px') {
-    width: 200px;
-    right: 0;
-  }
-
-  &__list li {
-    @include task-item();
-    padding: 0;
-
-    div:nth-child(1) {
-      width: 100%;
-      padding: 10px;
-    }
-  }
 }

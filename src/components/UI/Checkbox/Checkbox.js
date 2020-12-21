@@ -1,5 +1,6 @@
 import React from 'react';
-import { firebase } from "../firebase";
+import './Checkbox.scss'
+import { firebase } from "../../../firebase";
 
 export const Checkbox = ({id, taskDesc}) => {
     const archiveTask = () => {

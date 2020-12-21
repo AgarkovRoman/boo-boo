@@ -1,5 +1,6 @@
 import React from 'react'
-import {useProjectsValue} from '../context'
+import './ProjectOverlay.scss'
+import {useProjectsValue} from '../../context'
 
 export const ProjectOverlay = ({setProject, showProjectOverlay, setShowProjectOverlay}) => {
 

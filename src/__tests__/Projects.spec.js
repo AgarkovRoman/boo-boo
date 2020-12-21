@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, cleanup, fireEvent} from "@testing-library/react";
-import {Projects} from '../components/Projects'
+import {Projects} from '../components/Projects/Projects'
 import {useProjectsValue} from "../context";
 
 beforeEach(cleanup);

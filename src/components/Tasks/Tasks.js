@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
-import {Checkbox} from "./Checkbox";
-import {useTasks} from "../hooks";
-import {collatedTasks} from "../constants/collatedTasks";
-import {getTitle , getCollatedTitle, collatedTasksExist} from "../helpers/helpers";
-import {useSelectedProjectsValue, useProjectsValue} from "../context";
-import {AddTask} from "./AddTask/AddTask";
+import {Checkbox} from "../UI/Checkbox/Checkbox";
+import './Tasks.scss'
+import {useTasks} from "../../hooks";
+import {collatedTasks} from "../../constants/collatedTasks";
+import {getTitle , getCollatedTitle, collatedTasksExist} from "../../helpers/helpers";
+import {useSelectedProjectsValue, useProjectsValue} from "../../context";
+import {AddTask} from "../AddTask/AddTask";
 
 export const Tasks = () => {
     const { selectedProject } = useSelectedProjectsValue()

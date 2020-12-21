@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, cleanup, fireEvent} from "@testing-library/react";
-import {Checkbox} from '../components/Checkbox'
+import {Checkbox} from '../components/UI/Checkbox/Checkbox'
 
 beforeEach(cleanup);
 

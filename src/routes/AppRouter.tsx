@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import {SignIn} from "../pages/SignIn/SignIn";
+import {SignIn} from "../components/pages/SignIn/SignIn";
 import {Content} from "../components/layout/Content";
 import {Header} from "../components/layout/Header";
-import {SignUp} from "../pages/SignUp/SignUp";
+import {SignUp} from "../components/pages/SignUp/SignUp";
 import * as ROUTES from '../constants/routes'
 import {IsUserRedirect, ProtectedRoute} from "../helpers/routes";
 import {useAuthListener} from "../hooks";
@@ -28,9 +28,9 @@ export const AppRouter: React.FC = () => {
                         <Content/>
                     </ProtectedRoute>
 
-                    <Route path={ROUTES.HOME}>
+                    <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.HOME} exact>
                         <h1>home page</h1>
-                    </Route>
+                    </IsUserRedirect>
                 </Switch>
             </main>
         </BrowserRouter>

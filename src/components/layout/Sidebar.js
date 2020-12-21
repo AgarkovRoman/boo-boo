@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar} from "react-icons/fa";
 import {useSelectedProjectsValue} from "../../context";
-import {Projects} from "../Projects";
+import {Projects} from "../Projects/Projects";
 import {AddProject} from "../AddProject/AddProject";
 
 export const Sidebar = () => {

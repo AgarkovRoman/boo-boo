@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import './TaskDate.scss'
 import {FaRegPaperPlane, FaSpaceShuttle, FaSun} from "react-icons/fa";
 
 export const TaskDate = ({setShowTaskDate, setTaskDate, showTaskDate}) => {
