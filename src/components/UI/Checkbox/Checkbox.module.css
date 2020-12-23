@@ -1,4 +1,4 @@
-.checkbox-holder {
+.checkboxHolder {
   margin-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11,6 +11,9 @@
   justify-content: center;
   line-height: 16px;
 }
+.checkboxHolder:not(:focus-visible) {
+  outline: none;
+}
 
 .checkbox {
   cursor: pointer;
@@ -20,7 +23,6 @@
   display: block;
   border: 1px solid gray;
   border-radius: 16px;
-  margin-right: 8px;
 }
 
 /*# sourceMappingURL=Checkbox.module.css.map */

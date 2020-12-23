@@ -9,6 +9,9 @@
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+.mainBtn:not(:focus-visible) {
+  outline: none;
+}
 
 .primary {
   background-color: #db4c3f;
