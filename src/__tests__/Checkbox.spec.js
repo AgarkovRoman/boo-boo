@@ -27,10 +27,15 @@ describe('<Checkbox/>', () => {
             expect(queryByTestId('checkbox-action')).toBeTruthy();
             fireEvent.click(queryByTestId('checkbox-action'));
         });
-        it('render the task checkbox and accepts a onKeyDown', () => {
+        it('render the task checkbox and accepts a Enter onKeyDown', () => {
             const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
             expect(queryByTestId('checkbox-action')).toBeTruthy();
-            fireEvent.keyDown(queryByTestId('checkbox-action'));
+            fireEvent.keyDown(queryByTestId('checkbox-action'), { key: 'Enter', code: 'Enter' });
+        });
+        it('render the task checkbox and accepts a any onKeyDown', () => {
+            const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
+            expect(queryByTestId('checkbox-action')).toBeTruthy();
+            fireEvent.keyDown(queryByTestId('checkbox-action'), { key: 'a', code: 'KeyA' });
         });
     })
 })
