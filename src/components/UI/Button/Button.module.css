@@ -1,4 +1,4 @@
-.main-button {
+.mainBtn {
   font-size: 13px;
   line-height: 17px;
   padding: 6px 12px;
@@ -9,17 +9,19 @@
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
-.main-button--primary {
+
+.primary {
   background-color: #db4c3f;
 }
-.main-button--primary:hover {
+.primary:hover {
   background-color: #cb4639;
 }
-.main-button--transparent {
+
+.transparent {
   background-color: transparent;
   color: #555555;
 }
-.main-button--transparent:hover {
+.transparent:hover {
   background-color: #efefef;
 }
 

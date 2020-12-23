@@ -1,12 +1,12 @@
 import React from 'react'
-import './Button.module.scss'
+import classes from './Button.module.scss'
 import {ButtonPropsI} from "./index";
 
 export const Button: React.FC<ButtonPropsI> = ({onClick, label, dataTestId, color}) => {
 
     return (
         <button
-            className={`main-button main-button--${color}`}
+            className={`${classes.mainBtn} ${classes[color]}`}
             type="button"
             onClick={() => onClick()}
             data-testid={dataTestId}

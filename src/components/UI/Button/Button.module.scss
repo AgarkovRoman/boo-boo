@@ -1,4 +1,4 @@
-.main-button {
+.mainBtn {
   font-size: 13px;
   line-height: 17px;
   padding: 6px 12px;
@@ -8,21 +8,21 @@
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+}
 
-  &--primary {
-    background-color: #db4c3f;
+.primary {
+  background-color: #db4c3f;
 
-    &:hover {
-      background-color: #cb4639;
-    }
+  &:hover {
+    background-color: #cb4639;
   }
+}
 
-  &--transparent {
-    background-color: transparent;
-    color: #555555;
+.transparent {
+  background-color: transparent;
+  color: #555555;
 
-    &:hover {
-      background-color: #efefef
-    }
+  &:hover {
+    background-color: #efefef
   }
 }
