@@ -1,5 +1,5 @@
 import React from 'react'
-import './Button.scss'
+import './Button.module.scss'
 import {ButtonPropsI} from "./index";
 
 export const Button: React.FC<ButtonPropsI> = ({onClick, label, dataTestId, color}) => {
@@ -9,7 +9,7 @@ export const Button: React.FC<ButtonPropsI> = ({onClick, label, dataTestId, colo
             className={`main-button main-button--${color}`}
             type="button"
             onClick={() => onClick()}
-            data-testid={dataTestId ? dataTestId : null}
+            data-testid={dataTestId}
         >
             {label}
         </button>
