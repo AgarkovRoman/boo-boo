@@ -1,5 +1,5 @@
 import React from 'react';
-import './Checkbox.module.scss'
+import classes from './Checkbox.module.scss'
 import { firebase } from "../../../firebase";
 import {CheckboxPropsI} from "./index";
 
@@ -17,7 +17,7 @@ export const Checkbox: React.FC<CheckboxPropsI> = ({id, taskDesc}) => {
 
     return (
         <div
-            className="checkbox-holder"
+            className={classes.checkboxHolder}
             data-testid="checkbox-action"
             onClick={() => archiveTask()}
             onKeyDown={(e) => {
@@ -27,7 +27,7 @@ export const Checkbox: React.FC<CheckboxPropsI> = ({id, taskDesc}) => {
             role="button"
             tabIndex={0}
         >
-            <span className="checkbox" />
+            <span className={classes.checkbox} />
         </div>
     );
 };

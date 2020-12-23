@@ -10,14 +10,15 @@
   -ms-flex-pack: center;
   justify-content: center;
   line-height: 16px;
+}
 
-  .checkbox {
-    cursor: pointer;
-    color: #343434;
-    height: 16px;
-    width: 16px;
-    display: block;
-    border: 1px solid gray;
-    border-radius: 16px;
-  }
+.checkbox {
+  cursor: pointer;
+  color: #343434;
+  height: 16px;
+  width: 16px;
+  display: block;
+  border: 1px solid gray;
+  border-radius: 16px;
+  margin-right: 8px;
 }
