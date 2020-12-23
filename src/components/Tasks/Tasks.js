@@ -3,13 +3,13 @@ import {Checkbox} from "../UI/Checkbox/Checkbox";
 import './Tasks.scss'
 import {useTasks} from "../../hooks";
 import {collatedTasks} from "../../constants/collatedTasks";
-import {getTitle , getCollatedTitle, collatedTasksExist} from "../../helpers/helpers";
+import {getTitle, getCollatedTitle, collatedTasksExist} from "../../helpers/helpers";
 import {useSelectedProjectsValue, useProjectsValue} from "../../context";
 import {AddTask} from "../AddTask/AddTask";
 
 export const Tasks = () => {
-    const { selectedProject } = useSelectedProjectsValue()
-    const { projects } = useProjectsValue()
+    const {selectedProject} = useSelectedProjectsValue()
+    const {projects} = useProjectsValue()
     const {tasks} = useTasks(selectedProject)
 
     let projectName = '';
@@ -41,10 +41,11 @@ export const Tasks = () => {
                 ))}
             </ul>
             <AddTask/>
-            {tasks.length === 0 &&
-            <div className={'tasks__done'}>
-                <div className={'tasks__done-text'}>All tasks are done!</div>
-            </div>}
+            {tasks.length === 0 && <>
+                <div className={'tasks__done'}/>
+                <div className={'tasks__done-text'}>All tasks are done! Nice work!</div>
+            </>
+            }
         </div>
     )
 }

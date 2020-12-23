@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {SignIn} from "../components/pages/SignIn/SignIn";
 import {Content} from "../components/layout/Content";
-import {Header} from "../components/layout/Header";
+import {Header} from "../components/layout/Header/Header";
 import {SignUp} from "../components/pages/SignUp/SignUp";
 import * as ROUTES from '../constants/routes'
 import {IsUserRedirect, ProtectedRoute} from "../helpers/routes";
