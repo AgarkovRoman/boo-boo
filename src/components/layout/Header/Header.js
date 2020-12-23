@@ -1,7 +1,8 @@
 import React, {useContext, useState} from "react";
-import {FaAdjust, FaSignOutAlt, FaPlus} from 'react-icons/fa';
-import {AddTask} from "../AddTask/AddTask";
-import {FirebaseContext} from "../../context/firebase";
+import {FaAdjust, FaSignOutAlt, FaPlus, FaHamburger} from 'react-icons/fa';
+import classes from './Header.module.scss'
+import {AddTask} from "../../AddTask/AddTask";
+import {FirebaseContext} from "../../../context/firebase";
 
 export const Header = ({darkMode, setDarkMode}) => {
     const [shouldShowMain, setShouldShowMain] = useState(false)
@@ -17,19 +18,22 @@ export const Header = ({darkMode, setDarkMode}) => {
     }
 
     return (
-        <header className="header" data-testid="header">
-            <nav>
-                <div className="logo">
-                    <img src={"/images/logo.png"} alt="myNotion"/>
+        <header className={classes.header} data-testid="header">
+            <nav className={classes.navigation}>
+                <div className={classes.burger}
+                     aria-label='Close/Open sidebar'
+                     data-testid="Close/Open sidebar"
+                ><button className={classes.headerBtn}
+                ><FaHamburger/></button>
                 </div>
-                <div className="settings">
+                <div className={classes.settings}>
                     <ul>
-                        <li
-                            aria-label='Quick add task'
+                        <li aria-label='Quick add task'
                             data-testid="quick-add-task-action"
-                            className="settings__item">
+                            className={classes.settingsItem}>
                             <button
                                 type='button'
+                                className={classes.headerBtn}
                                 onClick={() => {
                                     setShowQuickAddTask(true)
                                     setShouldShowMain(true)
@@ -45,10 +49,11 @@ export const Header = ({darkMode, setDarkMode}) => {
                         <li
                             aria-label='Toggle dark mode'
                             data-testid="dark-mode-action"
-                            className="settings__item"
+                            className={classes.settingsItem}
                         >
                             <button
                                 type='button'
+                                className={classes.headerBtn}
                                 onClick={() => setDarkMode(!darkMode)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') setDarkMode(!darkMode)
@@ -60,17 +65,16 @@ export const Header = ({darkMode, setDarkMode}) => {
                         <li
                             aria-label='Sign out'
                             data-testid=""
-                            className="settings__item"
+                            className={classes.settingsItem}
                         >
                             <button
                                 type='button'
+                                className={classes.headerBtn}
                                 onClick={() => logOutHandler()}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') logOutHandler()
                                 }}
                             ><FaSignOutAlt/></button>
-
-
                         </li>
                     </ul>
                 </div>

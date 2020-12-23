@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
-import {Header} from '../components/layout/Header';
+import {Header} from '../components/layout/Header/Header';
 
 jest.mock('../context', () => ({
     useSelectedProjectsValue: jest.fn(() => ({ selectedProject: 1 })),
