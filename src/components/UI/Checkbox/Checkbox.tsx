@@ -1,8 +1,10 @@
 import React from 'react';
-import './Checkbox.scss'
+import './Checkbox.module.scss'
 import { firebase } from "../../../firebase";
+import {CheckboxPropsI} from "./index";
 
-export const Checkbox = ({id, taskDesc}) => {
+export const Checkbox: React.FC<CheckboxPropsI> = ({id, taskDesc}) => {
+
     const archiveTask = () => {
         firebase
             .firestore()
