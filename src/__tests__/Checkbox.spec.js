@@ -1,8 +1,6 @@
 import React from 'react'
-import {render, cleanup, fireEvent} from "@testing-library/react";
+import {render, fireEvent} from "@testing-library/react";
 import {Checkbox} from '../components/UI/Checkbox/Checkbox'
-
-beforeEach(cleanup);
 
 jest.mock('../firebase', () => ({
     firebase: {
@@ -19,23 +17,23 @@ jest.mock('../firebase', () => ({
 describe('<Checkbox/>', () => {
     describe('Success', () => {
         it('render the task checkbox', () => {
-            const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
-            expect(queryByTestId('checkbox-action')).toBeTruthy();
+            const {getByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
+            expect(getByTestId('checkbox-action')).toBeTruthy();
         });
         it('render the task checkbox and accepts a onClick', () => {
-            const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
-            expect(queryByTestId('checkbox-action')).toBeTruthy();
-            fireEvent.click(queryByTestId('checkbox-action'));
+            const {getByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
+            expect(getByTestId('checkbox-action')).toBeTruthy();
+            fireEvent.click(getByTestId('checkbox-action'));
         });
         it('render the task checkbox and accepts a Enter onKeyDown', () => {
-            const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
-            expect(queryByTestId('checkbox-action')).toBeTruthy();
-            fireEvent.keyDown(queryByTestId('checkbox-action'), { key: 'Enter', code: 'Enter' });
+            const {getByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
+            expect(getByTestId('checkbox-action')).toBeTruthy();
+            fireEvent.keyDown(getByTestId('checkbox-action'), { key: 'Enter', code: 'Enter' });
         });
         it('render the task checkbox and accepts a any onKeyDown', () => {
-            const {queryByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
-            expect(queryByTestId('checkbox-action')).toBeTruthy();
-            fireEvent.keyDown(queryByTestId('checkbox-action'), { key: 'a', code: 'KeyA' });
+            const {getByTestId} = render(<Checkbox id={'1'} taskDesc={'Finish this app'}/>);
+            expect(getByTestId('checkbox-action')).toBeTruthy();
+            fireEvent.keyDown(getByTestId('checkbox-action'), { key: 'a', code: 'KeyA' });
         });
     })
 })
