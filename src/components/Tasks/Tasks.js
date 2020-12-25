@@ -32,20 +32,23 @@ export const Tasks = () => {
         <div className='tasks' data-testid='tasks'>
             <h2 data-testid='project-name'>{projectName}</h2>
 
-            <ul className='tasks__list'>
-                {tasks.map(task => (
-                    <li key={`${task.id}`}>
-                        <Checkbox id={task.id} taskDesc={task.task}/>
-                        <span>{task.task}</span>
-                    </li>
-                ))}
-            </ul>
+            {tasks.length > 0 &&
+                <ul className='tasks__list'>
+                    {tasks.map(task => (
+                        <li key={`${task.id}`} data-testid='task'>
+                            <Checkbox id={task.id} taskDesc={task.task}/>
+                            <span>{task.task}</span>
+                        </li>
+                    ))}
+                </ul>}
+
             <AddTask/>
+
             {tasks.length === 0 && <>
                 <div className={'tasks__done'}/>
-                <div className={'tasks__done-text'}>All tasks are done! Nice work!</div>
-            </>
-            }
+                <div className={'tasks__done-text'} data-testid='task-not-found'>All tasks are done! Nice work!</div>
+            </>}
+
         </div>
     )
 }
