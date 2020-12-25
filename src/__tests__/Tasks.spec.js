@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {Tasks} from '../components/Tasks/Tasks';
 import {useSelectedProjectsValue} from '../context';
 import {useTasks} from "../hooks";
@@ -59,7 +59,7 @@ describe('< Tasks />', () => {
             selectedProject: 'INBOX',
         }));
 
-        useTasks.mockImplementation(()=>({
+        useTasks.mockImplementation(() => ({
             tasks: []
         }))
 
@@ -90,5 +90,4 @@ describe('< Tasks />', () => {
         expect(getByTestId('tasks')).toBeTruthy();
         expect(getByTestId('project-name').textContent).toBe('Inbox');
     });
-
 });
