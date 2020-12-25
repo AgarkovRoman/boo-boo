@@ -4,10 +4,12 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url("signup.png");
+  //background-image: url("signup.png"),  linear-gradient(8deg, #084680, #B72D93);
+  background-image: url("signup.png"),  linear-gradient(144deg, #366A5D, #CE051C);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
+  //background-color: linear-gradient(8deg, #084680, #B72D93);
 
   @media (max-width: 600px) {
     background-position: top;
@@ -49,6 +51,7 @@
   color: #ffffff;
   border-radius: 6px;
   background-color: #db4c3f;
+  //background-color: #084680;
   border: 1px solid #b32c20;
   font-size: 16px;
   line-height: 24px;
@@ -61,4 +64,12 @@
   &:active {
     background-color: #b32c20;
   }
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.signinLink {
+  color: #202020;
 }

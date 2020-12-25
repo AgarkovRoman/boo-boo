@@ -4,7 +4,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url("signin.png");
+  background-image: url("signin.png"), linear-gradient(45deg, #CFC1E2, #FCBA02);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -61,4 +61,12 @@
   &:active {
     background-color: #b32c20;
   }
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.signupLink {
+  color: #202020;
 }

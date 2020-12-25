@@ -54,7 +54,7 @@ export const SignIn: React.FC = () => {
                     >Войти
                     </button>
                 </form>
-                <p>Еще нет аккаунта? <NavLink to={ROUTER.SIGN_UP}>Sign up now</NavLink></p>
+                <p>Ещё нет аккаунта? <NavLink className={classes.signupLink} to={ROUTER.SIGN_UP}>Sign up now</NavLink></p>
             </div>
         </div>
     )

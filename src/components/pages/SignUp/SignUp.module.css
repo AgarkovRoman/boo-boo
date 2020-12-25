@@ -4,7 +4,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url("signup.png");
+  background-image: url("signup.png"), linear-gradient(144deg, #366A5D, #CE051C);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
@@ -59,6 +59,13 @@
 }
 .button:active {
   background-color: #b32c20;
+}
+.button:not(:focus-visible) {
+  outline: none;
+}
+
+.signinLink {
+  color: #202020;
 }
 
 /*# sourceMappingURL=SignUp.module.css.map */
