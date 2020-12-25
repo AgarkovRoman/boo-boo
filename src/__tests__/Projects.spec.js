@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, fireEvent} from "@testing-library/react";
+import {render, fireEvent, screen} from "@testing-library/react";
+import userEvent from '@testing-library/user-event'
 import {Projects} from '../components/Projects/Projects'
 import {useProjectsValue} from "../context";
 
@@ -9,71 +10,68 @@ jest.mock('../context', () => ({
     })),
     useProjectsValue: jest.fn(() => ({
         projects: [
-            {name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAMviaIDJNas'}
+            {name: 'Renovation', projectId: '2', userId: 'RM6FGvtHAMviaIDJNas'},
         ]
     }))
 }))
 
 
-describe('< ProjectOverlay/>', () => {
+describe('< Projects/>', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
 
     describe('Success', () => {
+
         it('renders the projects', () => {
-            const { queryByTestId } = render(<Projects />);
-            expect(queryByTestId('project-action')).toBeTruthy();
+            const {getAllByTestId} = render(<Projects/>);
+            expect(getAllByTestId('project-action')).toBeTruthy();
         });
 
         it('renders the projects and selects an active project using onClick', () => {
-            const { queryByTestId } = render(<Projects activeValue="1" />);
-            expect(queryByTestId('project-action')).toBeTruthy();
-
-            fireEvent.click(queryByTestId('project-action'));
-            expect(queryByTestId('project-action-parent').classList.contains('active')).toBeTruthy();
+            const {getByTestId} = render(<Projects/>);
+            expect(getByTestId('project-action')).toBeTruthy();
+            userEvent.click(getByTestId('project-action'));
+            expect(getByTestId('project-action-parent').classList.contains('active')).toBeTruthy();
         });
 
         it('renders the projects and selects an active project using onKeyDown', () => {
-            const { queryByTestId } = render(<Projects activeValue="0" />);
-            expect(queryByTestId('project-action')).toBeTruthy();
-
-            fireEvent.keyDown(queryByTestId('project-action'), {
+            const {getByTestId, queryByTestId} = render(<Projects activeValue="0"/>);
+            expect(getByTestId('project-action')).toBeTruthy();
+            fireEvent.keyDown(getByTestId('project-action'), {
                 key: 'a',
                 code: 65,
             });
-            expect(
-                queryByTestId('project-action-parent').classList.contains('active')
-            ).toBeFalsy();
+            expect(queryByTestId('project-action-parent').classList.contains('active')).toBeFalsy();
 
-            fireEvent.keyDown(queryByTestId('project-action'), {
+            fireEvent.keyDown(getByTestId('project-action'), {
                 key: 'Enter',
                 code: 13,
             });
-            expect(
-                queryByTestId('project-action-parent').classList.contains('active')
-            ).toBeTruthy();
+            expect(getByTestId('project-action-parent').classList.contains('active')).toBeTruthy();
         });
 
-        it('renders the projects with no active value', () => {
-            const { queryByTestId } = render(<Projects activeValue="0" />);
-            expect(queryByTestId('project-action')).toBeTruthy();
-
-            fireEvent.keyDown(queryByTestId('project-action'), {
-                key: 'a',
-                code: 65,
-            });
-            expect(
-                queryByTestId('project-action-parent').classList.contains('active')
-            ).toBeFalsy();
-
-            fireEvent.keyDown(queryByTestId('project-action'), {
-                key: 'Enter',
-                code: 13,
-            });
-            expect(
-                queryByTestId('project-action-parent').classList.contains('active')
-            ).toBeTruthy();
-        });
+        // it('renders the projects with no active value', () => {
+        //     const {queryByTestId} = render(<Projects activeValue="0"/>);
+        //     expect(queryByTestId('project-action')).toBeTruthy();
+        //
+        //     fireEvent.keyDown(queryByTestId('project-action'), {
+        //         key: 'a',
+        //         code: 65,
+        //     });
+        //     expect(
+        //         queryByTestId('project-action-parent').classList.contains('active')
+        //     ).toBeFalsy();
+        //
+        //     fireEvent.keyDown(queryByTestId('project-action'), {
+        //         key: 'Enter',
+        //         code: 13,
+        //     });
+        //     expect(
+        //         queryByTestId('project-action-parent').classList.contains('active')
+        //     ).toBeTruthy();
+        //
+        //     screen.debug()
+        // });
     });
 });
