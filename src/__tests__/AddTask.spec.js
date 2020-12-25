@@ -1,10 +1,8 @@
 import React from 'react'
-import {render, cleanup, fireEvent} from "@testing-library/react";
+import {render, fireEvent} from "@testing-library/react";
 import {AddTask} from '../components/AddTask/AddTask'
 import {useSelectedProjectsValue} from "../context";
 import firebase from "firebase"
-
-beforeEach(cleanup);
 
 jest.mock('../context', () => ({
     useSelectedProjectsValue: jest.fn(() => ({selectedProject: "1"})),

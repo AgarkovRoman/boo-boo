@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import {Sidebar} from '../components/layout/Sidebar';
 
 jest.mock('../context', () => ({

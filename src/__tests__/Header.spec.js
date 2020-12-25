@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import {Header} from '../components/layout/Header/Header';
 
 jest.mock('../context', () => ({
@@ -7,13 +7,11 @@ jest.mock('../context', () => ({
     useProjectsValue: jest.fn(() => ({ projects: [] })),
 }));
 
-beforeEach(cleanup);
-
 describe('<Header />', () => {
     describe('Success', () => {
         it('renders the header component', () => {
-            const { queryByTestId } = render(<Header />);
-            expect(queryByTestId('header')).toBeTruthy();
+            const {getByTestId} = render(<Header/>);
+            expect(getByTestId('header')).toBeTruthy();
         });
 
         it('renders the header component and activates dark mode using onClick', () => {

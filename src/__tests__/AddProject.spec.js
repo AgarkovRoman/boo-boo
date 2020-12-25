@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { AddProject } from '../components/AddProject/AddProject';
 
 jest.mock('../context', () => ({
@@ -30,8 +30,6 @@ jest.mock('../firebase', () => ({
         })),
     },
 }));
-
-beforeEach(cleanup);
 
 describe('<AddProject />', () => {
     describe('Success', () => {

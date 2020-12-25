@@ -1,8 +1,6 @@
 import React from 'react';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { render, fireEvent} from '@testing-library/react';
 import { IndividualProject } from '../components/IndividualProject/IndividualProject';
-
-beforeEach(cleanup);
 
 jest.mock('../firebase', () => ({
     firebase: {

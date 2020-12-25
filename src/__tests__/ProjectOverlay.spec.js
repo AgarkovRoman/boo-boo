@@ -1,10 +1,8 @@
 import React from 'react'
-import {render, cleanup, fireEvent} from "@testing-library/react";
+import {render, fireEvent} from "@testing-library/react";
 import {ProjectOverlay} from '../components/ProjectOverlay/ProjectOverlay'
 import {useProjectsValue} from "../context";
 import {useProject} from "../hooks";
-
-beforeEach(cleanup);
 
 jest.mock('../context', () => ({
     useProjectsValue: jest.fn(() => ({

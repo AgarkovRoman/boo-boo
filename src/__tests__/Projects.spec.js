@@ -1,9 +1,7 @@
 import React from 'react'
-import {render, cleanup, fireEvent} from "@testing-library/react";
+import {render, fireEvent} from "@testing-library/react";
 import {Projects} from '../components/Projects/Projects'
 import {useProjectsValue} from "../context";
-
-beforeEach(cleanup);
 
 jest.mock('../context', () => ({
     useSelectedProjectsValue: jest.fn(() => ({
