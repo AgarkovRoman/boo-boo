@@ -74,7 +74,9 @@ export const Sidebar = () => {
 
             <div className='sidebar__middle'
                  onClick={() => setShowProjects(!showProjects)}
-                 onKeyDown={() => setShowProjects(!showProjects)}
+                 onKeyDown={(e) => {
+                     if (e.key === 'Enter') setShowProjects(!showProjects)
+                 }}
                  aria-label={`${showProjects ? 'Hide' : 'Show'} projects`}
                  role='button'
                  tabIndex={0}
