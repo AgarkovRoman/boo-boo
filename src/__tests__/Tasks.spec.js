@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
-import { Tasks } from '../components/Tasks/Tasks';
-import { useSelectedProjectsValue } from '../context';
-
+import {render, screen} from '@testing-library/react';
+import {Tasks} from '../components/Tasks/Tasks';
+import {useSelectedProjectsValue} from '../context';
+import {useTasks} from "../hooks";
 
 jest.mock('../context', () => ({
     useSelectedProjectsValue: jest.fn(),
@@ -23,57 +23,72 @@ jest.mock('../context', () => ({
 }))
 
 jest.mock('../hooks', () => ({
-    useTasks: () => ({
+    useTasks: jest.fn(() => ({
         tasks: [
             {
                 id: '0HTGB1k3BXUYVh6nn2Vy',
-                archived: true,
+                archived: false,
                 date: "15/11/2020",
                 projectId: "1",
                 task: "задача на завтра в ворк",
                 userId: "RM6FGvtHAMviaIDJNas"
-            }
-        ]
-    })
+            },
+        ],
+    }))
 }))
-
-beforeEach(cleanup);
 
 describe('< Tasks />', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    it('renders tasks', () => {
+    it('renders a Tasks', () => {
         useSelectedProjectsValue.mockImplementation(() => ({
             setSelectedProject: jest.fn(() => 'INBOX'),
             selectedProject: 'INBOX',
         }));
 
-        const { queryByTestId } = render(<Tasks />);
-        expect(queryByTestId('tasks')).toBeTruthy();
-        expect(queryByTestId('project-name').textContent).toBe('Inbox');
+        const {getByTestId} = render(<Tasks/>);
+        expect(getByTestId('tasks')).toBeTruthy();
+        expect(getByTestId('project-name').textContent).toBe('Inbox');
     });
 
-    it('renders a task with a project title', () => {
+    it('render a Tasks without any tasks ', () => {
+        useSelectedProjectsValue.mockImplementation(() => ({
+            setSelectedProject: jest.fn(() => 'INBOX'),
+            selectedProject: 'INBOX',
+        }));
+
+        useTasks.mockImplementation(()=>({
+            tasks: []
+        }))
+
+        const {getByTestId} = render(<Tasks/>);
+        expect(getByTestId('tasks')).toBeTruthy();
+        expect(getByTestId('project-name').textContent).toBe('Inbox');
+        expect(getByTestId('task-not-found').textContent).toBe('All tasks are done! Nice work!');
+    })
+
+    it('renders a Tasks with a project title', () => {
         useSelectedProjectsValue.mockImplementation(() => ({
             setSelectedProject: jest.fn(() => '1'),
             selectedProject: '1',
         }));
 
-        const { queryByTestId } = render(<Tasks />);
-        expect(queryByTestId('tasks')).toBeTruthy();
-        expect(queryByTestId('project-name').textContent).toBe('💻 Work');
+        const {getByTestId} = render(<Tasks/>);
+        expect(getByTestId('tasks')).toBeTruthy();
+        expect(getByTestId('project-name').textContent).toBe('💻 Work');
     });
 
-    it('renders a task with a collated title', () => {
+    it('renders a Tasks with a collated title', () => {
         useSelectedProjectsValue.mockImplementation(() => ({
             setSelectedProject: jest.fn(() => 'INBOX'),
             selectedProject: 'INBOX',
         }));
 
-        const { queryByTestId } = render(<Tasks />);
-        expect(queryByTestId('tasks')).toBeTruthy();
-        expect(queryByTestId('project-name').textContent).toBe('Inbox');
+        const {getByTestId} = render(<Tasks/>);
+        expect(getByTestId('tasks')).toBeTruthy();
+        expect(getByTestId('project-name').textContent).toBe('Inbox');
     });
+
 });
