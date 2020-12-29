@@ -27,10 +27,20 @@
     "jsx-a11y",
     "@typescript-eslint"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "react-hooks/rules-of-hooks": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     "no-debugger": 0,
     "no-alert": 0,
+    "react/prop-types": 0,
     "no-unused-vars": "warn",
     "prefer-const": [
       "error",
@@ -125,6 +135,7 @@
     ]
   }
 }
+
 
 
 
