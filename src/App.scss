@@ -48,8 +48,6 @@ $generic-bg: #db4c3f;
   align-items: center;
 
   @if $va-align != center {
-    -webkit-box-pack: left;
-    -ms-flex-pack: left;
     justify-content: left;
   } @else {
     -webkit-box-pack: center;
