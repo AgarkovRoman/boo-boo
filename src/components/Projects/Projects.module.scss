@@ -1,59 +1,26 @@
-//.project {
-//  cursor: pointer;
-//  //background: red;
-//
-//  //&-delete {
-//  //  margin-left: auto;
-//  //  display: none;
-//  //
-//  //  svg {
-//  //    color: #cacaca;
-//  //  }
-//  //}
-//
-//  &.active, &:hover {
-//    font-weight: bold;
-//    background-color: white;
-//  }
-//
-//  &:nth-child(1) {
-//    .sidebar__dot {
-//      color: #6accbc;
-//    }
-//  }
-//
-//  &:nth-child(2) {
-//    .sidebar__dot {
-//      color: #fad003;
-//    }
-//  }
-//
-//  &:nth-child(3) {
-//    .sidebar__dot {
-//      color: #ff8d85;
-//    }
-//  }
-//
-//  &:nth-child(4) {
-//    .sidebar__dot {
-//      color: #ff9932;
-//    }
-//  }
-//
-//  &:nth-child(5) {
-//    .sidebar__dot {
-//      color: #af38eb;
-//    }
-//  }
-//}
-//
-//.projectItem {
-//  padding: 5px 15px 0 10px;
-//  width: 100%;
-//  display: -webkit-box;
-//  display: -ms-flexbox;
-//  display: flex;
-//  -webkit-box-align: center;
-//  -ms-flex-align: center;
-//  align-items: center;
-//}
+.project {
+  display: flex;
+  justify-content: left;
+  cursor: pointer;
+
+  &.active, &:hover {
+    font-weight: bold;
+    background-color: white;
+  }
+}
+
+.projectItem {
+  padding: 5px 10px 0 15px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+
+}

@@ -1,3 +1,20 @@
+.dot {
+  margin-right: 10px;
+  font-size: 30px;
+}
+.dot:nth-of-type(1) {
+  color: #6accbc;
+}
+.dot:nth-child(2) {
+  color: red;
+}
 
+.delete {
+  margin-left: auto;
+  display: flex;
+}
+.delete svg {
+  color: #cacaca;
+}
 
 /*# sourceMappingURL=IndividualProject.module.css.map */

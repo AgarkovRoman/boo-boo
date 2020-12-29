@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { Sidebar } from '../components/layout/Sidebar'
+import { Sidebar } from '../components/layout/Sidebar/Sidebar'
 
 jest.mock('../context', () => ({
   useSelectedProjectValue: jest.fn(() => ({

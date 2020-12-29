@@ -1,0 +1,96 @@
+.sidebar {
+  user-select: none;
+  width: 266px;
+  height: calc(100vh);
+  padding-top: 74px;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border-right: 1px solid #f1f1f1;
+  background-color: #fafafa;
+}
+@media only screen and (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}
+.sidebar li {
+  padding: 2px 4px;
+}
+
+.middle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+  padding: 11px;
+}
+.middle:not(:focus-visible) {
+  outline: none;
+}
+.middle h2 {
+  margin: 0;
+  color: #333;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.iconChevron {
+  color: #0000008a;
+  margin-right: 10px;
+}
+
+.hiddenProject {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.generic li {
+  list-style-type: none;
+  color: #333;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  line-height: 1.5;
+  font-size: 15px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.generic li div:not(:focus-visible) {
+  outline: none;
+}
+.generic li div:nth-child(1) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 0 10px 10px;
+  width: 100%;
+}
+.generic li div:nth-child(1) span:first-of-type {
+  margin-right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.generic li div:nth-child(1) span:first-of-type svg {
+  width: 18px;
+  height: 18px;
+  color: #555;
+}
+.generic li.active, .generic li:hover {
+  font-weight: bold;
+  background-color: white;
+}
+
+.projects {
+  padding-left: 3px;
+}
+
+/*# sourceMappingURL=Sidebar.module.css.map */

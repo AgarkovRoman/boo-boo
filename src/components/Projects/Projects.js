@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import classes from './Projects.module.scss'
+import classes from './Projects.module.scss'
 import { useProjectsValue, useSelectedProjectsValue } from '../../context'
 import { IndividualProject } from '../IndividualProject/IndividualProject'
 
@@ -14,16 +14,12 @@ export const Projects = ({ activeNull = true }) => {
         key={project.projectId}
         data-testid="project-action-parent"
         data-doc-id={project.docId}
-                className={
-                    active === project.projectId
-                        ? 'active sidebar__project'
-                        : 'sidebar__project'
-                }
-        // className={`${classes.project} ${active === project.projectId ? classes.active : ''}`}
+        // className={active === project.projectId ? 'active sidebar__project' : 'sidebar__project'}
+        className={`${classes.project} ${active === project.projectId ? classes.active : ''}`}
       >
         <div
-                    className='sidebar__project-item'
-                    // className={classes.projectItem}
+          // className="sidebar__project-item"
+          className={classes.projectItem}
           role="button"
           data-testid="project-action"
           tabIndex={0}

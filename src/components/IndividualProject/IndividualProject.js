@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
-// import classes from './IndividualProject.module.scss'
+import classes from './IndividualProject.module.scss'
 import { useProjectsValue, useSelectedProjectsValue } from '../../context'
 import { firebase } from '../../firebase'
 import { Button } from '../UI/Button/Button'
@@ -25,10 +25,10 @@ export const IndividualProject = ({ project }) => {
 
   return (
     <>
-      <span className="sidebar__dot">•</span>
-      <span className="sidebar__project-name">{project.name}</span>
+      <span className={classes.dot}>•</span>
+      <span>{project.name}</span>
       <span
-                className="sidebar__project-delete"
+        className={classes.delete}
         data-testid="delete-project"
         onClick={() => setShowConfirm(!showConfirm)}
         onKeyDown={(e) => {
@@ -40,7 +40,7 @@ export const IndividualProject = ({ project }) => {
       >
         <FaTrashAlt />
         {showConfirm && (
-                    <div className="project-delete-modal">
+          <div className="project-delete-modal">
             <div className="project-delete-modal__inner">
               <p>Are you sure you want to delete this project?</p>
               <div className="project-delete-modal__buttons">
