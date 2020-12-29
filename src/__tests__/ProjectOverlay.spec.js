@@ -1,16 +1,16 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
 import { useProjectsValue } from '../context'
-import { useProject } from '../hooks'
 
 jest.mock('../context', () => ({
   useProjectsValue: jest.fn(() => ({
-    projects: [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAMviaIDJNas' }],
+    projects: [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }],
   })),
 }))
 
-describe('< ProjectOverlay/>', () => {
+describe('< ProjectOverlay />', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
@@ -21,35 +21,57 @@ describe('< ProjectOverlay/>', () => {
       const setProject = jest.fn()
       const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
 
-      const { queryByTestId } = render(
+      const { getByTestId } = render(
         <ProjectOverlay
           showProjectOverlay
           setShowProjectOverlay={setShowProjectOverlay}
           setProject={setProject}
-        />,
+        />
       )
 
-      expect(queryByTestId('project-overlay')).toBeTruthy()
-      fireEvent.click(queryByTestId('project-overlay-action'))
+      expect(getByTestId('project-overlay')).toBeTruthy()
+      userEvent.click(getByTestId('project-overlay-action'))
       expect(setProject).toHaveBeenCalled()
     })
 
-    it('renders the project overlay and calls setShowProjectOverlay using onKeyDown', () => {
+    it('renders the project overlay and calls setShowProjectOverlay using onKeyDown Enter', () => {
       const showProjectOverlay = true
       const setProject = jest.fn()
       const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
 
-      const { queryByTestId } = render(
+      const { getByTestId } = render(
         <ProjectOverlay
           showProjectOverlay
           setShowProjectOverlay={setShowProjectOverlay}
           setProject={setProject}
-        />,
+        />
       )
 
-      expect(queryByTestId('project-overlay')).toBeTruthy()
-      fireEvent.keyDown(queryByTestId('project-overlay-action'))
+      expect(getByTestId('project-overlay')).toBeTruthy()
+      fireEvent.keyDown(getByTestId('project-overlay-action'), {
+        key: 'Enter',
+        code: 13,
+      })
       expect(setProject).toHaveBeenCalled()
+    })
+
+    it('renders the project overlay and calls setShowProjectOverlay using wrong onKeyDown', () => {
+      const showProjectOverlay = true
+      const setProject = jest.fn()
+      const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
+
+      const { getByTestId } = render(
+        <ProjectOverlay
+          showProjectOverlay
+          setShowProjectOverlay={setShowProjectOverlay}
+          setProject={setProject}
+        />
+      )
+
+      expect(getByTestId('project-overlay')).toBeTruthy()
+      expect(getByTestId('project-overlay-action')).toBeTruthy()
+      fireEvent.keyDown(getByTestId('project-overlay-action'), { key: 'a', code: 'KeyA' })
+      expect(setProject).not.toHaveBeenCalled()
     })
   })
 
@@ -59,8 +81,8 @@ describe('< ProjectOverlay/>', () => {
         projects: [],
       }))
 
-      const { queryByTestId } = render(<ProjectOverlay showProjectOverlay />)
-      expect(queryByTestId('project-overlay')).toBeTruthy()
+      const { getByTestId, queryByTestId } = render(<ProjectOverlay showProjectOverlay />)
+      expect(getByTestId('project-overlay')).toBeTruthy()
       expect(queryByTestId('project-overlay-action')).toBeFalsy()
     })
   })
