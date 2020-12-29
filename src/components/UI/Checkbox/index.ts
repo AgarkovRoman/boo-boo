@@ -1,4 +1,4 @@
 export interface CheckboxPropsI {
-    id: string
-    taskDesc: string
+  id: string
+  taskDesc: string
 }
