@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import { SignIn } from '../components/pages/SignIn/SignIn'
 import { Content } from '../components/layout/Content'
 import { Header } from '../components/layout/Header/Header'
