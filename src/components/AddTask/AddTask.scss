@@ -1,7 +1,12 @@
 .add-task {
+
   &__shallow {
     padding: 4px 0;
     cursor: pointer;
+
+    &:not(:focus-visible) {
+      outline: none;
+    }
   }
 
   &__overlay {

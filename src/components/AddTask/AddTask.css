@@ -2,6 +2,9 @@
   padding: 4px 0;
   cursor: pointer;
 }
+.add-task__shallow:not(:focus-visible) {
+  outline: none;
+}
 .add-task__overlay {
   background: rgba(102, 102, 102, 0.5);
   position: absolute;
