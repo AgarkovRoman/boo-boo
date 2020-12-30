@@ -3,6 +3,8 @@ import moment from 'moment'
 import './TaskDate.scss'
 import { FaRegPaperPlane, FaSpaceShuttle, FaSun } from 'react-icons/fa'
 
+// TODO: убраать отступы так, чтобы модалка открывалась прямо под иконкой
+
 export const TaskDate = ({ setShowTaskDate, setTaskDate, showTaskDate }) =>
   showTaskDate && (
     <div className="task-date" data-testid="task-date-overlay">
@@ -38,9 +40,11 @@ export const TaskDate = ({ setShowTaskDate, setTaskDate, showTaskDate }) =>
               setShowTaskDate(false)
               setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
             }}
-            onKeyDown={() => {
-              setShowTaskDate(false)
-              setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setShowTaskDate(false)
+                setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+              }
             }}
             role="button"
             tabIndex={0}
@@ -60,9 +64,11 @@ export const TaskDate = ({ setShowTaskDate, setTaskDate, showTaskDate }) =>
               setShowTaskDate(false)
               setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
             }}
-            onKeyDown={() => {
-              setShowTaskDate(false)
-              setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setShowTaskDate(false)
+                setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+              }
             }}
             role="button"
             tabIndex={0}

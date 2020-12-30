@@ -31,7 +31,7 @@ jest.mock('../firebase', () => ({
   },
 }))
 
-describe('<AddProject />', () => {
+describe('< AddProject />', () => {
   describe('Success', () => {
     it('renders <AddProject />', () => {
       const { queryByTestId } = render(<AddProject />)

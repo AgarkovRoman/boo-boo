@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { IndividualProject } from '../components/IndividualProject/IndividualProject'
 
 jest.mock('../firebase', () => ({
@@ -50,7 +51,7 @@ describe('<IndividualProject />', () => {
       fireEvent.click(queryByTestId('delete-project'))
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
 
-      fireEvent.click(getByText('Delete'))
+      userEvent.click(getByText('Delete'))
     })
 
     it('renders the delete overlay and then deletes a project using onKeyDown', () => {
@@ -67,16 +68,16 @@ describe('<IndividualProject />', () => {
       })
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
 
-      fireEvent.click(getByText('Delete'))
+      userEvent.click(getByText('Delete'))
     })
 
     it('renders the delete overlay and then cancels using onClick', () => {
       const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
 
-      fireEvent.click(queryByTestId('delete-project'))
+      userEvent.click(queryByTestId('delete-project'))
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
 
-      fireEvent.click(getByText('Cancel'))
+      userEvent.click(getByText('Cancel'))
     })
 
     it('renders the delete overlay and then cancels using onKeyDown', () => {
