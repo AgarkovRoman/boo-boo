@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './AddProject.scss'
+import classes from './AddProject.module.scss'
 import { firebase } from '../../firebase'
 import { generatePushId } from '../../helpers/helpers'
 import { useProjectsValue } from '../../context'
@@ -29,10 +29,10 @@ export const AddProject = ({ shouldShow = false }) => {
       })
 
   return (
-    <div className="add-project-wrapper" data-testid="add-project">
+    <div className={classes.wrapper} data-testid="add-project">
       {!show && (
         <div
-          className="add-project"
+          className={classes.addProject}
           aria-label="Add Project"
           data-testid="add-project-action"
           onClick={() => setShow(true)}
@@ -42,25 +42,25 @@ export const AddProject = ({ shouldShow = false }) => {
           role="button"
           tabIndex={0}
         >
-          <span className="add-project__plus">+</span>
-          <span className="add-project__text">Add Project</span>
+          <span className={classes.plus}>+</span>
+          <span className={classes.text}>Add Project</span>
         </div>
       )}
 
       {show && (
         <>
-          <div className="add-project__input" data-testid="add-project-inner">
+          <div className={classes.input} data-testid="add-project-inner">
             <input
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="add-project__name"
+              className={classes.name}
               data-testid="project-name"
               type="text"
               placeholder="Name your project"
             />
           </div>
 
-          <div className="add-project__buttons">
+          <div className={classes.buttons}>
             <Button
               color="primary"
               label="Add Project"

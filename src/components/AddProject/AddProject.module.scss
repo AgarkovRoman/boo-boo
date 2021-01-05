@@ -1,16 +1,35 @@
-.add-project {
+.addProject {
   padding: 4px 0;
   cursor: pointer;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
 }
-.add-project-wrapper {
+
+.wrapper {
   padding-left: 13px;
   padding-right: 20px;
   margin-top: 20px;
 }
-.add-project__input {
+
+.plus {
+  color: #dd4b39;
+  font-size: 18px;
+}
+
+.text {
+  display: inline-block;
+  color: #545454;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.input {
   margin-bottom: 10px;
 }
-.add-project__name {
+
+.name {
   width: 100%;
   border: 1px solid #ddd;
   background-color: white;
@@ -19,9 +38,8 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-.add-project__buttons {
+
+.buttons {
   display: flex;
   justify-content: space-between;
 }
-
-/*# sourceMappingURL=AddProject.css.map */
