@@ -32,7 +32,7 @@ jest.mock('../context', () => ({
   })),
 }))
 
-describe('<IndividualProject />', () => {
+describe('< IndividualProject />', () => {
   const project = {
     name: '🔧 Renovation',
     projectId: '2',
