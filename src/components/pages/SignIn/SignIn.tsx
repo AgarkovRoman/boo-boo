@@ -58,7 +58,7 @@ export const SignIn: React.FC = () => {
             />
             {/* {errors.Password && <p>Обязательное поле</p>} */}
           </label>
-          <button className={classes.button} type="submit">
+          <button className={classes.button} data-testid="sign-in" type="submit">
             Войти
           </button>
         </form>
