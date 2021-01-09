@@ -21,63 +21,42 @@ export const Header = ({ darkMode, setDarkMode }) => {
   return (
     <header className={classes.header} data-testid="header">
       <nav className={classes.navigation}>
-        <div
-          className={classes.burger}
-          aria-label="Close/Open sidebar"
-          data-testid="Close/Open sidebar"
-        >
-          <button className={classes.headerBtn} type="button">
+        <div className={classes.burger} aria-label="Close/Open sidebar">
+          <button className={classes.headerBtn} data-testid="Close/Open sidebar" type="button">
             <FaHamburger />
           </button>
         </div>
         <div className={classes.settings}>
           <ul>
-            <li
-              aria-label="Quick add task"
-              data-testid="quick-add-task-action"
-              className={classes.settingsItem}
-            >
+            <li aria-label="Quick add task" className={classes.settingsItem}>
               <button
                 type="button"
+                data-testid="quick-add-task-action"
                 className={classes.headerBtn}
                 onClick={() => {
                   setShowQuickAddTask(true)
                   setShouldShowMain(true)
                 }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    setShowQuickAddTask(true)
-                    setShouldShowMain(true)
-                  }
-                }}
               >
                 <FaPlus />
               </button>
             </li>
-            <li
-              aria-label="Toggle dark mode"
-              data-testid="dark-mode-action"
-              className={classes.settingsItem}
-            >
+            <li aria-label="Toggle dark mode" className={classes.settingsItem}>
               <button
                 type="button"
+                data-testid="dark-mode-action"
                 className={classes.headerBtn}
                 onClick={() => setDarkMode(!darkMode)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') setDarkMode(!darkMode)
-                }}
               >
                 <FaAdjust />
               </button>
             </li>
-            <li aria-label="Sign out" data-testid="" className={classes.settingsItem}>
+            <li aria-label="Sign out" className={classes.settingsItem}>
               <button
                 type="button"
                 className={classes.headerBtn}
+                data-testid="sign-out"
                 onClick={() => logOutHandler()}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') logOutHandler()
-                }}
               >
                 <FaSignOutAlt />
               </button>
