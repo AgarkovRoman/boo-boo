@@ -1,0 +1,32 @@
+.mainBtn {
+  font-size: 13px;
+  line-height: 17px;
+  padding: 6px 12px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.primary {
+  background-color: #db4c3f;
+
+  &:hover {
+    background-color: #cb4639;
+  }
+}
+
+.transparent {
+  background-color: transparent;
+  color: #555555;
+
+  &:hover {
+    background-color: #efefef
+  }
+}

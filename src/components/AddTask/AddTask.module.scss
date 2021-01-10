@@ -1,0 +1,107 @@
+.addTask {
+  margin-top: 10px;
+
+  .main {
+    position: relative;
+  }
+}
+
+.shallow {
+  padding: 4px 0;
+  cursor: pointer;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.plus {
+  color: #dd4b39;
+  font-size: 18px;
+}
+
+.text {
+  display: inline-block;
+  color: #545454;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.overlay {
+  background: rgba(102, 102, 102, 0.5);
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  -webkit-transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
+  height: calc(100vh);
+
+  .main {
+    @media (max-width: 900px) {
+      width: 90%;
+    }
+
+    overflow: visible;
+    margin-bottom: 20px;
+    //margin-top: 55px;
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 20px 30px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    .header {
+      font-size: 13px;
+      margin-bottom: 20px;
+      float: left;
+    }
+  }
+}
+
+.title {
+  font-size: 16px;
+  margin: 0;
+  display: inline;
+}
+
+.cancelX {
+  cursor: pointer;
+  color: gray;
+  float: right;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.content {
+  width: 100%;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 3px;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.buttonCancel {
+  margin-left: 10px;
+}
+
+.project, .date {
+  cursor: pointer;
+  float: right;
+  color: gray;
+  margin: 4px;
+  //margin: 10px 5px;
+}
+
+.project {
+  margin-right: 0;
+}

@@ -1,0 +1,59 @@
+.tasks {
+  width: 656px;
+  background-color: white;
+  margin-left: 266px;
+  border-right: 1px solid #f1f1f1;
+  min-height: calc(100vh);
+  vertical-align: top;
+  padding: 80px 40px;
+}
+@media (max-width: 900px) {
+  .tasks {
+    margin-left: 0;
+    width: auto;
+  }
+}
+.tasks h2 {
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0 30px 20px 0;
+}
+.tasks .add-task {
+  margin-top: 20px;
+}
+.tasks__list li {
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 18px;
+  color: #333;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  list-style-type: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tasks__done {
+  margin: 0 auto;
+  width: 50%;
+  min-height: 250px;
+  background-image: url("notFound.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.tasks__done-text {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .tasks__done {
+    min-height: 150px;
+    width: 80%;
+  }
+}
+
+/*# sourceMappingURL=Tasks.css.map */

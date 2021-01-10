@@ -1,0 +1,37 @@
+.project-overlay {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px, rgba(0, 0, 0, 0.1) 0 4px 11px;
+  position: absolute;
+  z-index: 1;
+  top: 85px;
+  border-radius: 3px;
+  background-color: white;
+  width: 200px;
+  right: 0;
+}
+@media (max-width: 900px) {
+  .project-overlay {
+    width: 200px;
+    right: 0;
+  }
+}
+.project-overlay__list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 18px;
+  color: #333;
+  font-size: 14px;
+  list-style: none;
+  padding: 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+.project-overlay__list li:hover {
+  background-color: #f9f9f9;
+}
+.project-overlay__list li div:nth-child(1) {
+  width: 100%;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=ProjectOverlay.css.map */
