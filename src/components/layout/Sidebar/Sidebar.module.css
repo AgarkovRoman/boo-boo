@@ -93,4 +93,9 @@
   padding-left: 3px;
 }
 
+.active {
+  font-weight: bold;
+  background-color: white;
+}
+
 /*# sourceMappingURL=Sidebar.module.css.map */
