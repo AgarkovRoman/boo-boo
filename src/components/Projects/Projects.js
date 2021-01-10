@@ -14,11 +14,9 @@ export const Projects = ({ activeNull = true }) => {
         key={project.projectId}
         data-testid="project-action-parent"
         data-doc-id={project.docId}
-        // className={active === project.projectId ? 'active sidebar__project' : 'sidebar__project'}
         className={`${classes.project} ${active === project.projectId ? classes.active : ''}`}
       >
         <div
-          // className="sidebar__project-item"
           className={classes.projectItem}
           role="button"
           data-testid="project-action"
