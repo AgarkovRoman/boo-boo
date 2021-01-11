@@ -8,7 +8,7 @@ jest.mock('../firebase', () => ({
     firestore: jest.fn(() => ({
       collection: jest.fn(() => ({
         doc: jest.fn(() => ({
-          delete: jest.fn(() => Promise.resolve('Never mock firebase, but I did!')),
+          delete: jest.fn(() => Promise.resolve('resolve')),
           update: jest.fn(),
         })),
       })),
@@ -17,7 +17,7 @@ jest.mock('../firebase', () => ({
 }))
 
 jest.mock('../context', () => ({
-  useSelectedProjectValue: jest.fn(() => ({
+  useSelectedProjectsValue: jest.fn(() => ({
     setSelectedProject: jest.fn(() => 'INBOX'),
   })),
   useProjectsValue: jest.fn(() => ({
@@ -48,7 +48,7 @@ describe('< IndividualProject />', () => {
     it('renders the delete overlay and then deletes a project using onClick', () => {
       const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
 
-      fireEvent.click(queryByTestId('delete-project'))
+      userEvent.click(queryByTestId('delete-project'))
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
 
       userEvent.click(getByText('Delete'))
