@@ -33,7 +33,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,ts,tsx}",
       "!src/routes/AppRouter.tsx",
-      "!src/index.js",
+      "!src/App.js",
+      "!src/firebase.js",
       "!src/helpers/routes.js",
       "!src/hooks/*.js",
       "!src/context/*.js"
