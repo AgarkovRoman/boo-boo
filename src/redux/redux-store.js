@@ -1,10 +1,8 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
+import { authReducer } from './auth-reducer'
 
-const reducers = combineReducers({
-  // auth: fsdsdf,
-})
+const reducer = {
+  auth: authReducer,
+}
 
-export const store = createStore(reducers)
-
-// export const store = configureStore(reducers)
+export const store = configureStore({ reducer })
