@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom'
 import classes from './SignUp.module.scss'
 import * as ROUTER from '../../../constants/routes'
 import { FirebaseContext } from '../../../context/firebase'
+import { authAPI } from '../../../api/api'
 
 type FormData = {
   Name: string
@@ -19,9 +20,8 @@ export const SignUp: React.FC = () => {
   const [error, setError] = useState()
 
   const onSubmit = (data: FormData) => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(data.Email, data.Password)
+    authAPI
+      .signUp(data.Email, data.Password)
       .then((result: any) => {
         result.user?.updateProfile({
           displayName: data.Name,

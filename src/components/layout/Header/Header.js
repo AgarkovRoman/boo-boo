@@ -2,21 +2,13 @@ import React, { useContext, useState } from 'react'
 import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
-import { FirebaseContext } from '../../../context/firebase'
+import { authAPI } from '../../../api/api'
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [shouldShowMain, setShouldShowMain] = useState(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState(false)
-  const { firebase } = useContext(FirebaseContext)
 
-  const logOutHandler = () => {
-    firebase
-      .auth()
-      .signOut()
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+  const logOutHandler = () => authAPI.signOut().catch((error) => console.log(error))
 
   return (
     <header className={classes.header} data-testid="header">

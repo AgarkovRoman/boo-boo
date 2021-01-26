@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { NavLink, useHistory } from 'react-router-dom'
 import classes from './SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { FirebaseContext } from '../../../context/firebase'
+import { authAPI } from '../../../api/api'
 
 type FormData = {
   Email: string
@@ -12,15 +12,13 @@ type FormData = {
 
 export const SignIn: React.FC = () => {
   const history = useHistory()
-  const { firebase }: any = useContext(FirebaseContext)
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState()
 
   const onSubmit = (data: FormData) => {
-    console.log('data', data)
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(data.Email, data.Password)
+    // console.log('data', data)
+    authAPI
+      .signIn(data.Email, data.Password)
       .then(() => {
         history.push(ROUTER.APP)
       })
