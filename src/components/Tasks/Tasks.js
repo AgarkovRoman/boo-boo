@@ -13,8 +13,8 @@ export const Tasks = () => {
   const { projects } = useProjectsValue()
   const { tasks } = useTasks(selectedProject)
 
-  console.log(projects)
-  console.log(tasks)
+  // console.log(projects)
+  // console.log(tasks)
   // console.log(archivedTasks)
 
   let projectName = ''
