@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import classes from './SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { authAPI } from '../../../api/api'
+import { signInThunkCreator } from '../../../redux/auth-reducer'
 
 type FormData = {
   Email: string
@@ -11,20 +12,12 @@ type FormData = {
 }
 
 export const SignIn: React.FC = () => {
-  const history = useHistory()
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState()
+  const dispatch = useDispatch()
 
   const onSubmit = (data: FormData) => {
-    // console.log('data', data)
-    authAPI
-      .signIn(data.Email, data.Password)
-      .then(() => {
-        history.push(ROUTER.APP)
-      })
-      .catch((error: any) => {
-        setError(error.message)
-      })
+    dispatch(signInThunkCreator(data.Email, data.Password))
   }
 
   console.log(errors)
