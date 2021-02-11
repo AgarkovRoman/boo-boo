@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -16,14 +16,14 @@ type FormData = {
 export const SignUp: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState()
-
   const dispatch = useDispatch()
 
-  const onSubmit = (data: FormData) => {
-    dispatch(signUpThunkCreator(data.Email, data.Password, data.Name))
-  }
+  const onSubmit = useCallback(
+    (data: FormData) => dispatch(signUpThunkCreator(data.Email, data.Password, data.Name)),
+    []
+  )
 
-  console.log(errors)
+  console.log('SignUp errors: ', errors)
 
   return (
     <div className={classes.wrapper}>

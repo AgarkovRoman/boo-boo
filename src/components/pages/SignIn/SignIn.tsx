@@ -16,10 +16,6 @@ export const SignIn: React.FC = () => {
   const [error, setError] = useState()
   const dispatch = useDispatch()
 
-  // const onSubmit = (data: FormData) => {
-  //   dispatch(signInThunkCreator(data.Email, data.Password))
-  // }
-
   const onSubmit = useCallback(
     (data: FormData) => dispatch(signInThunkCreator(data.Email, data.Password)),
     []
