@@ -54,15 +54,23 @@ export const signInThunkCreator = (email, password) => async (dispatch) => {
 }
 
 export const signUpThunkCreator = (email, password, name) => async (dispatch) => {
-  await authAPI.signUp(email, password, name).then((result) =>
-    result.user?.updateProfile({
-      displayName: name,
+  await authAPI
+    .signUp(email, password, name)
+    .then((result) =>
+      result.user?.updateProfile({
+        displayName: name,
+      })
+    )
+    .then(() => {
+      dispatch(authMeThunkCreator())
     })
-  )
-  // .then((result) => {
-  // result.user?.updateProfile({
-  //   displayName: name,
-  // })
-  // })
-  dispatch(authMeThunkCreator())
+}
+
+export const signOutThunkCreator = () => async (dispatch) => {
+  await authAPI
+    .signOut()
+    .then(() => {
+      dispatch(setAuthUserData({ userId: null, userEmail: null, userName: null }))
+    })
+    .catch((error) => console.log(error))
 }
