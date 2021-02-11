@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -16,11 +16,16 @@ export const SignIn: React.FC = () => {
   const [error, setError] = useState()
   const dispatch = useDispatch()
 
-  const onSubmit = (data: FormData) => {
-    dispatch(signInThunkCreator(data.Email, data.Password))
-  }
+  // const onSubmit = (data: FormData) => {
+  //   dispatch(signInThunkCreator(data.Email, data.Password))
+  // }
 
-  console.log(errors)
+  const onSubmit = useCallback(
+    (data: FormData) => dispatch(signInThunkCreator(data.Email, data.Password)),
+    []
+  )
+
+  console.log('SignIn errors: ', errors)
 
   return (
     <div className={classes.wrapper}>

@@ -1,6 +1,7 @@
 import { authAPI } from '../api/api'
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
+const SIGN_OUT_USER = 'SIGN_OUT_USER'
 
 const initialState = {
   userId: null,
@@ -16,6 +17,12 @@ export const authReducer = (state = initialState, action) => {
         ...action.payload,
       }
     }
+    case SIGN_OUT_USER: {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    }
     default:
       return state
   }
@@ -25,6 +32,11 @@ export const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = ({ userId, userEmail, userName }) => ({
   type: SET_AUTH_USER_DATA,
+  payload: { userId, userEmail, userName },
+})
+
+export const signOutUser = ({ userId, userEmail, userName }) => ({
+  type: SIGN_OUT_USER,
   payload: { userId, userEmail, userName },
 })
 
@@ -70,7 +82,7 @@ export const signOutThunkCreator = () => async (dispatch) => {
   await authAPI
     .signOut()
     .then(() => {
-      dispatch(setAuthUserData({ userId: null, userEmail: null, userName: null }))
+      dispatch(signOutUser({ userId: null, userEmail: null, userName: null }))
     })
     .catch((error) => console.log(error))
 }

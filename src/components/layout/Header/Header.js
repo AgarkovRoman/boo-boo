@@ -1,9 +1,8 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
-import { authAPI } from '../../../api/api'
 import { signOutThunkCreator } from '../../../redux/auth-reducer'
 
 export const Header = ({ darkMode, setDarkMode }) => {
