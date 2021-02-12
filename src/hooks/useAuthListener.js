@@ -22,7 +22,7 @@ export const useAuthListener = () => {
     const listener = authAPI.authMe(auth)
     dispatch(authMeThunkCreator())
     return () => listener()
-  }, [])
+  }, [dispatch])
 
   return { user }
 }

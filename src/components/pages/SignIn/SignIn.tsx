@@ -14,11 +14,11 @@ type FormData = {
 export const SignIn: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState()
-  const dispatch = useDispatch()
 
+  const dispatch = useDispatch()
   const onSubmit = useCallback(
     (data: FormData) => dispatch(signInThunkCreator(data.Email, data.Password)),
-    []
+    [dispatch]
   )
 
   console.log('SignIn errors: ', errors)

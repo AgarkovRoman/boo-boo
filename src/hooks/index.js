@@ -52,15 +52,16 @@ export const useProject = () => {
     firebase
       .firestore()
       .collection('projects')
-      // .where('userId', '==', 'gVoZXWITqio5hCPomphV')
       .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
       .orderBy('projectId')
       .get()
       .then((snapshot) => {
+        console.log('snapshot: ', snapshot.docs)
         const allProjects = snapshot.docs.map((project) => ({
           ...project.data(),
           docId: project.id,
         }))
+        console.log('allProjects: ', allProjects)
 
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects)

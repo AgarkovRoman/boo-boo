@@ -8,9 +8,9 @@ import { signOutThunkCreator } from '../../../redux/auth-reducer'
 export const Header = ({ darkMode, setDarkMode }) => {
   const [shouldShowMain, setShouldShowMain] = useState(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState(false)
-  const dispatch = useDispatch()
 
-  const signOutHandler = useCallback(() => dispatch(signOutThunkCreator()), [])
+  const dispatch = useDispatch()
+  const signOutHandler = useCallback(() => dispatch(signOutThunkCreator()), [dispatch])
 
   return (
     <header className={classes.header} data-testid="header">

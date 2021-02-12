@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react'
-import { Checkbox } from '../UI/Checkbox/Checkbox'
 import './Tasks.scss'
+import { useSelector } from 'react-redux'
+
+import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { useTasks } from '../../hooks'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
-import { useSelectedProjectsValue, useProjectsValue } from '../../context'
+import { useProjectsValue } from '../../context'
 import { AddTask } from '../AddTask/AddTask'
 // import { ProjectI, TaskI } from './index'
 
 export const Tasks = () => {
-  const { selectedProject } = useSelectedProjectsValue()
+  const selectedProject = useSelector((state) => state.projects.activeProject)
   const { projects } = useProjectsValue()
   const { tasks } = useTasks(selectedProject)
 
-  // console.log(projects)
+  // console.log('projects', projects)
   // console.log(tasks)
   // console.log(archivedTasks)
 
@@ -21,12 +23,10 @@ export const Tasks = () => {
 
   if (projects && projects.length > 0 && selectedProject && !collatedTasksExist(selectedProject)) {
     projectName = getTitle(projects, selectedProject).name
-    // console.log('1', projectName)
   }
 
   if (collatedTasksExist(selectedProject) && selectedProject) {
     projectName = getCollatedTitle(collatedTasks, selectedProject).name
-    // console.log('2', projectName)
   }
 
   useEffect(() => {

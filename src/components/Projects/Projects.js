@@ -11,9 +11,9 @@ export const Projects = ({ activeNull = true }) => {
   const { projects } = useProjectsValue()
 
   const dispatch = useDispatch()
-  const selectProject = useCallback((project) => dispatch(setProject(project)), [])
+  const selectProject = useCallback((project) => dispatch(setProject(project)), [dispatch])
 
-  console.log('projects', projects)
+  // console.log('projects', projects)
   return (
     projects &&
     projects.map((project) => (

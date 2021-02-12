@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true)
 
   const dispatch = useDispatch()
-  const selectProject = useCallback((project) => dispatch(setProject(project)), [])
+  const selectProject = useCallback((project) => dispatch(setProject(project)), [dispatch])
 
   return (
     <div className={classes.sidebar} data-testid="sidebar">

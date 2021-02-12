@@ -20,7 +20,7 @@ export const SignUp: React.FC = () => {
 
   const onSubmit = useCallback(
     (data: FormData) => dispatch(signUpThunkCreator(data.Email, data.Password, data.Name)),
-    []
+    [dispatch]
   )
 
   console.log('SignUp errors: ', errors)
