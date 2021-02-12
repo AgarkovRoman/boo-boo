@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Switch } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { SignIn } from '../components/pages/SignIn/SignIn'
 import { Content } from '../components/layout/Content'
 import { Header } from '../components/layout/Header/Header'
@@ -7,10 +8,20 @@ import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
 import { useAuthListener } from '../hooks'
+import { setAllProjectThunkCreator } from '../redux/projects-reducer'
 
 export const AppRouter: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false)
   const { user } = useAuthListener()
+
+  const dispatch = useDispatch()
+
+  const userId = 123
+  const setAllProjects = useCallback(() => dispatch(setAllProjectThunkCreator(userId)), [dispatch])
+
+  useEffect(() => {
+    setAllProjects()
+  }, [dispatch, setAllProjects])
 
   return (
     <BrowserRouter>
