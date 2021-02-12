@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 import classes from './Sidebar.module.scss'
 import { useSelectedProjectsValue } from '../../../context'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
+import { setProject } from '../../../redux/projects-reducer'
+import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
 
 export const Sidebar = () => {
   const { setSelectedProject } = useSelectedProjectsValue()
   const [active, setActive] = useState('inbox')
   const [showProjects, setShowProjects] = useState(true)
+
+  const dispatch = useDispatch()
+  const selectProject = useCallback((project) => dispatch(setProject(project)), [])
 
   return (
     <div className={classes.sidebar} data-testid="sidebar">
@@ -20,11 +26,13 @@ export const Sidebar = () => {
             onClick={() => {
               setActive('inbox')
               setSelectedProject('INBOX')
+              selectProject(INBOX)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('inbox')
                 setSelectedProject('INBOX')
+                selectProject(INBOX)
               }
             }}
             role="button"
@@ -43,11 +51,13 @@ export const Sidebar = () => {
             onClick={() => {
               setActive('today')
               setSelectedProject('TODAY')
+              selectProject(TODAY)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('today')
                 setSelectedProject('TODAY')
+                selectProject(TODAY)
               }
             }}
             role="button"
@@ -68,11 +78,13 @@ export const Sidebar = () => {
             onClick={() => {
               setActive('next_7')
               setSelectedProject('NEXT_7')
+              selectProject(NEXT_7)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('next_7')
                 setSelectedProject('NEXT_7')
+                selectProject(NEXT_7)
               }
             }}
             role="button"
