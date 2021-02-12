@@ -18,3 +18,14 @@ export const authAPI = {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
   },
 }
+
+export const projectsAPI = {
+  getAllProjectsById(userId) {
+    return firebase
+      .firestore()
+      .collection('projects')
+      .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
+      .orderBy('projectId')
+      .get()
+  },
+}
