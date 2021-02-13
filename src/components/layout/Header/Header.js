@@ -1,22 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
-import { FirebaseContext } from '../../../context/firebase'
+import { signOutThunkCreator } from '../../../redux/auth-reducer'
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [shouldShowMain, setShouldShowMain] = useState(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState(false)
-  const { firebase } = useContext(FirebaseContext)
 
-  const logOutHandler = () => {
-    firebase
-      .auth()
-      .signOut()
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+  const dispatch = useDispatch()
+  const signOutHandler = useCallback(() => dispatch(signOutThunkCreator()), [dispatch])
 
   return (
     <header className={classes.header} data-testid="header">
@@ -56,7 +50,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
                 type="button"
                 className={classes.headerBtn}
                 data-testid="sign-out"
-                onClick={() => logOutHandler()}
+                onClick={signOutHandler}
               >
                 <FaSignOutAlt />
               </button>

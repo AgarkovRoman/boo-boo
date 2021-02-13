@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import classes from './SignUp.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { FirebaseContext } from '../../../context/firebase'
+import { signUpThunkCreator } from '../../../redux/auth-reducer'
 
 type FormData = {
   Name: string
@@ -13,29 +14,16 @@ type FormData = {
 }
 
 export const SignUp: React.FC = () => {
-  const history = useHistory()
   const { register, handleSubmit, errors } = useForm<FormData>()
-  const { firebase }: any = useContext(FirebaseContext)
   const [error, setError] = useState()
+  const dispatch = useDispatch()
 
-  const onSubmit = (data: FormData) => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(data.Email, data.Password)
-      .then((result: any) => {
-        result.user?.updateProfile({
-          displayName: data.Name,
-        })
-      })
-      .then(() => {
-        history.push(ROUTER.APP)
-      })
-      .catch((error: any) => {
-        setError(error.message)
-      })
-  }
+  const onSubmit = useCallback(
+    (data: FormData) => dispatch(signUpThunkCreator(data.Email, data.Password, data.Name)),
+    [dispatch]
+  )
 
-  console.log(errors)
+  console.log('SignUp errors: ', errors)
 
   return (
     <div className={classes.wrapper}>

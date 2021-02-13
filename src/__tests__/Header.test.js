@@ -9,7 +9,7 @@ jest.mock('../firebase', () => ({
   firebase: {
     auth: jest.fn(() => ({
       signOut: jest.fn(() => Promise.resolve('I am resolved!')),
-      catch: jest.fn(() => Promise.resolve('I am catch!')),
+      // catch: jest.fn((error) => Promise.reject(error)),
     })),
   },
 }))
@@ -79,6 +79,18 @@ describe('< Header />', () => {
     })
 
     it('renders the Header component and sign-out using onClick', () => {
+      const { queryByTestId } = render(
+        <BrowserRouter>
+          <FirebaseContext.Provider value={{ firebase }}>
+            <Header />
+          </FirebaseContext.Provider>
+        </BrowserRouter>
+      )
+      expect(queryByTestId('header')).toBeTruthy()
+      userEvent.click(queryByTestId('sign-out'))
+    })
+
+    it('renders the Header component and sign-out reject', () => {
       const { queryByTestId } = render(
         <BrowserRouter>
           <FirebaseContext.Provider value={{ firebase }}>

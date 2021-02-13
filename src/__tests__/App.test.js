@@ -7,8 +7,6 @@ describe('<App/>', () => {
     const { getByTestId } = render(<App />)
     expect(getByTestId('application')).toBeTruthy()
     expect(getByTestId('application').classList.contains('darkmode')).toBeFalsy()
-
-    screen.debug()
   })
   it('render the application using dark mode', () => {
     const { getByTestId } = render(<App darkModeDefault />)

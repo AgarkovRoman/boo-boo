@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import classes from './SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { FirebaseContext } from '../../../context/firebase'
+import { signInThunkCreator } from '../../../redux/auth-reducer'
 
 type FormData = {
   Email: string
@@ -11,25 +12,16 @@ type FormData = {
 }
 
 export const SignIn: React.FC = () => {
-  const history = useHistory()
-  const { firebase }: any = useContext(FirebaseContext)
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState()
 
-  const onSubmit = (data: FormData) => {
-    console.log('data', data)
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(data.Email, data.Password)
-      .then(() => {
-        history.push(ROUTER.APP)
-      })
-      .catch((error: any) => {
-        setError(error.message)
-      })
-  }
+  const dispatch = useDispatch()
+  const onSubmit = useCallback(
+    (data: FormData) => dispatch(signInThunkCreator(data.Email, data.Password)),
+    [dispatch]
+  )
 
-  console.log(errors)
+  console.log('SignIn errors: ', errors)
 
   return (
     <div className={classes.wrapper}>

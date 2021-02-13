@@ -1,9 +1,10 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { Sidebar } from '../components/layout/Sidebar/Sidebar'
 
 jest.mock('../context', () => ({
-  useSelectedProjectValue: jest.fn(() => ({
+  useSelectedProjectsValue: jest.fn(() => ({
     setSelectedProject: jest.fn(() => 'INBOX'),
   })),
   useProjectsValue: jest.fn(() => ({
@@ -18,21 +19,56 @@ jest.mock('../context', () => ({
   })),
 }))
 
-describe('<Sidebar />', () => {
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+}))
+
+describe('< Sidebar />', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   describe('Success', () => {
-    it('renders the <Sidebar />', () => {
+    it('renders the < Sidebar />', () => {
       const { queryByTestId } = render(<Sidebar />)
       expect(queryByTestId('sidebar')).toBeTruthy()
     })
 
-    it('changes the active project to inbox in collated tasks', () => {
+    it('changes the active project to Inbox in collated tasks using onClick', () => {
       const { queryByTestId } = render(<Sidebar />)
       expect(queryByTestId('sidebar')).toBeTruthy()
-      fireEvent.click(queryByTestId('inbox-action'))
+      userEvent.click(queryByTestId('inbox-action'))
+      expect(queryByTestId('inbox').classList.contains('active')).toBeTruthy()
+      expect(queryByTestId('today').classList.contains('active')).toBeFalsy()
+      expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()
+    })
+
+    it('changes the active project to Today in collated tasks using onClick', () => {
+      const { queryByTestId } = render(<Sidebar />)
+      expect(queryByTestId('sidebar')).toBeTruthy()
+      userEvent.click(queryByTestId('today-action'))
+      expect(queryByTestId('inbox').classList.contains('active')).toBeFalsy()
+      expect(queryByTestId('today').classList.contains('active')).toBeTruthy()
+      expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()
+    })
+
+    it('changes the active project to Next_7 in collated tasks using onClick', () => {
+      const { queryByTestId } = render(<Sidebar />)
+      expect(queryByTestId('sidebar')).toBeTruthy()
+      userEvent.click(queryByTestId('next_7-action'))
+      expect(queryByTestId('inbox').classList.contains('active')).toBeFalsy()
+      expect(queryByTestId('today').classList.contains('active')).toBeFalsy()
+      expect(queryByTestId('next_7').classList.contains('active')).toBeTruthy()
+    })
+
+    it('changes the active project to Inbox in collated tasks using keyDown', () => {
+      const { queryByTestId } = render(<Sidebar />)
+      expect(queryByTestId('sidebar')).toBeTruthy()
       fireEvent.keyDown(queryByTestId('inbox-action'), {
         key: 'a',
         code: 65,
       })
+
       fireEvent.keyDown(queryByTestId('inbox-action'), {
         key: 'Enter',
         code: 13,
@@ -43,18 +79,16 @@ describe('<Sidebar />', () => {
       expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()
     })
 
-    it('changes the active project to today in collated tasks', () => {
+    it('changes the active project to Today in collated tasks using keyDown', () => {
       const { queryByTestId } = render(<Sidebar />)
       expect(queryByTestId('sidebar')).toBeTruthy()
-      fireEvent.click(queryByTestId('today-action'))
-      fireEvent.click(queryByTestId('inbox-action'))
       fireEvent.keyDown(queryByTestId('today-action'), {
         key: 'a',
         code: 65,
       })
 
-      expect(queryByTestId('today').classList.contains('active')).toBeFalsy()
       expect(queryByTestId('inbox').classList.contains('active')).toBeTruthy()
+      expect(queryByTestId('today').classList.contains('active')).toBeFalsy()
       expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()
 
       fireEvent.keyDown(queryByTestId('today-action'), {
@@ -67,11 +101,9 @@ describe('<Sidebar />', () => {
       expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()
     })
 
-    it('changes the active project to next_7 in collated tasks', () => {
+    it('changes the active project to next_7 in collated tasks using keyDown', () => {
       const { queryByTestId } = render(<Sidebar />)
       expect(queryByTestId('sidebar')).toBeTruthy()
-      fireEvent.click(queryByTestId('next_7-action'))
-      fireEvent.click(queryByTestId('inbox-action'))
       fireEvent.keyDown(queryByTestId('next_7-action'), {
         key: 'a',
         code: 65,
@@ -94,10 +126,10 @@ describe('<Sidebar />', () => {
       const { queryByTestId, queryByText, getByText } = render(<Sidebar />)
       expect(queryByTestId('sidebar')).toBeTruthy()
 
-      fireEvent.click(getByText('Projects'))
+      userEvent.click(getByText('Projects'))
       expect(queryByText('Add Project')).toBeFalsy()
 
-      fireEvent.click(getByText('Projects'))
+      userEvent.click(getByText('Projects'))
       expect(queryByText('Add Project')).toBeTruthy()
     })
 

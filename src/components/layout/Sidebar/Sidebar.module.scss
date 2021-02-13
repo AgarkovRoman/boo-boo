@@ -17,7 +17,7 @@
     padding: 2px 4px;
   }
 
-  //refactor this
+  // todo: refactor this styles
   //&__project {
   //
   //  &:nth-child(1) {
@@ -137,4 +137,9 @@
 
 .projects {
   padding-left: 3px;
+}
+
+.active {
+  font-weight: bold;
+  background-color: white;
 }
