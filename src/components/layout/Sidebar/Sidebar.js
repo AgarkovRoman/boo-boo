@@ -2,14 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import classes from './Sidebar.module.scss'
-import { useSelectedProjectsValue } from '../../../context'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
 import { setProject } from '../../../redux/projects-reducer'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
 
 export const Sidebar = () => {
-  const { setSelectedProject } = useSelectedProjectsValue()
   const [active, setActive] = useState('inbox')
   const [showProjects, setShowProjects] = useState(true)
 
@@ -25,13 +23,11 @@ export const Sidebar = () => {
             data-testid="inbox-action"
             onClick={() => {
               setActive('inbox')
-              setSelectedProject('INBOX')
               selectProject(INBOX)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('inbox')
-                setSelectedProject('INBOX')
                 selectProject(INBOX)
               }
             }}
@@ -50,13 +46,11 @@ export const Sidebar = () => {
             data-testid="today-action"
             onClick={() => {
               setActive('today')
-              setSelectedProject('TODAY')
               selectProject(TODAY)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('today')
-                setSelectedProject('TODAY')
                 selectProject(TODAY)
               }
             }}
@@ -77,13 +71,11 @@ export const Sidebar = () => {
             data-testid="next_7-action"
             onClick={() => {
               setActive('next_7')
-              setSelectedProject('NEXT_7')
               selectProject(NEXT_7)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setActive('next_7')
-                setSelectedProject('NEXT_7')
                 selectProject(NEXT_7)
               }
             }}

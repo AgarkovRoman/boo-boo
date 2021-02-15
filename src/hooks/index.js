@@ -56,12 +56,12 @@ export const useProject = () => {
       .orderBy('projectId')
       .get()
       .then((snapshot) => {
-        console.log('snapshot: ', snapshot.docs)
+        // console.log('snapshot: ', snapshot.docs)
         const allProjects = snapshot.docs.map((project) => ({
           ...project.data(),
           docId: project.id,
         }))
-        console.log('allProjects: ', allProjects)
+        // console.log('allProjects: ', allProjects)
 
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects)
