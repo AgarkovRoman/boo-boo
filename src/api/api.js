@@ -29,3 +29,16 @@ export const projectsAPI = {
       .get()
   },
 }
+
+export const tasksAPI = {
+  getAllTasksById(userId) {
+    return firebase
+      .firestore()
+      .collection('tasks')
+      .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
+      .get()
+  },
+  archivedTasksById(taskId) {
+    return firebase.firestore().collection('tasks').doc(taskId).update({ archived: true })
+  },
+}
