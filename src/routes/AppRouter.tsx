@@ -9,6 +9,7 @@ import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
 import { useAuthListener } from '../hooks'
 import { setAllProjectThunkCreator } from '../redux/projects-reducer'
+import { getAllTasksTC } from '../redux/tasks-reducer'
 
 export const AppRouter: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false)
@@ -16,12 +17,15 @@ export const AppRouter: React.FC = () => {
 
   const dispatch = useDispatch()
 
+  // Get all projects from back and set it in redux
   const userId = 123
-  const setAllProjects = useCallback(() => dispatch(setAllProjectThunkCreator(userId)), [dispatch])
+  const getAllProjects = useCallback(() => dispatch(setAllProjectThunkCreator(userId)), [dispatch])
+  const getAllTasks = useCallback(() => dispatch(getAllTasksTC(userId)), [dispatch])
 
   useEffect(() => {
-    setAllProjects()
-  }, [dispatch, setAllProjects])
+    getAllProjects()
+    getAllTasks()
+  }, [dispatch, getAllProjects, getAllTasks])
 
   return (
     <BrowserRouter>
