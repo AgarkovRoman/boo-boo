@@ -28,6 +28,15 @@ export const projectsAPI = {
       .orderBy('projectId')
       .get()
   },
+
+  addProject(project) {
+    return firebase
+      .firestore()
+      .collection('projects')
+      .add({
+        ...project,
+      })
+  },
 }
 
 export const tasksAPI = {

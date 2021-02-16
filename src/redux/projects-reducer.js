@@ -3,6 +3,7 @@ import { projectsAPI } from '../api/api'
 
 const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT'
 const SET_ALL_PROJECTS = 'SET_ALL_PROJECTS'
+const ADD_PROJECT = 'ADD_PROJECT'
 
 const initialState = {
   activeProject: INBOX,
@@ -25,6 +26,12 @@ export const projectsReducer = (state = initialState, action) => {
         allProjects: payload,
       }
     }
+    case ADD_PROJECT: {
+      return {
+        ...state,
+        allProjects: [...state.allProjects, payload],
+      }
+    }
     default:
       return state
   }
@@ -32,6 +39,7 @@ export const projectsReducer = (state = initialState, action) => {
 
 export const setProject = (project) => ({ type: SET_ACTIVE_PROJECT, payload: project })
 export const setAllProjects = (projects) => ({ type: SET_ALL_PROJECTS, payload: projects })
+export const addProject = (project) => ({ type: ADD_PROJECT, payload: project })
 
 export const setAllProjectThunkCreator = (userId) => async (dispatch) => {
   await projectsAPI.getAllProjectsById(userId).then((snapshot) => {
@@ -41,4 +49,9 @@ export const setAllProjectThunkCreator = (userId) => async (dispatch) => {
     }))
     dispatch(setAllProjects(allProjects))
   })
+}
+
+export const addProjectTC = (project) => async (dispatch) => {
+  dispatch(addProject(project))
+  await projectsAPI.addProject({ ...project })
 }

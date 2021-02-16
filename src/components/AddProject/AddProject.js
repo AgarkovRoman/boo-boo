@@ -1,32 +1,27 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import uuid from 'react-uuid'
 import classes from './AddProject.module.scss'
-import { firebase } from '../../firebase'
-import { generatePushId } from '../../helpers/helpers'
-import { useProjectsValue } from '../../context'
 import { Button } from '../UI/Button/Button'
+import { addProjectTC } from '../../redux/projects-reducer'
 
 export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow)
-  const [projectName, setProjectName] = useState('')
+  const [project, setProject] = useState({
+    name: '',
+    userId: 'RM6FGvtHAMviaIDJNas',
+  })
+  const dispatch = useDispatch()
+  const projectId = uuid()
 
-  const projectId = generatePushId()
-  const { projects, setProjects } = useProjectsValue()
+  const addProject = useCallback((item) => dispatch(addProjectTC(item)), [dispatch])
 
-  const addProject = () =>
-    projectName &&
-    firebase
-      .firestore()
-      .collection('projects')
-      .add({
-        projectId,
-        name: projectName,
-        userId: 'RM6FGvtHAMviaIDJNas',
-      })
-      .then(() => {
-        setProjects([...projects])
-        setProjectName('')
-        setShow(false)
-      })
+  const handleProject = (item) => {
+    addProject(item).then(() => {
+      setProject({ ...project, name: '' })
+      setShow(false)
+    })
+  }
 
   return (
     <div className={classes.wrapper} data-testid="add-project">
@@ -51,8 +46,8 @@ export const AddProject = ({ shouldShow = false }) => {
         <>
           <div className={classes.input} data-testid="add-project-inner">
             <input
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
+              value={project.name}
+              onChange={(e) => setProject({ ...project, name: e.target.value })}
               className={classes.name}
               data-testid="project-name"
               type="text"
@@ -64,7 +59,7 @@ export const AddProject = ({ shouldShow = false }) => {
             <Button
               color="primary"
               label="Add Project"
-              onClick={addProject}
+              onClick={() => handleProject({ ...project, projectId })}
               dataTestId="add-project-submit"
             />
             <Button
