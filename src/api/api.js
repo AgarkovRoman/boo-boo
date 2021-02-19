@@ -37,6 +37,10 @@ export const projectsAPI = {
         ...project,
       })
   },
+
+  deleteProject(docId) {
+    return firebase.firestore().collection('projects').doc(docId).delete()
+  },
 }
 
 export const tasksAPI = {

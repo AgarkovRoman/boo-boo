@@ -13,7 +13,6 @@ export const Tasks = () => {
 
   const createProjectName = () => {
     let name = ''
-
     if (
       projects &&
       projects.length > 0 &&

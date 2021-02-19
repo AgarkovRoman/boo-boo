@@ -1,3 +1,36 @@
+.project {
+  display: flex;
+  justify-content: left;
+  cursor: pointer;
+}
+.project.active, .project:hover {
+  font-weight: bold;
+  background-color: white;
+}
+
+.projectAction {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.projectAction:not(:focus-visible) {
+  outline: none;
+}
+
+.projectItem {
+  padding: 5px 10px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.projectItem:not(:focus-visible) {
+  outline: none;
+}
+
 .dot {
   margin-right: 10px;
   font-size: 30px;
@@ -12,6 +45,10 @@
 .delete {
   margin-left: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  position: relative;
 }
 .delete svg {
   color: #cacaca;

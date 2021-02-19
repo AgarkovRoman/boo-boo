@@ -4,6 +4,7 @@ import { projectsAPI } from '../api/api'
 const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT'
 const SET_ALL_PROJECTS = 'SET_ALL_PROJECTS'
 const ADD_PROJECT = 'ADD_PROJECT'
+const DELETE_PROJECT = 'DELETE_PROJECT'
 
 const initialState = {
   activeProject: INBOX,
@@ -32,16 +33,23 @@ export const projectsReducer = (state = initialState, action) => {
         allProjects: [...state.allProjects, payload],
       }
     }
+    case DELETE_PROJECT: {
+      return {
+        ...state,
+        allProjects: state.allProjects.filter((project) => project.docId !== payload),
+      }
+    }
     default:
       return state
   }
 }
 
-export const setProject = (project) => ({ type: SET_ACTIVE_PROJECT, payload: project })
+export const setActiveProject = (projectId) => ({ type: SET_ACTIVE_PROJECT, payload: projectId })
 export const setAllProjects = (projects) => ({ type: SET_ALL_PROJECTS, payload: projects })
 export const addProject = (project) => ({ type: ADD_PROJECT, payload: project })
+export const deleteProject = (docId) => ({ type: DELETE_PROJECT, payload: docId })
 
-export const setAllProjectThunkCreator = (userId) => async (dispatch) => {
+export const setAllProjectTC = (userId) => async (dispatch) => {
   await projectsAPI.getAllProjectsById(userId).then((snapshot) => {
     const allProjects = snapshot.docs.map((project) => ({
       ...project.data(),
@@ -51,7 +59,16 @@ export const setAllProjectThunkCreator = (userId) => async (dispatch) => {
   })
 }
 
-export const addProjectTC = (project) => async (dispatch) => {
+export const addProjectTC = (project, userId) => async (dispatch) => {
   dispatch(addProject(project))
-  await projectsAPI.addProject({ ...project })
+  await projectsAPI.addProject({ ...project }).then(() => {
+    dispatch(setAllProjectTC(userId))
+  })
+}
+
+export const deleteProjectTC = (docId, userId) => async (dispatch) => {
+  dispatch(deleteProject(docId))
+  await projectsAPI.deleteProject(docId).then(() => {
+    dispatch(setAllProjectTC(userId))
+  })
 }

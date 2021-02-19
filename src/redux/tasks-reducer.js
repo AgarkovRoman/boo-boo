@@ -5,6 +5,7 @@ const initialState = {
 }
 
 const SET_TASKS = 'SET_TASKS'
+const ADD_TASK = 'ADD_TASK'
 const ARCHIVED_TASK = 'ARCHIVED_TASK'
 
 const archivedTaskHandler = (tasks, taskId) => {
@@ -26,10 +27,10 @@ export const tasksReducer = (state = initialState, action) => {
 
   switch (type) {
     case SET_TASKS: {
-      return {
-        ...state,
-        allTasks: payload,
-      }
+      return { ...state, allTasks: payload }
+    }
+    case ADD_TASK: {
+      return { ...state, allTasks: [...state.allTasks, payload] }
     }
     case ARCHIVED_TASK: {
       return { ...state, allTasks: archivedTaskHandler(state.allTasks, payload) }
@@ -40,6 +41,7 @@ export const tasksReducer = (state = initialState, action) => {
 }
 
 export const setAllTasks = (tasks) => ({ type: SET_TASKS, payload: tasks })
+export const addTask = (task) => ({ type: ADD_TASK, payload: task })
 export const archivedTask = (taskId) => ({ type: ARCHIVED_TASK, payload: taskId })
 
 export const getAllTasksTC = (userId) => async (dispatch) => {
@@ -51,7 +53,6 @@ export const getAllTasksTC = (userId) => async (dispatch) => {
     dispatch(setAllTasks(allTasks))
   })
 }
-
 export const archiveTaskTC = (taskId) => async (dispatch) => {
   await tasksAPI.archivedTasksById(taskId)
   dispatch(archivedTask(taskId))
