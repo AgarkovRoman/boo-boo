@@ -48,11 +48,20 @@ export const getAllTasksTC = (userId) => async (dispatch) => {
   await tasksAPI.getAllTasksById(userId).then((snapshot) => {
     const allTasks = snapshot.docs.map((task) => ({
       id: task.id,
+      docId: task.id,
       ...task.data(),
     }))
     dispatch(setAllTasks(allTasks))
   })
 }
+
+export const addTaskTC = (task, userId) => async (dispatch) => {
+  dispatch(addTask(task))
+  await tasksAPI.addTask(task).then(() => {
+    dispatch(getAllTasksTC(userId))
+  })
+}
+
 export const archiveTaskTC = (taskId) => async (dispatch) => {
   await tasksAPI.archivedTasksById(taskId)
   dispatch(archivedTask(taskId))

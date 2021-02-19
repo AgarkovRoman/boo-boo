@@ -8,7 +8,7 @@ import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
 import { useAuthListener } from '../hooks'
-import { setAllProjectTC } from '../redux/projects-reducer'
+import { getAllProjectTC } from '../redux/projects-reducer'
 import { getAllTasksTC } from '../redux/tasks-reducer'
 
 export const AppRouter: React.FC = () => {
@@ -19,7 +19,7 @@ export const AppRouter: React.FC = () => {
 
   // Get all projects from back and set it in redux
   const userId = 123
-  const getAllProjects = useCallback(() => dispatch(setAllProjectTC(userId)), [dispatch])
+  const getAllProjects = useCallback(() => dispatch(getAllProjectTC(userId)), [dispatch])
   const getAllTasks = useCallback(() => dispatch(getAllTasksTC(userId)), [dispatch])
 
   useEffect(() => {

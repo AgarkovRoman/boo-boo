@@ -28,6 +28,7 @@ export const Tasks = () => {
 
     return name
   }
+
   const getFilteredTasks = (allTasks, project) =>
     allTasks.filter((task) => task.projectId === project).filter((task) => !task.archived)
 

@@ -49,7 +49,7 @@ export const setAllProjects = (projects) => ({ type: SET_ALL_PROJECTS, payload: 
 export const addProject = (project) => ({ type: ADD_PROJECT, payload: project })
 export const deleteProject = (docId) => ({ type: DELETE_PROJECT, payload: docId })
 
-export const setAllProjectTC = (userId) => async (dispatch) => {
+export const getAllProjectTC = (userId) => async (dispatch) => {
   await projectsAPI.getAllProjectsById(userId).then((snapshot) => {
     const allProjects = snapshot.docs.map((project) => ({
       ...project.data(),
@@ -62,13 +62,13 @@ export const setAllProjectTC = (userId) => async (dispatch) => {
 export const addProjectTC = (project, userId) => async (dispatch) => {
   dispatch(addProject(project))
   await projectsAPI.addProject({ ...project }).then(() => {
-    dispatch(setAllProjectTC(userId))
+    dispatch(getAllProjectTC(userId))
   })
 }
 
 export const deleteProjectTC = (docId, userId) => async (dispatch) => {
   dispatch(deleteProject(docId))
   await projectsAPI.deleteProject(docId).then(() => {
-    dispatch(setAllProjectTC(userId))
+    dispatch(getAllProjectTC(userId))
   })
 }

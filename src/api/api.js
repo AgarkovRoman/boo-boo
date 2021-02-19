@@ -54,4 +54,11 @@ export const tasksAPI = {
   archivedTasksById(taskId) {
     return firebase.firestore().collection('tasks').doc(taskId).update({ archived: true })
   },
+
+  addTask(task) {
+    return firebase
+      .firestore()
+      .collection('tasks')
+      .add({ ...task })
+  },
 }
