@@ -33,9 +33,7 @@ export const projectsAPI = {
     return firebase
       .firestore()
       .collection('projects')
-      .add({
-        ...project,
-      })
+      .add({ ...project })
   },
 
   deleteProject(docId) {
@@ -45,12 +43,16 @@ export const projectsAPI = {
 
 export const tasksAPI = {
   getAllTasksById(userId) {
-    return firebase
-      .firestore()
-      .collection('tasks')
-      .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
-      .get()
+    return (
+      firebase
+        .firestore()
+        .collection('tasks')
+        .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
+        // .orderBy('projectId')
+        .get()
+    )
   },
+
   archivedTasksById(taskId) {
     return firebase.firestore().collection('tasks').doc(taskId).update({ archived: true })
   },
