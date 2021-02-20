@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import './Tasks.scss'
 import { useSelector } from 'react-redux'
+import uuid from 'react-uuid'
 import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
+import { getActiveProject, getAllProjects } from '../../redux/projects-selectors'
+import { getAllTasks } from '../../redux/tasks-selectors'
 
 export const Tasks = () => {
-  const selectedProject = useSelector((state) => state.projects.activeProject)
-  const projects = useSelector((state) => state.projects.allProjects)
-  const tasks = useSelector((state) => state.tasks.allTasks)
+  const selectedProject = useSelector((state) => getActiveProject(state))
+  const projects = useSelector((state) => getAllProjects(state))
+  const tasks = useSelector((state) => getAllTasks(state))
 
   const createProjectName = () => {
     let name = ''
@@ -30,7 +33,7 @@ export const Tasks = () => {
   }
 
   const getFilteredTasks = (allTasks, project) =>
-    allTasks.filter((task) => task.projectId === project).filter((task) => !task.archived)
+    allTasks.filter((task) => task.projectId === project && !task.archived)
 
   const projectName = createProjectName()
   const selectedProjectTasks = getFilteredTasks(tasks, selectedProject)
@@ -46,7 +49,7 @@ export const Tasks = () => {
       {selectedProjectTasks.length > 0 && (
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
-            <li key={task.id} data-testid="task">
+            <li key={uuid()} data-testid="task">
               <Checkbox id={task.id} taskDesc={task.task} />
               <span>{task.task}</span>
             </li>

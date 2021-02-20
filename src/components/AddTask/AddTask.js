@@ -42,6 +42,7 @@ export const AddTask = ({
       addTaskHandler({
         archived: false,
         projectId,
+        createDate: Date.now(),
         task: taskName,
         date: collatedDate || taskDate,
         userId: 'RM6FGvtHAMviaIDJNas',
