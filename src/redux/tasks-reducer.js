@@ -47,11 +47,12 @@ export const archivedTask = (taskId) => ({ type: ARCHIVED_TASK, payload: taskId 
 export const getAllTasksTC = (userId) => async (dispatch) => {
   await tasksAPI.getAllTasksById(userId).then((snapshot) => {
     const allTasks = snapshot.docs.map((task) => ({
+      ...task.data(),
       id: task.id,
       docId: task.id,
-      ...task.data(),
     }))
-    dispatch(setAllTasks(allTasks))
+    const sortTasks = allTasks.sort((a, b) => a.createDate - b.createDate)
+    dispatch(setAllTasks(sortTasks))
   })
 }
 
