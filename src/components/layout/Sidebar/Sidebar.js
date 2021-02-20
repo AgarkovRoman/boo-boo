@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './Sidebar.module.scss'
@@ -7,6 +7,12 @@ import { AddProject } from '../../AddProject/AddProject'
 import { setActiveProject } from '../../../redux/projects-reducer'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
 import { getActiveProject } from '../../../redux/projects-selectors'
+import { TasksCounter } from '../../UI/TasksCounter/TasksCounter'
+import {
+  getInboxTasksCounter,
+  getNext7TasksCounter,
+  getTodayTasksCounter,
+} from '../../../redux/tasks-selectors'
 
 export const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true)
@@ -17,6 +23,20 @@ export const Sidebar = () => {
     dispatch,
   ])
 
+  const selectInboxTaskCountMemoized = useMemo(() => getInboxTasksCounter, [])
+  const selectTodayTaskCountMemoized = useMemo(() => getTodayTasksCounter, [])
+  const selectNext7TaskCountMemoized = useMemo(() => getNext7TasksCounter, [])
+
+  const inboxTaskCount = useSelector((state) => selectInboxTaskCountMemoized(state))
+  const todayTaskCount = useSelector((state) => selectTodayTaskCountMemoized(state))
+  const next7TaskCount = useSelector((state) => selectNext7TaskCountMemoized(state))
+
+  // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
+  // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
+  // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
+  console.log('inboxTaskCount', inboxTaskCount)
+  console.log('todayTaskCount', todayTaskCount)
+  console.log('next7TaskCount', next7TaskCount)
   return (
     <div className={classes.sidebar} data-testid="sidebar">
       <ul className={classes.generic}>
@@ -39,6 +59,10 @@ export const Sidebar = () => {
               <FaInbox />
             </span>
             <span>Inbox</span>
+
+            <span className={classes.taskCounterContainer}>
+              <TasksCounter count={inboxTaskCount} />
+            </span>
           </div>
         </li>
         <li data-testid="today" className={activeProject === TODAY ? classes.active : ''}>
@@ -61,6 +85,9 @@ export const Sidebar = () => {
                 <FaRegCalendar />
               </span>
               <span>Today</span>
+              <span className={classes.taskCounterContainer}>
+                <TasksCounter count={todayTaskCount} />
+              </span>
             </span>
           </div>
         </li>
@@ -83,6 +110,9 @@ export const Sidebar = () => {
               <FaRegCalendarAlt />
             </span>
             <span>Next 7 days</span>
+            <span className={classes.taskCounterContainer}>
+              <TasksCounter count={next7TaskCount} />
+            </span>
           </div>
         </li>
       </ul>
