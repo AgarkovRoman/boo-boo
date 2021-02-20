@@ -1,15 +1,19 @@
 import React, { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import uuid from 'react-uuid'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
 import { addProjectTC } from '../../redux/projects-reducer'
+import { getUserId } from '../../redux/auth-selectors'
 
 export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow)
+
+  const userId = useSelector((state) => getUserId(state))
+
   const [project, setProject] = useState({
     name: '',
-    userId: 'RM6FGvtHAMviaIDJNas',
+    userId,
   })
   const dispatch = useDispatch()
   const projectId = uuid()

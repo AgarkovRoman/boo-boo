@@ -14,6 +14,13 @@ export const authAPI = {
     return firebase.auth().signOut()
   },
 
+  addUser(user) {
+    return firebase
+      .firestore()
+      .collection('users')
+      .add({ ...user })
+  },
+
   signUp(email, password, name) {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
   },
@@ -24,7 +31,7 @@ export const projectsAPI = {
     return firebase
       .firestore()
       .collection('projects')
-      .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
+      .where('userId', '==', userId)
       .orderBy('projectId')
       .get()
   },
@@ -47,7 +54,7 @@ export const tasksAPI = {
       firebase
         .firestore()
         .collection('tasks')
-        .where('userId', '==', 'RM6FGvtHAMviaIDJNas')
+        .where('userId', '==', userId)
         // .orderBy('projectId')
         .get()
     )

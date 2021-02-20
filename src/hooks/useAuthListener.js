@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getUser } from '../helpers/helpers'
 import { authAPI } from '../api/api'
-import { authMeThunkCreator } from '../redux/auth-reducer'
+import { authMeTC } from '../redux/auth-reducer'
 
 export const useAuthListener = () => {
   const [user, setUser] = useState(getUser())
@@ -20,7 +20,7 @@ export const useAuthListener = () => {
 
   useEffect(() => {
     const listener = authAPI.authMe(auth)
-    dispatch(authMeThunkCreator())
+    dispatch(authMeTC())
     return () => listener()
   }, [dispatch])
 

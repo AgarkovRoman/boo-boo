@@ -34,9 +34,6 @@ export const Sidebar = () => {
   // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
   // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
   // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
-  console.log('inboxTaskCount', inboxTaskCount)
-  console.log('todayTaskCount', todayTaskCount)
-  console.log('next7TaskCount', next7TaskCount)
   return (
     <div className={classes.sidebar} data-testid="sidebar">
       <ul className={classes.generic}>

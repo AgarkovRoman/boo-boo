@@ -8,6 +8,7 @@ import { TaskDate } from '../TaskDate/TaskDate'
 import { Button } from '../UI/Button/Button'
 import { getActiveProject } from '../../redux/projects-selectors'
 import { addTaskTC } from '../../redux/tasks-reducer'
+import { getUserId } from '../../redux/auth-selectors'
 
 export const AddTask = ({
   showAddTaskMain = true,
@@ -24,6 +25,7 @@ export const AddTask = ({
 
   const dispatch = useDispatch()
   const selectedProject = useSelector((state) => getActiveProject(state))
+  const userId = useSelector((state) => getUserId(state))
   const addTaskHandler = useCallback((task) => dispatch(addTaskTC(task)), [dispatch])
 
   const addTask = () => {
@@ -45,7 +47,7 @@ export const AddTask = ({
         createDate: Date.now(),
         task: taskName,
         date: collatedDate || taskDate,
-        userId: 'RM6FGvtHAMviaIDJNas',
+        userId,
       }).then(() => {
         setTaskName('')
         setProject('')

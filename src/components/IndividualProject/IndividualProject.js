@@ -6,6 +6,7 @@ import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects-reducer'
 import { getActiveProject } from '../../redux/projects-selectors'
+import { getUserId } from '../../redux/auth-selectors'
 
 export const IndividualProject = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState(false)
@@ -13,19 +14,9 @@ export const IndividualProject = ({ project }) => {
   const activeProject = useSelector((state) => getActiveProject(state))
   const dispatch = useDispatch()
   const selectProject = useCallback((id) => dispatch(setActiveProject(id)), [dispatch])
-  const deleteProject = useCallback((id) => dispatch(deleteProjectTC(id)), [dispatch])
-
-  // const deleteProject = (docId) => {
-  //   firebase
-  //     .firestore()
-  //     .collection('projects')
-  //     .doc(docId)
-  //     .delete()
-  //     .then(() => {
-  //       setProjects([...projects])
-  //       setSelectedProject('INBOX')
-  //     })
-  // }
+  const deleteProject = useCallback((id, userId) => dispatch(deleteProjectTC(id, userId)), [
+    dispatch,
+  ])
 
   return (
     <>
@@ -78,7 +69,7 @@ export const IndividualProject = ({ project }) => {
             <div className="project-delete-modal__buttons">
               <Button
                 onClick={() => {
-                  deleteProject(project.docId)
+                  deleteProject(project.docId, project.userId)
                   selectProject(INBOX)
                 }}
                 label="Delete"

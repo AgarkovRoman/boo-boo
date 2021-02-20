@@ -56,10 +56,10 @@ export const getAllTasksTC = (userId) => async (dispatch) => {
   })
 }
 
-export const addTaskTC = (task, userId) => async (dispatch) => {
+export const addTaskTC = (task) => async (dispatch) => {
   dispatch(addTask(task))
   await tasksAPI.addTask(task).then(() => {
-    dispatch(getAllTasksTC(userId))
+    dispatch(getAllTasksTC(task.userId))
   })
 }
 

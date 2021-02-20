@@ -42,7 +42,7 @@ export const signOutUser = ({ userId, userEmail, userName }) => ({
 
 /* ThunkCreators */
 
-export const authMeThunkCreator = () => async (dispatch) => {
+export const authMeTC = () => async (dispatch) => {
   await authAPI.authMe((user) => {
     if (user) {
       const { uid, email, displayName } = user
@@ -56,29 +56,32 @@ export const authMeThunkCreator = () => async (dispatch) => {
   })
 }
 
-export const signInThunkCreator = (email, password) => async (dispatch) => {
+export const signInTC = (email, password) => async (dispatch) => {
   await authAPI
     .signIn(email, password)
     .then(() => {
-      dispatch(authMeThunkCreator())
+      dispatch(authMeTC())
     })
     .catch((error) => console.log(error))
 }
 
-export const signUpThunkCreator = (email, password, name) => async (dispatch) => {
+export const signUpTC = (email, password, name) => async (dispatch) => {
   await authAPI
     .signUp(email, password, name)
-    .then((result) =>
-      result.user?.updateProfile({
-        displayName: name,
+    .then((result) => {
+      authAPI.addUser({
+        email,
+        name,
+        userId: result.user.uid,
       })
-    )
+      return result.user?.updateProfile({ displayName: name })
+    })
     .then(() => {
-      dispatch(authMeThunkCreator())
+      dispatch(authMeTC())
     })
 }
 
-export const signOutThunkCreator = () => async (dispatch) => {
+export const signOutTC = () => async (dispatch) => {
   await authAPI
     .signOut()
     .then(() => {

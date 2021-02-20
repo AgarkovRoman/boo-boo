@@ -59,10 +59,10 @@ export const getAllProjectTC = (userId) => async (dispatch) => {
   })
 }
 
-export const addProjectTC = (project, userId) => async (dispatch) => {
+export const addProjectTC = (project) => async (dispatch) => {
   dispatch(addProject(project))
   await projectsAPI.addProject({ ...project }).then(() => {
-    dispatch(getAllProjectTC(userId))
+    dispatch(getAllProjectTC(project.userId))
   })
 }
 
