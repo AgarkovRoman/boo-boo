@@ -6,7 +6,6 @@ import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects-reducer'
 import { getActiveProject } from '../../redux/projects-selectors'
-import { getUserId } from '../../redux/auth-selectors'
 
 export const IndividualProject = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState(false)

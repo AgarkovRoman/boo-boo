@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import uuid from 'react-uuid'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
