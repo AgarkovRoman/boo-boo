@@ -4,13 +4,9 @@ import uuid from 'react-uuid'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
 import { addProjectTC } from '../../redux/projects-reducer'
-import { getUserId } from '../../redux/auth-selectors'
 
-export const AddProject = ({ shouldShow = false }) => {
+export const AddProject = ({ shouldShow = false, userId }) => {
   const [show, setShow] = useState(shouldShow)
-
-  const userId = useSelector((state) => getUserId(state))
-
   const [project, setProject] = useState({
     name: '',
     userId,

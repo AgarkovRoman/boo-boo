@@ -47,9 +47,7 @@ export const authMeTC = () => async (dispatch) => {
     if (user) {
       const { uid, email, displayName } = user
       dispatch(setAuthUserData({ userId: uid, userEmail: email, userName: displayName }))
-
       // localStorage.setItem('authUser', JSON.stringify(user))
-
       return user
     }
     return null

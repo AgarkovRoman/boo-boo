@@ -1,9 +1,10 @@
 import React from 'react'
 import './ProjectOverlay.scss'
-import { useProjectsValue } from '../../context'
+import { useSelector } from 'react-redux'
+import { getActiveProject } from '../../redux/projects-selectors'
 
 export const ProjectOverlay = ({ setProject, showProjectOverlay, setShowProjectOverlay }) => {
-  const { projects } = useProjectsValue()
+  const projects = useSelector((state) => getActiveProject(state))
 
   return (
     projects &&

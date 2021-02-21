@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './Sidebar.module.scss'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
-import { setActiveProject } from '../../../redux/projects-reducer'
+import { getAllProjectTC, setActiveProject } from '../../../redux/projects-reducer'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
 import { getActiveProject } from '../../../redux/projects-selectors'
 import { TasksCounter } from '../../UI/TasksCounter/TasksCounter'
@@ -13,12 +13,16 @@ import {
   getNext7TasksCounter,
   getTodayTasksCounter,
 } from '../../../redux/tasks-selectors'
+import { getAllTasksTC } from '../../../redux/tasks-reducer'
 
-export const Sidebar = () => {
+export const Sidebar = ({ userId }) => {
   const [showProjects, setShowProjects] = useState(true)
 
-  const activeProject = useSelector((state) => getActiveProject(state))
   const dispatch = useDispatch()
+  // Get all projects & tasks from back and set it in redux
+  const getAllProjects = useCallback(() => dispatch(getAllProjectTC(userId)), [dispatch])
+  const getAllTasks = useCallback(() => dispatch(getAllTasksTC(userId)), [dispatch])
+
   const selectProject = useCallback((projectId) => dispatch(setActiveProject(projectId)), [
     dispatch,
   ])
@@ -31,9 +35,16 @@ export const Sidebar = () => {
   const todayTaskCount = useSelector((state) => selectTodayTaskCountMemoized(state))
   const next7TaskCount = useSelector((state) => selectNext7TaskCountMemoized(state))
 
+  const activeProject = useSelector((state) => getActiveProject(state))
   // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
   // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
   // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
+
+  useEffect(() => {
+    getAllProjects()
+    getAllTasks()
+  }, [dispatch, getAllProjects, getAllTasks])
+
   return (
     <div className={classes.sidebar} data-testid="sidebar">
       <ul className={classes.generic}>
@@ -131,7 +142,7 @@ export const Sidebar = () => {
       </div>
 
       <ul className={classes.projects}>{showProjects && <Projects />}</ul>
-      {showProjects && <AddProject />}
+      {showProjects && <AddProject userId={userId} />}
     </div>
   )
 }
