@@ -1,22 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import classes from './Checkbox.module.scss'
-import { firebase } from '../../../firebase'
 import { CheckboxPropsI } from './index'
+import { archiveTaskTC } from '../../../redux/tasks/tasks-reducer'
 
 export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
-  const archiveTask = () => {
-    firebase.firestore().collection('tasks').doc(id).update({
-      archived: true,
-    })
-  }
+  const dispatch = useDispatch()
+  const handleArchiveTask = useCallback((taskId) => dispatch(archiveTaskTC(taskId)), [dispatch])
 
   return (
     <div
       className={classes.checkboxHolder}
       data-testid="checkbox-action"
-      onClick={() => archiveTask()}
+      onClick={() => handleArchiveTask(id)}
       onKeyDown={(e) => {
-        if (e.key === 'Enter') archiveTask()
+        if (e.key === 'Enter') handleArchiveTask(id)
       }}
       aria-label={`Mark ${taskDesc} as done?`}
       role="button"

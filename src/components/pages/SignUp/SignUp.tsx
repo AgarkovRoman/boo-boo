@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignUp.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { signUpThunkCreator } from '../../../redux/auth-reducer'
+import { signUpTC } from '../../../redux/auth/auth-reducer'
 
 type FormData = {
   Name: string
@@ -19,7 +19,7 @@ export const SignUp: React.FC = () => {
   const dispatch = useDispatch()
 
   const onSubmit = useCallback(
-    (data: FormData) => dispatch(signUpThunkCreator(data.Email, data.Password, data.Name)),
+    (data: FormData) => dispatch(signUpTC(data.Email, data.Password, data.Name)),
     [dispatch]
   )
 

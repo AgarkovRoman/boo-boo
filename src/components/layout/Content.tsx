@@ -2,9 +2,13 @@ import React from 'react'
 import { Sidebar } from './Sidebar/Sidebar'
 import { Tasks } from '../Tasks/Tasks'
 
-export const Content: React.FC = () => (
+interface ContentPropsI {
+  userId: string
+}
+
+export const Content: React.FC<ContentPropsI> = ({ userId }) => (
   <section className="content" data-testid="content">
-    <Sidebar />
+    <Sidebar userId={userId} />
     <Tasks />
   </section>
 )

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { signInThunkCreator } from '../../../redux/auth-reducer'
+import { signInTC } from '../../../redux/auth/auth-reducer'
 
 type FormData = {
   Email: string
@@ -16,10 +16,9 @@ export const SignIn: React.FC = () => {
   const [error, setError] = useState()
 
   const dispatch = useDispatch()
-  const onSubmit = useCallback(
-    (data: FormData) => dispatch(signInThunkCreator(data.Email, data.Password)),
-    [dispatch]
-  )
+  const onSubmit = useCallback((data: FormData) => dispatch(signInTC(data.Email, data.Password)), [
+    dispatch,
+  ])
 
   console.log('SignIn errors: ', errors)
 

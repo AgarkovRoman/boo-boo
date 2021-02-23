@@ -96,8 +96,17 @@
     font-size: 15px;
     padding-left: 0;
     padding-right: 0;
+    border-radius: 8px;
+    margin-bottom: 2px;
 
     div {
+      display: flex;
+     align-items: center;
+
+      .taskCounterContainer {
+        margin-left: 6px;
+      }
+
       &:not(:focus-visible) {
         outline: none;
       }
@@ -130,7 +139,6 @@
     &.active, &:hover {
       font-weight: bold;
       background-color: white;
-      //border-radius: 4px;
     }
   }
 }

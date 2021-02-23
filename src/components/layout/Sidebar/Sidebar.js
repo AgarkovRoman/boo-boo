@@ -1,37 +1,62 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import classes from './Sidebar.module.scss'
-import { useSelectedProjectsValue } from '../../../context'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
-import { setProject } from '../../../redux/projects-reducer'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
+import { getActiveProject } from '../../../redux/projects/projects-selectors'
+import { TasksCounter } from '../../UI/TasksCounter/TasksCounter'
+import {
+  getInboxTasksCounter,
+  getNext7TasksCounter,
+  getTodayTasksCounter,
+} from '../../../redux/tasks/tasks-selectors'
+import { getAllTasksTC } from '../../../redux/tasks/tasks-reducer'
+import { getAllProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer';
 
-export const Sidebar = () => {
-  const { setSelectedProject } = useSelectedProjectsValue()
-  const [active, setActive] = useState('inbox')
+export const Sidebar = ({ userId }) => {
   const [showProjects, setShowProjects] = useState(true)
 
   const dispatch = useDispatch()
-  const selectProject = useCallback((project) => dispatch(setProject(project)), [dispatch])
+  // Get all projects & tasks from back and set it in redux
+  const getAllProjects = useCallback(() => dispatch(getAllProjectTC(userId)), [dispatch, userId])
+  const getAllTasks = useCallback(() => dispatch(getAllTasksTC(userId)), [dispatch, userId])
+
+  const selectProject = useCallback((projectId) => dispatch(setActiveProject(projectId)), [
+    dispatch,
+  ])
+
+  const selectInboxTaskCountMemoized = useMemo(() => getInboxTasksCounter, [])
+  const selectTodayTaskCountMemoized = useMemo(() => getTodayTasksCounter, [])
+  const selectNext7TaskCountMemoized = useMemo(() => getNext7TasksCounter, [])
+
+  const inboxTaskCount = useSelector((state) => selectInboxTaskCountMemoized(state))
+  const todayTaskCount = useSelector((state) => selectTodayTaskCountMemoized(state))
+  const next7TaskCount = useSelector((state) => selectNext7TaskCountMemoized(state))
+
+  const activeProject = useSelector((state) => getActiveProject(state))
+  // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
+  // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
+  // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
+
+  useEffect(() => {
+    getAllProjects()
+    getAllTasks()
+  }, [dispatch, getAllProjects, getAllTasks])
 
   return (
     <div className={classes.sidebar} data-testid="sidebar">
       <ul className={classes.generic}>
-        <li data-testid="inbox" className={active === 'inbox' ? classes.active : ''}>
+        <li data-testid="inbox" className={activeProject === INBOX ? classes.active : ''}>
           <div
             aria-label="Show inbox tasks"
             data-testid="inbox-action"
             onClick={() => {
-              setActive('inbox')
-              setSelectedProject('INBOX')
               selectProject(INBOX)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setActive('inbox')
-                setSelectedProject('INBOX')
                 selectProject(INBOX)
               }
             }}
@@ -42,21 +67,21 @@ export const Sidebar = () => {
               <FaInbox />
             </span>
             <span>Inbox</span>
+
+            <span className={classes.taskCounterContainer}>
+              <TasksCounter count={inboxTaskCount} />
+            </span>
           </div>
         </li>
-        <li data-testid="today" className={active === 'today' ? classes.active : ''}>
+        <li data-testid="today" className={activeProject === TODAY ? classes.active : ''}>
           <div
             aria-label="Show today`s tasks"
             data-testid="today-action"
             onClick={() => {
-              setActive('today')
-              setSelectedProject('TODAY')
               selectProject(TODAY)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setActive('today')
-                setSelectedProject('TODAY')
                 selectProject(TODAY)
               }
             }}
@@ -68,22 +93,21 @@ export const Sidebar = () => {
                 <FaRegCalendar />
               </span>
               <span>Today</span>
+              <span className={classes.taskCounterContainer}>
+                <TasksCounter count={todayTaskCount} />
+              </span>
             </span>
           </div>
         </li>
-        <li data-testid="next_7" className={active === 'next_7' ? classes.active : ''}>
+        <li data-testid="next_7" className={activeProject === NEXT_7 ? classes.active : ''}>
           <div
             aria-label="Show tasks for the next 7 days"
             data-testid="next_7-action"
             onClick={() => {
-              setActive('next_7')
-              setSelectedProject('NEXT_7')
               selectProject(NEXT_7)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setActive('next_7')
-                setSelectedProject('NEXT_7')
                 selectProject(NEXT_7)
               }
             }}
@@ -94,6 +118,9 @@ export const Sidebar = () => {
               <FaRegCalendarAlt />
             </span>
             <span>Next 7 days</span>
+            <span className={classes.taskCounterContainer}>
+              <TasksCounter count={next7TaskCount} />
+            </span>
           </div>
         </li>
       </ul>
@@ -115,7 +142,7 @@ export const Sidebar = () => {
       </div>
 
       <ul className={classes.projects}>{showProjects && <Projects />}</ul>
-      {showProjects && <AddProject />}
+      {showProjects && <AddProject userId={userId} />}
     </div>
   )
 }

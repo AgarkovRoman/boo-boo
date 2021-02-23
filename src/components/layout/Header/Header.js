@@ -3,14 +3,14 @@ import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
-import { signOutThunkCreator } from '../../../redux/auth-reducer'
+import { signOutTC } from '../../../redux/auth/auth-reducer'
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [shouldShowMain, setShouldShowMain] = useState(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState(false)
 
   const dispatch = useDispatch()
-  const signOutHandler = useCallback(() => dispatch(signOutThunkCreator()), [dispatch])
+  const signOutHandler = useCallback(() => dispatch(signOutTC()), [dispatch])
 
   return (
     <header className={classes.header} data-testid="header">
