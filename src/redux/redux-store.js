@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authReducer } from './auth-reducer'
-import { projectsReducer } from './projects-reducer'
-import { tasksReducer } from './tasks-reducer'
+import { authReducer } from './auth/auth-reducer'
+import { projectsReducer } from './projects/projects-reducer'
+import { tasksReducer } from './tasks/tasks-reducer'
 
 const reducer = {
   auth: authReducer,

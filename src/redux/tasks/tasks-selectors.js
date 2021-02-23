@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { INBOX, NEXT_7, TODAY } from '../constants/defaultProjects'
+import { INBOX, NEXT_7, TODAY } from '../../constants/defaultProjects'
 
 export const getAllTasks = (state) => state.tasks.allTasks
 

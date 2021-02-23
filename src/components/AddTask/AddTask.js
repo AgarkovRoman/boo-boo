@@ -6,9 +6,9 @@ import classes from './AddTask.module.scss'
 import { ProjectOverlay } from '../ProjectOverlay/ProjectOverlay'
 import { TaskDate } from '../TaskDate/TaskDate'
 import { Button } from '../UI/Button/Button'
-import { getActiveProject } from '../../redux/projects-selectors'
-import { addTaskTC } from '../../redux/tasks-reducer'
-import { getUserId } from '../../redux/auth-selectors'
+import { getActiveProject } from '../../redux/projects/projects-selectors'
+import { addTaskTC } from '../../redux/tasks/tasks-reducer'
+import { getUserId } from '../../redux/auth/auth-selectors'
 
 export const AddTask = ({
   showAddTaskMain = true,

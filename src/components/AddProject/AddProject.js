@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import uuid from 'react-uuid'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
-import { addProjectTC } from '../../redux/projects-reducer'
+import { addProjectTC } from '../../redux/projects/projects-reducer'
 
 export const AddProject = ({ shouldShow = false, userId }) => {
   const [show, setShow] = useState(shouldShow)

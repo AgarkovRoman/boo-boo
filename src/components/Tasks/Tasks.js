@@ -6,8 +6,8 @@ import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
-import { getActiveProject, getAllProjects } from '../../redux/projects-selectors'
-import { getAllTasks } from '../../redux/tasks-selectors'
+import { getActiveProject, getAllProjects } from '../../redux/projects/projects-selectors'
+import { getAllTasks } from '../../redux/tasks/tasks-selectors'
 
 export const Tasks = () => {
   const selectedProject = useSelector((state) => getActiveProject(state))

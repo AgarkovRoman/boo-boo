@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import classes from './Checkbox.module.scss'
 import { CheckboxPropsI } from './index'
-import { archiveTaskTC } from '../../../redux/tasks-reducer'
+import { archiveTaskTC } from '../../../redux/tasks/tasks-reducer'
 
 export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
   const dispatch = useDispatch()

@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from './Sidebar.module.scss'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
-import { getAllProjectTC, setActiveProject } from '../../../redux/projects-reducer'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
-import { getActiveProject } from '../../../redux/projects-selectors'
+import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { TasksCounter } from '../../UI/TasksCounter/TasksCounter'
 import {
   getInboxTasksCounter,
   getNext7TasksCounter,
   getTodayTasksCounter,
-} from '../../../redux/tasks-selectors'
-import { getAllTasksTC } from '../../../redux/tasks-reducer'
+} from '../../../redux/tasks/tasks-selectors'
+import { getAllTasksTC } from '../../../redux/tasks/tasks-reducer'
+import { getAllProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer';
 
 export const Sidebar = ({ userId }) => {
   const [showProjects, setShowProjects] = useState(true)

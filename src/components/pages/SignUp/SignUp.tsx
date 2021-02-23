@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignUp.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { signUpTC } from '../../../redux/auth-reducer'
+import { signUpTC } from '../../../redux/auth/auth-reducer'
 
 type FormData = {
   Name: string

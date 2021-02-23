@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from './IndividualProject.module.scss'
 import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
-import { deleteProjectTC, setActiveProject } from '../../redux/projects-reducer'
-import { getActiveProject } from '../../redux/projects-selectors'
+import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'
+import { getActiveProject } from '../../redux/projects/projects-selectors'
 
 export const IndividualProject = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState(false)

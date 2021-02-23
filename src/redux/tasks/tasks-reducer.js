@@ -1,4 +1,4 @@
-import { tasksAPI } from '../api/api'
+import { tasksAPI } from '../../api/api'
 
 const initialState = {
   allTasks: [],

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
-import { signInTC } from '../../../redux/auth-reducer'
+import { signInTC } from '../../../redux/auth/auth-reducer'
 
 type FormData = {
   Email: string

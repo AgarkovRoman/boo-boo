@@ -3,7 +3,7 @@ import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
-import { signOutTC } from '../../../redux/auth-reducer'
+import { signOutTC } from '../../../redux/auth/auth-reducer'
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [shouldShowMain, setShouldShowMain] = useState(false)

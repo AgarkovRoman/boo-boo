@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { getUser } from '../helpers/helpers'
 import { authAPI } from '../api/api'
-import { authMeTC } from '../redux/auth-reducer'
+import { authMeTC } from '../redux/auth/auth-reducer'
 
 export const useAuthListener = () => {
   const [user, setUser] = useState(getUser())
