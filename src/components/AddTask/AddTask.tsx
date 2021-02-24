@@ -9,26 +9,35 @@ import { Button } from '../UI/Button/Button'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
 import { addTaskTC } from '../../redux/tasks/tasks-reducer'
 import { getUserId } from '../../redux/auth/auth-selectors'
+import { ProjectsStateI } from '../../redux/projects/projects-types'
+import { AuthStateI } from '../../redux/auth/auth-types'
 
-export const AddTask = ({
+interface AddTaskPropsI {
+  showAddTaskMain?: boolean
+  showShouldMain?: boolean
+  showQuickAddTask?: boolean
+  setShowQuickAddTask?: (value: boolean) => void
+}
+
+export const AddTask: React.FC<AddTaskPropsI> = ({
   showAddTaskMain = true,
   showShouldMain = false,
-  showQuickAddTask,
+  showQuickAddTask = false,
   setShowQuickAddTask,
 }) => {
-  const [taskName, setTaskName] = useState('')
-  const [taskDate, setTaskDate] = useState('')
-  const [project, setProject] = useState('')
-  const [showAddTaskInput, setShowAddTaskInput] = useState(showShouldMain)
-  const [showProjectOverlay, setShowProjectOverlay] = useState(false)
-  const [showTaskDate, setShowTaskDate] = useState(false)
+  const [taskName, setTaskName] = useState<string>('')
+  const [taskDate, setTaskDate] = useState<string>('')
+  const [project, setProject] = useState<string>('')
+  const [showAddTaskInput, setShowAddTaskInput] = useState<boolean>(showShouldMain)
+  const [showProjectOverlay, setShowProjectOverlay] = useState<boolean>(false)
+  const [showTaskDate, setShowTaskDate] = useState<boolean>(false)
 
   const dispatch = useDispatch()
-  const selectedProject = useSelector((state) => getActiveProject(state))
-  const userId = useSelector((state) => getUserId(state))
+  const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
+  const userId = useSelector((state: AuthStateI) => getUserId(state))
   const addTaskHandler = useCallback((task) => dispatch(addTaskTC(task)), [dispatch])
 
-  const addTask = () => {
+  const getTaskObject = () => {
     const projectId = project || selectedProject
 
     let collatedDate = ''
@@ -48,15 +57,22 @@ export const AddTask = ({
         task: taskName,
         date: collatedDate || taskDate,
         userId,
-      }).then(() => {
-        setTaskName('')
-        setProject('')
-        setShowAddTaskInput(false)
-        setShowProjectOverlay(false)
       })
     )
   }
 
+  const addTask = () => {
+    setTaskName('')
+    setProject('')
+    setShowAddTaskInput(false)
+    setShowProjectOverlay(false)
+
+    return showQuickAddTask && setShowQuickAddTask
+      ? getTaskObject() && setShowQuickAddTask(false)
+      : getTaskObject()
+  }
+
+  console.log('project: ', project)
   return (
     <div
       className={showQuickAddTask ? classes.overlay : classes.addTask}
@@ -81,7 +97,8 @@ export const AddTask = ({
 
       {(showAddTaskInput || showQuickAddTask) && (
         <div className={classes.main} data-testid="add-task-main">
-          {showQuickAddTask && (
+          {/* Quick Add Task */}
+          {showQuickAddTask !== undefined && setShowQuickAddTask !== undefined && (
             <>
               <div data-testid="quick-add-task">
                 <h2 className={classes.title}>Quick Add Task</h2>
@@ -130,9 +147,7 @@ export const AddTask = ({
             onChange={(e) => setTaskName(e.target.value)}
           />
           <Button
-            onClick={() => {
-              showQuickAddTask ? addTask() && setShowQuickAddTask(false) : addTask()
-            }}
+            onClick={() => addTask()}
             label="Add Task"
             color="primary"
             dataTestId="add-task"

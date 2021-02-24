@@ -13,10 +13,16 @@ import {
   getTodayTasksCounter,
 } from '../../../redux/tasks/tasks-selectors'
 import { getAllTasksTC } from '../../../redux/tasks/tasks-reducer'
-import { getAllProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer';
+import { getAllProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer'
+import { TasksStateI } from '../../../redux/tasks/tasks-types'
+import { ProjectsStateI } from '../../../redux/projects/projects-types'
 
-export const Sidebar = ({ userId }) => {
-  const [showProjects, setShowProjects] = useState(true)
+interface SidebarPropsI {
+  userId: string
+}
+
+export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
+  const [showProjects, setShowProjects] = useState<boolean>(true)
 
   const dispatch = useDispatch()
   // Get all projects & tasks from back and set it in redux
@@ -31,11 +37,11 @@ export const Sidebar = ({ userId }) => {
   const selectTodayTaskCountMemoized = useMemo(() => getTodayTasksCounter, [])
   const selectNext7TaskCountMemoized = useMemo(() => getNext7TasksCounter, [])
 
-  const inboxTaskCount = useSelector((state) => selectInboxTaskCountMemoized(state))
-  const todayTaskCount = useSelector((state) => selectTodayTaskCountMemoized(state))
-  const next7TaskCount = useSelector((state) => selectNext7TaskCountMemoized(state))
+  const inboxTaskCount = useSelector((state: TasksStateI) => selectInboxTaskCountMemoized(state))
+  const todayTaskCount = useSelector((state: TasksStateI) => selectTodayTaskCountMemoized(state))
+  const next7TaskCount = useSelector((state: TasksStateI) => selectNext7TaskCountMemoized(state))
 
-  const activeProject = useSelector((state) => getActiveProject(state))
+  const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
   // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
   // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
   // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))

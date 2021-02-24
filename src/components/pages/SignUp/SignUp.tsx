@@ -15,7 +15,7 @@ type FormData = {
 
 export const SignUp: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
-  const [error, setError] = useState()
+  const [error, setError] = useState<string>('')
   const dispatch = useDispatch()
 
   const onSubmit = useCallback(

@@ -6,11 +6,17 @@ import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
+import { ProjectI, ProjectsStateI } from '../../redux/projects/projects-types'
 
-export const IndividualProject = ({ project }) => {
-  const [showConfirm, setShowConfirm] = useState(false)
+interface IndividualProjectPropsI {
+  project: ProjectI
+}
 
-  const activeProject = useSelector((state) => getActiveProject(state))
+export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }) => {
+  const [showConfirm, setShowConfirm] = useState<boolean>(false)
+
+  const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
+
   const dispatch = useDispatch()
   const selectProject = useCallback((id) => dispatch(setActiveProject(id)), [dispatch])
   const deleteProject = useCallback((id, userId) => dispatch(deleteProjectTC(id, userId)), [

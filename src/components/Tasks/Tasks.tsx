@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react'
 import './Tasks.scss'
 import { useSelector } from 'react-redux'
-import uuid from 'react-uuid'
+import { v4 as uuid } from 'uuid'
 import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
-import { getActiveProject, getAllProjects } from '../../redux/projects/projects-selectors'
 import { getAllTasks } from '../../redux/tasks/tasks-selectors'
+import { getActiveProject, getAllProjects } from '../../redux/projects/projects-selectors'
+import { ProjectsStateI } from '../../redux/projects/projects-types'
+import { TaskI, TasksStateI } from '../../redux/tasks/tasks-types'
 
-export const Tasks = () => {
-  const selectedProject = useSelector((state) => getActiveProject(state))
-  const projects = useSelector((state) => getAllProjects(state))
-  const tasks = useSelector((state) => getAllTasks(state))
+export const Tasks: React.FC = () => {
+  const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
+  const projects = useSelector((state: ProjectsStateI) => getAllProjects(state))
+  const tasks = useSelector((state: TasksStateI) => getAllTasks(state))
 
   const createProjectName = () => {
     let name = ''
@@ -32,8 +34,8 @@ export const Tasks = () => {
     return name
   }
 
-  const getFilteredTasks = (allTasks, project) =>
-    allTasks.filter((task) => task.projectId === project && !task.archived)
+  const getFilteredTasks = (allTasks: Array<TaskI>, selectProjectId: string) =>
+    allTasks.filter((task: TaskI) => task.projectId === selectProjectId && !task.archived)
 
   const projectName = createProjectName()
   const selectedProjectTasks = getFilteredTasks(tasks, selectedProject)

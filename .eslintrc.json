@@ -90,6 +90,8 @@
       {
         "extensions": [
           ".js",
+          ".ts",
+          ".tsx",
           ".jsx"
         ]
       }

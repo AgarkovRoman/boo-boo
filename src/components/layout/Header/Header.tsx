@@ -5,9 +5,14 @@ import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
 import { signOutTC } from '../../../redux/auth/auth-reducer'
 
-export const Header = ({ darkMode, setDarkMode }) => {
-  const [shouldShowMain, setShouldShowMain] = useState(false)
-  const [showQuickAddTask, setShowQuickAddTask] = useState(false)
+interface HeaderPropsI {
+  darkMode: boolean
+  setDarkMode: (darkMode: boolean) => void
+}
+
+export const Header: React.FC<HeaderPropsI> = ({ darkMode, setDarkMode }) => {
+  const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
+  const [showQuickAddTask, setShowQuickAddTask] = useState<boolean>(false)
 
   const dispatch = useDispatch()
   const signOutHandler = useCallback(() => dispatch(signOutTC()), [dispatch])

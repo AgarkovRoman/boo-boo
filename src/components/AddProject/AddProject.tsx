@@ -1,26 +1,32 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import uuid from 'react-uuid'
+import { v4 as uuid } from 'uuid'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
 import { addProjectTC } from '../../redux/projects/projects-reducer'
+import { ProjectI } from '../../redux/projects/projects-types'
 
-export const AddProject = ({ shouldShow = false, userId }) => {
-  const [show, setShow] = useState(shouldShow)
-  const [project, setProject] = useState({
+interface AddProjectPropsI {
+  shouldShow?: boolean
+  userId: string
+}
+
+export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false, userId }) => {
+  const [show, setShow] = useState<boolean>(shouldShow)
+  const [project, setProject] = useState<ProjectI>({
     name: '',
     userId,
+    projectId: '',
   })
   const dispatch = useDispatch()
   const projectId = uuid()
 
   const addProject = useCallback((item) => dispatch(addProjectTC(item)), [dispatch])
 
-  const handleProject = (item) => {
-    addProject(item).then(() => {
-      setProject({ ...project, name: '' })
-      setShow(false)
-    })
+  const handleAddProject = (item: ProjectI) => {
+    addProject(item)
+    setProject({ ...project, name: '' })
+    setShow(false)
   }
 
   return (
@@ -59,7 +65,7 @@ export const AddProject = ({ shouldShow = false, userId }) => {
             <Button
               color="primary"
               label="Add Project"
-              onClick={() => handleProject({ ...project, projectId })}
+              onClick={() => handleAddProject({ ...project, projectId })}
               dataTestId="add-project-submit"
             />
             <Button
