@@ -7,7 +7,7 @@ import { addProjectTC } from '../../redux/projects/projects-reducer'
 import { ProjectI } from '../../redux/projects/projects-types'
 
 interface AddProjectPropsI {
-  shouldShow: boolean
+  shouldShow?: boolean
   userId: string
 }
 

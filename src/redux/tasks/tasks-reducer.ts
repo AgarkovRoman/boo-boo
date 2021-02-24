@@ -83,9 +83,9 @@ export const getAllTasksTC = (
   })
 }
 
-export const addTaskTC = (
-  task: TaskI
-): ThunkAction<void, TasksStateI, unknown, Action<string>> => async (dispatch) => {
+export const addTaskTC = (task: TaskI): ThunkAction<void, TasksStateI, unknown, Action> => async (
+  dispatch
+) => {
   dispatch(addTask(task))
   await tasksAPI.addTask(task).then(() => {
     dispatch(getAllTasksTC(task.userId))

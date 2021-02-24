@@ -8,5 +8,9 @@ import { ProjectsStateI } from '../../redux/projects/projects-types'
 export const Projects: React.FC = () => {
   const projects = useSelector((state: ProjectsStateI) => getAllProjects(state))
 
-  return projects && projects.map((project) => <IndividualProject key={uuid()} project={project} />)
+  return (
+    <>
+      {projects && projects.map((project) => <IndividualProject key={uuid()} project={project} />)}
+    </>
+  )
 }

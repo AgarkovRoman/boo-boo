@@ -59,7 +59,7 @@ export const Tasks: React.FC = () => {
         </ul>
       )}
 
-      {/* <AddTask /> */}
+      <AddTask />
 
       {selectedProjectTasks.length === 0 && (
         <>
