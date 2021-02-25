@@ -1,3 +1,8 @@
+export interface collatedTaskI {
+  key: string
+  name: string
+}
+
 export const collatedTasks = [
   { key: 'INBOX', name: 'Inbox' },
   { key: 'TODAY', name: 'Today' },

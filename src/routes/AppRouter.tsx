@@ -6,7 +6,7 @@ import { Header } from '../components/layout/Header/Header'
 import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
-import { useAuthListener } from '../hooks'
+import { useAuthListener } from '../hooks/useAuthListener'
 
 export const AppRouter: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false)

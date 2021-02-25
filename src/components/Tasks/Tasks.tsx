@@ -24,11 +24,11 @@ export const Tasks: React.FC = () => {
       selectedProject &&
       !collatedTasksExist(selectedProject)
     ) {
-      name = getTitle(projects, selectedProject).name
+      name = getTitle(projects, selectedProject)
     }
 
     if (collatedTasksExist(selectedProject) && selectedProject) {
-      name = getCollatedTitle(collatedTasks, selectedProject).name
+      name = getCollatedTitle(collatedTasks, selectedProject)
     }
 
     return name
