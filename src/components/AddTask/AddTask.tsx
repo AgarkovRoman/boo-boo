@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { FaRegListAlt, FaRegCalendarAlt, FaRegTimesCircle } from 'react-icons/fa'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
+import { VscAdd } from 'react-icons/all'
 import classes from './AddTask.module.scss'
 import { ProjectOverlay } from '../ProjectOverlay/ProjectOverlay'
 import { TaskDate } from '../TaskDate/TaskDate'
@@ -89,7 +90,9 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
           aria-label="Add task"
           role="button"
         >
-          <span className={classes.plus}>+</span>
+          <span className={classes.plus}>
+            <VscAdd />
+          </span>
           <span className={classes.text}>Add Task</span>
         </div>
       )}

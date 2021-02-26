@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import './Tasks.scss'
 import { useSelector } from 'react-redux'
 import { v4 as uuid } from 'uuid'
-import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
@@ -53,10 +52,6 @@ export const Tasks: React.FC = () => {
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
             <Task key={uuid()} name={task.task} id={task.id} />
-            // <li key={uuid()} data-testid="task">
-            //   <Checkbox id={task.id} taskDesc={task.task} />
-            //   <span>{task.task}</span>
-            // </li>
           ))}
         </ul>
       )}

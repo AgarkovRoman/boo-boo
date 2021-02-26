@@ -1,6 +1,8 @@
 .addProject {
   padding: 4px 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &:not(:focus-visible) {
     outline: none;
@@ -14,14 +16,17 @@
 }
 
 .plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #dd4b39;
-  font-size: 18px;
 }
 
 .text {
   display: inline-block;
   color: #545454;
   font-size: 14px;
+  line-height: 17px;
   margin-left: 15px;
 }
 

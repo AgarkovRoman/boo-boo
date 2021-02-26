@@ -15,7 +15,7 @@ export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
   const [isModalDisplay, setIsModalDisplay] = useState(false)
 
   const dispatch = useDispatch()
-  const deleteTask = useCallback((taskId: string) => dispatch(deleteTaskTC(taskId)), [])
+  const deleteTask = useCallback((taskId: string) => dispatch(deleteTaskTC(taskId)), [dispatch])
 
   return (
     <>

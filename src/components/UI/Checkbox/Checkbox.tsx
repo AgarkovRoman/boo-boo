@@ -1,12 +1,20 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { VscCheck } from 'react-icons/vsc'
 import classes from './Checkbox.module.scss'
 import { CheckboxPropsI } from './index'
 import { archiveTaskTC } from '../../../redux/tasks/tasks-reducer'
 
 export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
+  const [mouseEnter, setMouseEnter] = useState<boolean>(false)
+  const [checked, setChecked] = useState<boolean>(false)
   const dispatch = useDispatch()
-  const handleArchiveTask = useCallback((taskId) => dispatch(archiveTaskTC(taskId)), [dispatch])
+  const archiveTask = useCallback((taskId) => dispatch(archiveTaskTC(taskId)), [dispatch])
+
+  const handleArchiveTask = (taskId: string) => {
+    setChecked(true)
+    setTimeout(() => archiveTask(taskId), 300)
+  }
 
   return (
     <div
@@ -20,7 +28,13 @@ export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
       role="button"
       tabIndex={0}
     >
-      <span className={classes.checkbox} />
+      <span
+        className={`${classes.checkbox} ${checked && classes.checkboxChecked}`}
+        onMouseEnter={() => setMouseEnter(true)}
+        onMouseLeave={() => setMouseEnter(false)}
+      >
+        {mouseEnter && <VscCheck />}
+      </span>
     </div>
   )
 }

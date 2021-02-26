@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuid } from 'uuid'
+import { VscAdd } from 'react-icons/all'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'
 import { addProjectTC } from '../../redux/projects/projects-reducer'
@@ -43,7 +44,9 @@ export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false, use
           role="button"
           tabIndex={0}
         >
-          <span className={classes.plus}>+</span>
+          <span className={classes.plus}>
+            <VscAdd />
+          </span>
           <span className={classes.text}>Add Project</span>
         </div>
       )}
