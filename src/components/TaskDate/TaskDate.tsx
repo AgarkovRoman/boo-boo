@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
-import './TaskDate.scss'
 import { FaRegPaperPlane, FaSpaceShuttle, FaSun } from 'react-icons/fa'
+import classes from './TaskDate.module.scss'
 
 // TODO: убраать отступы так, чтобы модалка открывалась прямо под иконкой
 
@@ -18,10 +18,11 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
 }) => (
   <>
     {showTaskDate && (
-      <div className="task-date" data-testid="task-date-overlay">
-        <ul className="task-date__list">
-          <li>
+      <div className={classes.taskDate} data-testid="task-date-overlay">
+        <ul className={classes.list}>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select today as the task date"
               onClick={() => {
                 setShowTaskDate(false)
@@ -44,8 +45,9 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
             </div>
           </li>
 
-          <li>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select tomorrow as the task date"
               onClick={() => {
                 setShowTaskDate(false)
@@ -68,8 +70,9 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
             </div>
           </li>
 
-          <li>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select next week as the task date"
               onClick={() => {
                 setShowTaskDate(false)

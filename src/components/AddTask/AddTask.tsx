@@ -72,7 +72,6 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
       : getTaskObject()
   }
 
-  console.log('project: ', project)
   return (
     <div
       className={showQuickAddTask ? classes.overlay : classes.addTask}
@@ -128,16 +127,20 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
               </div>
             </>
           )}
-          <ProjectOverlay
-            setProject={setProject}
-            showProjectOverlay={showProjectOverlay}
-            setShowProjectOverlay={setShowProjectOverlay}
-          />
-          <TaskDate
-            setTaskDate={setTaskDate}
-            showTaskDate={showTaskDate}
-            setShowTaskDate={setShowTaskDate}
-          />
+          <div className={classes.taskProjectOverlay}>
+            <ProjectOverlay
+              setProject={setProject}
+              showProjectOverlay={showProjectOverlay}
+              setShowProjectOverlay={setShowProjectOverlay}
+            />
+          </div>
+          <div className={classes.taskDateOverlay}>
+            <TaskDate
+              setTaskDate={setTaskDate}
+              showTaskDate={showTaskDate}
+              setShowTaskDate={setShowTaskDate}
+            />
+          </div>
           <input
             className={classes.content}
             aria-label="Enter your task"

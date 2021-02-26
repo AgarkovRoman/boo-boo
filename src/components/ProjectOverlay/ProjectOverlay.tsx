@@ -1,6 +1,6 @@
 import React from 'react'
-import './ProjectOverlay.scss'
 import { useSelector } from 'react-redux'
+import classes from './ProjectOverlay.module.scss'
 import { getAllProjects } from '../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../redux/projects/projects-types'
 
@@ -20,11 +20,12 @@ export const ProjectOverlay: React.FC<ProjectOverlayPropsI> = ({
   return (
     <>
       {projects && showProjectOverlay && (
-        <div className="project-overlay" data-testid="project-overlay">
-          <ul className="project-overlay__list">
+        <div className={classes.projectOverlay} data-testid="project-overlay">
+          <ul className={classes.overlayList}>
             {projects.map((project) => (
-              <li key={project.projectId}>
+              <li className={classes.listItem} key={project.projectId}>
                 <div
+                  className={classes.listElement}
                   data-testid="project-overlay-action"
                   onClick={() => {
                     setProject(project.projectId)

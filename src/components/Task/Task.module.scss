@@ -11,8 +11,14 @@
 
 .kebab {
   cursor: pointer;
+  position: relative;
 
   &:not(:focus-visible) {
     outline: none;
   }
+}
+
+.modal {
+  position: absolute;
+  right: 205px;
 }
