@@ -4,6 +4,7 @@ import { tasksAPI } from '../../api/api'
 import {
   addTaskActionCreatorI,
   archivedTaskActionCreatorI,
+  deleteTaskActionCreatorI,
   setAllTasksActionCreatorI,
   TaskI,
   TasksActionCreatorType,
@@ -18,6 +19,7 @@ const initialState: TasksI = {
 export const SET_TASKS = 'SET_TASKS'
 export const ADD_TASK = 'ADD_TASK'
 export const ARCHIVED_TASK = 'ARCHIVED_TASK'
+export const DELETE_TASK = 'DELETE_TASK'
 
 const archivedTaskHandler = (tasks: Array<TaskI>, taskId: Array<TaskI> | TaskI | string) =>
   tasks.map((task) => {
@@ -43,6 +45,9 @@ export const tasksReducer = (state = initialState, action: TasksActionCreatorTyp
     case ARCHIVED_TASK: {
       return { ...state, allTasks: archivedTaskHandler(state.allTasks, payload) } as TasksI
     }
+    case DELETE_TASK: {
+      return { ...state, allTasks: state.allTasks.filter((task) => task.docId !== payload) }
+    }
     default:
       return state
   }
@@ -57,6 +62,11 @@ export const addTask = (task: TaskI): addTaskActionCreatorI => ({ type: ADD_TASK
 
 export const archivedTask = (taskId: string): archivedTaskActionCreatorI => ({
   type: ARCHIVED_TASK,
+  payload: taskId,
+})
+
+export const deleteTask = (taskId: string): deleteTaskActionCreatorI => ({
+  type: DELETE_TASK,
   payload: taskId,
 })
 
@@ -97,4 +107,11 @@ export const archiveTaskTC = (
 ): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
   await tasksAPI.archivedTasksById(taskId)
   dispatch(archivedTask(taskId))
+}
+
+export const deleteTaskTC = (
+  taskId: string
+): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
+  await tasksAPI.deleteTask(taskId)
+  dispatch(deleteTask(taskId))
 }

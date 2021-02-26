@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { VscKebabVertical } from 'react-icons/vsc'
+import { useDispatch } from 'react-redux'
 import classes from './Task.module.scss'
 import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { DeleteTaskModal } from './DeleteTaskModal'
+import { deleteTaskTC } from '../../redux/tasks/tasks-reducer'
 
 interface TaskPropsI {
   name: string
@@ -12,7 +14,8 @@ interface TaskPropsI {
 export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
   const [isModalDisplay, setIsModalDisplay] = useState(false)
 
-  const deleteTask = (taskName: string) => console.log(`delete ${taskName}`)
+  const dispatch = useDispatch()
+  const deleteTask = useCallback((taskId: string) => dispatch(deleteTaskTC(taskId)), [])
 
   return (
     <>
@@ -37,7 +40,7 @@ export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
           {isModalDisplay && (
             <div className={classes.modal}>
               <DeleteTaskModal
-                deleteTask={() => deleteTask(name)}
+                deleteTask={() => deleteTask(id)}
                 onClose={() => setIsModalDisplay(false)}
               />
             </div>
