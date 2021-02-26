@@ -2,11 +2,11 @@ import React, { useCallback, useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import classes from './IndividualProject.module.scss'
-import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
 import { ProjectI, ProjectsStateI } from '../../redux/projects/projects-types'
+import { DeleteProjectModal } from '../DeleteModal/DeleteProjectModal'
 
 interface IndividualProjectPropsI {
   project: ProjectI
@@ -68,25 +68,12 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
         </div>
       </li>
       {showConfirm && (
-        <div className="project-delete-modal">
-          <div className="project-delete-modal__inner">
-            <p>Are you sure you want to delete this project?</p>
-            <div className="project-delete-modal__buttons">
-              <Button
-                onClick={() => {
-                  deleteProject(project.docId, project.userId)
-                  selectProject(INBOX)
-                }}
-                label="Delete"
-                color="primary"
-              />
-              <Button
-                onClick={() => setShowConfirm(!showConfirm)}
-                label="Cancel"
-                color="transparent"
-              />
-            </div>
-          </div>
+        <div className={classes.deleteModal}>
+          <DeleteProjectModal
+            deleteProject={() => deleteProject(project.docId, project.userId)}
+            selectProject={() => selectProject(INBOX)}
+            setShowConfirm={() => setShowConfirm(!showConfirm)}
+          />
         </div>
       )}
     </>

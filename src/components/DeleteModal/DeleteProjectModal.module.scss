@@ -1,0 +1,24 @@
+.modal {
+  position: absolute;
+  z-index: 99;
+  width: 200px;
+  padding: 10px;
+  right: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px, rgba(0, 0, 0, 0.1) 0 4px 11px;;
+  border-radius: 4px
+}
+
+.title {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  line-height: normal;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.buttons {
+  button + button {
+    margin-left: 4px;
+  }
+}
