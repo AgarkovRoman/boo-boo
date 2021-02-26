@@ -25,7 +25,7 @@ export const SignIn: React.FC = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.formBox}>
-        <h3 className={classes.title}>Вход</h3>
+        <h3 className={classes.title}>Sign In</h3>
         {error}
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <label className={classes.label}>
@@ -36,7 +36,7 @@ export const SignIn: React.FC = () => {
               name="Email"
               ref={register({ required: true, pattern: /^\S+@\S+$/i })}
             />
-            {/* {errors.Email && <p>Обязательное поле</p>} */}
+            {/* {errors.Email && <p>Require field</p>} */}
           </label>
 
           <label className={classes.label}>
@@ -47,15 +47,15 @@ export const SignIn: React.FC = () => {
               name="Password"
               ref={register({ required: true, minLength: 6 })}
             />
-            {/* {errors.Password && <p>Обязательное поле</p>} */}
+            {/* {errors.Password && <p>Require field</p>} */}
           </label>
           <button className={classes.button} data-testid="sign-in" type="submit">
-            Войти
+            SignIn
           </button>
         </form>
 
         <p>
-          Ещё нет аккаунта?
+          Don't have an account yet?
           <NavLink className={classes.signupLink} to={ROUTER.SIGN_UP}>
             Sign up now
           </NavLink>

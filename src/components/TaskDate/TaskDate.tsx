@@ -3,8 +3,6 @@ import moment from 'moment'
 import { FaRegPaperPlane, FaSpaceShuttle, FaSun } from 'react-icons/fa'
 import classes from './TaskDate.module.scss'
 
-// TODO: убраать отступы так, чтобы модалка открывалась прямо под иконкой
-
 interface TaskDatePropsI {
   setShowTaskDate: (value: boolean) => void
   setTaskDate: (value: string) => void

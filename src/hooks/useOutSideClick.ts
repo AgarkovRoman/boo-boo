@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 export const useOutsideClick = (ref: any, display: boolean, callback: () => void) => {
-  const handleClick = (e: Event) => {
-    if (ref.current && !ref.current.contains(e.target)) {
-      callback()
-    }
-  }
+  const handleClick = useCallback(
+    (e: Event) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        callback()
+      }
+    },
+    [callback, ref]
+  )
 
   useEffect(() => {
     if (display) {

@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { FaTrashAlt } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { VscKebabVertical } from 'react-icons/all'
 import classes from './IndividualProject.module.scss'

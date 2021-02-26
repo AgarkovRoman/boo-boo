@@ -28,13 +28,13 @@ export const SignUp: React.FC = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.formBox}>
-        <h3 className={classes.title}>Регистрация</h3>
+        <h3 className={classes.title}>SignUp</h3>
         {error}
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <label>
             Name
             <input type="text" placeholder="Name" name="Name" ref={register({ required: true })} />
-            {/* {errors.Email && <p>Обязательное поле</p>} */}
+            {/* {errors.Email && <p>Require field</p>} */}
           </label>
           <label>
             Email
@@ -44,7 +44,7 @@ export const SignUp: React.FC = () => {
               name="Email"
               ref={register({ required: true, pattern: /^\S+@\S+$/i })}
             />
-            {/* {errors.Email && <p>Обязательное поле</p>} */}
+            {/* {errors.Email && <p>Require field</p>} */}
           </label>
           <label>
             Password
@@ -54,21 +54,21 @@ export const SignUp: React.FC = () => {
               name="Password"
               ref={register({ required: true, minLength: 6 })}
             />
-            {/* {errors.Password && <p>Обязательное поле</p>} */}
+            {/* {errors.Password && <p>Require field</p>} */}
           </label>
           {/* <label>Repeat Password */}
           {/*    <input type="password" placeholder="Repeat Password" name="RepeatPassword" */}
           {/*           ref={register({required: true, minLength: 6})}/> */}
-          {/*    /!*{errors.Password && <p>Обязательное поле</p>}*!/ */}
+          {/*    /!*{errors.Password && <p>Require field</p>}*!/ */}
           {/* </label> */}
 
           <button className={classes.button} data-testid="sign-up" type="submit">
-            Зарегистрироваться
+            Sign Up
           </button>
         </form>
 
         <p>
-          Уже есть аккаунт?
+          Already have an account?
           <NavLink className={classes.signinLink} to={ROUTER.SIGN_IN}>
             Sign in now
           </NavLink>
