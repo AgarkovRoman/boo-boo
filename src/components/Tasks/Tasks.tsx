@@ -10,6 +10,7 @@ import { getAllTasks } from '../../redux/tasks/tasks-selectors'
 import { getActiveProject, getAllProjects } from '../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../redux/projects/projects-types'
 import { TaskI, TasksStateI } from '../../redux/tasks/tasks-types'
+import { Task } from '../Task/Task'
 
 export const Tasks: React.FC = () => {
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
@@ -51,10 +52,11 @@ export const Tasks: React.FC = () => {
       {selectedProjectTasks.length > 0 && (
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
-            <li key={uuid()} data-testid="task">
-              <Checkbox id={task.id} taskDesc={task.task} />
-              <span>{task.task}</span>
-            </li>
+            <Task key={uuid()} name={task.task} id={task.id} />
+            // <li key={uuid()} data-testid="task">
+            //   <Checkbox id={task.id} taskDesc={task.task} />
+            //   <span>{task.task}</span>
+            // </li>
           ))}
         </ul>
       )}

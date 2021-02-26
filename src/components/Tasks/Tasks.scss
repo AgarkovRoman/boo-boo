@@ -23,8 +23,8 @@
   }
 
   &__list li {
-    display: -ms-flexbox;
     display: flex;
+    justify-content: space-between;
     line-height: 18px;
     color: #333;
     padding-top: 10px;
