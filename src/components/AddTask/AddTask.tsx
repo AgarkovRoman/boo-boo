@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { FaRegListAlt, FaRegCalendarAlt, FaRegTimesCircle } from 'react-icons/fa'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import { VscAdd } from 'react-icons/all'
 import classes from './AddTask.module.scss'
@@ -43,9 +43,9 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
 
     let collatedDate = ''
     if (projectId === 'TODAY') {
-      collatedDate = moment().format('DD/MM/YYYY')
+      collatedDate = dayjs().format('DD/MM/YYYY')
     } else if (projectId === 'NEXT_7') {
-      collatedDate = moment().add(7, 'days').format('DD/MM/YYYY')
+      collatedDate = dayjs().add(7, 'day').format('DD/MM/YYYY')
     }
 
     return (

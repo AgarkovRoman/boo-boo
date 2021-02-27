@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { Content } from '../components/layout/Content'
+import { Content } from '../components/layout/Content/Content'
 
 jest.mock('../context', () => ({
   useSelectedProjectValue: jest.fn(() => ({

@@ -32,7 +32,7 @@ const archivedTaskHandler = (tasks: Array<TaskI>, taskId: Array<TaskI> | TaskI |
     }
   })
 
-export const tasksReducer = (state = initialState, action: TasksActionCreatorType) => {
+export const tasksReducer = (state = initialState, action: TasksActionCreatorType): TasksI => {
   const { type, payload } = action
 
   switch (type) {

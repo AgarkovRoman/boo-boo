@@ -33,14 +33,14 @@
 }
 
 .checkboxChecked {
-  background-color: #db4c3f;
-  border-color: #db4c3f;
+  background-color:  var(--main-color);;
+  border-color:  var(--main-color);;
   transform: scale(1.1);
   transition: all 0.25s ease-in;
   color: #ffffff;
 
   &:hover {
-    background-color: #db4c3f;
-    border-color: #db4c3f;
+    background-color: var(--main-color);;
+    border-color:  var(--main-color);;
   }
 }

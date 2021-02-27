@@ -13,9 +13,11 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #202020;
   background-color: #fafafa;
-  font-smooth: always;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  --main-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+  --generic-border: 1px solid #f1f1f1;
+  --main-color: #db4c3f
 }
 
 ul {
@@ -23,15 +25,10 @@ ul {
   padding: 0;
 }
 
-//Variables
-$generic-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
-$generic-border: 1px solid #f1f1f1;
-$generic-bg: #db4c3f;
-
-/*Mixins
+/*Mixinsv
 ==============================*/
 @mixin box-overlay {
-  box-shadow: $generic-box-shadow;
+  box-shadow: var(--main-box-shadow);
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -39,12 +36,3 @@ $generic-bg: #db4c3f;
   border-radius: 3px
 }
 
-/* Main Content
-  ============================================ */
-.content {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr auto;
-  max-width: 922px;
-  margin: auto;
-}

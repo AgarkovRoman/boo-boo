@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { FaRegPaperPlane, FaSpaceShuttle, FaSun } from 'react-icons/fa'
 import classes from './TaskDate.module.scss'
 
@@ -24,12 +24,12 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
               aria-label="Select today as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().format('DD/MM/YYYY'))
+                setTaskDate(dayjs().format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().format('DD/MM/YYYY'))
                 }
               }}
               role="button"
@@ -49,12 +49,12 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
               aria-label="Select tomorrow as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+                setTaskDate(dayjs().add(1, 'day').format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().add(1, 'day').format('DD/MM/YYYY'))
                 }
               }}
               role="button"
@@ -74,12 +74,12 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
               aria-label="Select next week as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+                setTaskDate(dayjs().add(7, 'day').format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().add(7, 'day').format('DD/MM/YYYY'))
                 }
               }}
               role="button"

@@ -1,6 +1,6 @@
 .modal {
   position: absolute;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px, rgba(0, 0, 0, 0.1) 0 4px 11px;
+  box-shadow: var(--main-box-shadow);
   z-index: 99;
   width: 200px;
   padding: 10px;

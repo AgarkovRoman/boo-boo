@@ -2,7 +2,7 @@
   width: 656px;
   background-color: white;
   margin-left: 266px;
-  border-right: 1px solid #f1f1f1;
+  border-right: var(--generic-border);
   min-height: calc(100vh);
   vertical-align: top;
   padding: 80px 40px;

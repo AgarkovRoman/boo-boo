@@ -1,5 +1,5 @@
 .taskDate {
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px, rgba(0, 0, 0, 0.1) 0 4px 11px;
+  box-shadow: var(--main-box-shadow);
   position: absolute;
   z-index: 1;
   //top: 85px;

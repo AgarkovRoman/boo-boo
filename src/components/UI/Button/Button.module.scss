@@ -15,7 +15,7 @@
 }
 
 .primary {
-  background-color: #db4c3f;
+  background-color: var(--main-color);
 
   &:hover {
     background-color: #cb4639;
