@@ -20,7 +20,7 @@
   align-items: center;
   border: 1px solid gray;
   border-radius: 16px;
-  transition: border 0.3s ease-in, color 0.3s ease-in, background-color 0.3s ease-in;
+  transition: border 0.3s ease-in, background-color 0.3s ease-in;
 
   svg {
     width: 10px;
@@ -28,19 +28,20 @@
   }
 
   &:hover {
-    background-color: #d0d0d0;
+    background-color: #efefef;
   }
 }
 
 .checkboxChecked {
-  background-color:  var(--main-color);;
-  border-color:  var(--main-color);;
+  background-color:  var(--main-color);
+  border-color:  var(--main-color);
   transform: scale(1.1);
-  transition: all 0.25s ease-in;
+  transition: background-color 0.25s ease-in;
   color: #ffffff;
 
   &:hover {
-    background-color: var(--main-color);;
-    border-color:  var(--main-color);;
+    background-color: var(--main-color);
+    border-color:  var(--main-color);
+    color: #ffffff;
   }
 }
