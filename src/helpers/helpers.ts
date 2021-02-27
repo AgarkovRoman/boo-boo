@@ -1,7 +1,7 @@
 import { collatedTaskI, collatedTasks } from '../constants/collatedTasks'
 import { ProjectI } from '../redux/projects/projects-types'
 
-export const getTitle = (projects: Array<ProjectI>, projectId: string) => {
+export const getTitle = (projects: Array<ProjectI>, projectId: string): string => {
   const object = projects.find((project) => project.projectId === projectId)
   if (object !== undefined) {
     return object.name
@@ -9,7 +9,7 @@ export const getTitle = (projects: Array<ProjectI>, projectId: string) => {
   return ''
 }
 
-export const getCollatedTitle = (projects: Array<collatedTaskI>, key: string) => {
+export const getCollatedTitle = (projects: Array<collatedTaskI>, key: string): string => {
   const object = projects.find((project) => project.key === key)
   if (object !== undefined) {
     return object.name
@@ -17,7 +17,7 @@ export const getCollatedTitle = (projects: Array<collatedTaskI>, key: string) =>
   return ''
 }
 
-export const collatedTasksExist = (selectedProject: string) =>
+export const collatedTasksExist = (selectedProject: string): collatedTaskI | undefined =>
   collatedTasks.find((task) => task.key === selectedProject)
 
 export const getUser = () => JSON.parse(<string>localStorage.getItem('authUser'))
