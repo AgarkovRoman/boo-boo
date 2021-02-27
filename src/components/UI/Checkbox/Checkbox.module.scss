@@ -35,9 +35,9 @@
 .checkboxChecked {
   background-color:  var(--main-color);
   border-color:  var(--main-color);
+  color: #ffffff;
   transform: scale(1.1);
   transition: background-color 0.25s ease-in;
-  color: #ffffff;
 
   &:hover {
     background-color: var(--main-color);

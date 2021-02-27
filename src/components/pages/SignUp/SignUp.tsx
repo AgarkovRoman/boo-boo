@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignUp.module.scss'
+import signInStyles from '../SignIn/SignIn.module.scss'
 import * as ROUTER from '../../../constants/routes'
 import { signUpTC } from '../../../redux/auth/auth-reducer'
 
@@ -27,10 +28,10 @@ export const SignUp: React.FC = () => {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.formBox}>
-        <h3 className={classes.title}>SignUp</h3>
+      <div className={signInStyles.formBox}>
+        <h3 className={signInStyles.title}>Sign Up</h3>
         {error}
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={signInStyles.form} onSubmit={handleSubmit(onSubmit)}>
           <label>
             Name
             <input type="text" placeholder="Name" name="Name" ref={register({ required: true })} />
@@ -62,14 +63,14 @@ export const SignUp: React.FC = () => {
           {/*    /!*{errors.Password && <p>Require field</p>}*!/ */}
           {/* </label> */}
 
-          <button className={classes.button} data-testid="sign-up" type="submit">
+          <button className={signInStyles.button} data-testid="sign-up" type="submit">
             Sign Up
           </button>
         </form>
 
-        <p>
+        <p className={signInStyles.footerParagraph}>
           Already have an account?
-          <NavLink className={classes.signinLink} to={ROUTER.SIGN_IN}>
+          <NavLink className={signInStyles.footerLink} to={ROUTER.SIGN_IN}>
             Sign in now
           </NavLink>
         </p>

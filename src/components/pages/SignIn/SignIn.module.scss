@@ -4,7 +4,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url("signin.png"), linear-gradient(45deg, #CFC1E2, #FCBA02);
+  background-image: url("signin.png"), linear-gradient(45deg, var(--orange-color), var(--main-color));
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -17,7 +17,7 @@
 .formBox {
   background: rgba(white, 0.5);
   border-radius: 6px;
-  padding: 8px;
+  padding: 16px 8px 12px;
 }
 
 .title {
@@ -48,18 +48,18 @@
   padding: 10px 12px;
   color: #ffffff;
   border-radius: 6px;
-  background-color: var(--main-color);;
-  border: 1px solid #b32c20;
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color-d);
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
 
   &:hover {
-    background-color: #c94d41;
+    background-color: var(--main-color-l);
   }
 
   &:active {
-    background-color: #b32c20;
+    background-color: var(--main-color-d);
   }
 
   &:not(:focus-visible) {
@@ -67,6 +67,10 @@
   }
 }
 
-.signupLink {
+.footerParagraph {
+  margin: 8px 0 0;
+}
+
+.footerLink {
   color: #202020;
 }

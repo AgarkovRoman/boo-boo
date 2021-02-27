@@ -18,7 +18,11 @@
   background-color: var(--main-color);
 
   &:hover {
-    background-color: #cb4639;
+    background-color: var(--main-color-l);
+  }
+
+  &:active {
+    background-color: var(--main-color-d);
   }
 }
 

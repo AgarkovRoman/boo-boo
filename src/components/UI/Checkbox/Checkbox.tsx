@@ -35,7 +35,7 @@ export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
         onFocus={() => setMouseEnter(true)}
         onMouseLeave={() => setMouseEnter(false)}
       >
-        {mouseEnter && <VscCheck />}
+        {(mouseEnter || checked) && <VscCheck />}
       </span>
     </div>
   )

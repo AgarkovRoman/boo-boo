@@ -50,13 +50,13 @@ export const SignIn: React.FC = () => {
             {/* {errors.Password && <p>Require field</p>} */}
           </label>
           <button className={classes.button} data-testid="sign-in" type="submit">
-            SignIn
+            Sign In
           </button>
         </form>
 
-        <p>
+        <p className={classes.footerParagraph}>
           Don't have an account yet?
-          <NavLink className={classes.signupLink} to={ROUTER.SIGN_UP}>
+          <NavLink className={classes.footerLink} to={ROUTER.SIGN_UP}>
             Sign up now
           </NavLink>
         </p>
