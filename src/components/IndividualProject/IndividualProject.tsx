@@ -6,8 +6,8 @@ import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
 import { ProjectI, ProjectsStateI } from '../../redux/projects/projects-types'
-import { DeleteProjectModal } from '../DeleteModal/DeleteProjectModal'
 import { useOutsideClick } from '../../hooks/useOutSideClick'
+import { SmallModalWindow } from '../UI/SmallModalWindow/SmallModalWindow'
 
 interface IndividualProjectPropsI {
   project: ProjectI
@@ -71,18 +71,21 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
             aria-label="Confirm deletion of project"
           >
             <VscKebabVertical />
+            {showConfirm && (
+              <div className={classes.deleteModal} ref={deleteModalRef}>
+                <SmallModalWindow
+                  description="Are you sure you want to delete this project?"
+                  deleteTask={() => {
+                    deleteProject(project.docId, project.userId)
+                    selectProject(INBOX)
+                  }}
+                  onClose={() => setShowConfirm(false)}
+                />
+              </div>
+            )}
           </div>
         </div>
       </li>
-      {showConfirm && (
-        <div className={classes.deleteModal} ref={deleteModalRef}>
-          <DeleteProjectModal
-            deleteProject={() => deleteProject(project.docId, project.userId)}
-            selectProject={() => selectProject(INBOX)}
-            setShowConfirm={() => toggleDeleteModal()}
-          />
-        </div>
-      )}
     </>
   )
 }

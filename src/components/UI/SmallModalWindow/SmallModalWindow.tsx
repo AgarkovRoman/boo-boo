@@ -1,15 +1,20 @@
 import React from 'react'
-import classes from './DeleteTaskModal.module.scss'
-import { Button } from '../UI/Button/Button'
+import classes from './SmallModalWindow.module.scss'
+import { Button } from '../Button/Button'
 
-interface DeleteTaskModalPropsI {
+interface SmallModalWindowPropsI {
+  description: string
   deleteTask: () => void
   onClose: () => void
 }
 
-export const DeleteTaskModal: React.FC<DeleteTaskModalPropsI> = ({ deleteTask, onClose }) => (
+export const SmallModalWindow: React.FC<SmallModalWindowPropsI> = ({
+  description,
+  deleteTask,
+  onClose,
+}) => (
   <div className={classes.modal}>
-    <p className={classes.title}>Are you sure you want to delete this task?</p>
+    <p className={classes.title}>{description}</p>
     <div className={classes.buttons}>
       <Button
         onClick={() => {

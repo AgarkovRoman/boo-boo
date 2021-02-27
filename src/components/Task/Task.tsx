@@ -3,8 +3,8 @@ import { VscKebabVertical } from 'react-icons/vsc'
 import { useDispatch } from 'react-redux'
 import classes from './Task.module.scss'
 import { Checkbox } from '../UI/Checkbox/Checkbox'
-import { DeleteTaskModal } from './DeleteTaskModal'
 import { deleteTaskTC } from '../../redux/tasks/tasks-reducer'
+import { SmallModalWindow } from '../UI/SmallModalWindow/SmallModalWindow'
 
 interface TaskPropsI {
   name: string
@@ -39,7 +39,8 @@ export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
           <VscKebabVertical />
           {isModalDisplay && (
             <div className={classes.modal}>
-              <DeleteTaskModal
+              <SmallModalWindow
+                description="Are you sure you want to delete this task?"
                 deleteTask={() => deleteTask(id)}
                 onClose={() => setIsModalDisplay(false)}
               />

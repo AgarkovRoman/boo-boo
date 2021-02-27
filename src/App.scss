@@ -25,14 +25,3 @@ ul {
   padding: 0;
 }
 
-/*Mixinsv
-==============================*/
-@mixin box-overlay {
-  box-shadow: var(--main-box-shadow);
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  top: 85px;
-  border-radius: 3px
-}
-
