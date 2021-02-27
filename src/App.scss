@@ -1,6 +1,40 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+/* roboto-300 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-300.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-300.woff') format('woff');
+}
+/* roboto-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-regular.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-regular.woff') format('woff');
+}
+/* roboto-500 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-500.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-500.woff') format('woff');
+}
+/* roboto-700 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-700.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-700.woff') format('woff');
+}
 
-// General Settings
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
