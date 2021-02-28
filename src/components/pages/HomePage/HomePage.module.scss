@@ -1,0 +1,161 @@
+.homePage {
+  background: #000000;
+  padding: 70px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding: 40px 30px;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 20px 10px;
+  }
+}
+
+.homePageBody {
+  width: 100%;
+  padding: 0 60px;
+  max-width: 1300px;
+  background: #FFFFFF;
+  border-radius: 32px;
+  height: 100%;
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 30px;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 0 15px;
+  }
+}
+
+.header {
+  height: 65px;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 880px) {
+    margin-bottom: 80px;
+  }
+}
+
+.logo {
+  cursor: pointer;
+  width: auto;
+
+  @media screen and (max-width: 768px) {
+    width: 70%;
+    height: auto;
+  }
+}
+
+.navList {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navListUl {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navListElement {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  list-style: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
+
+  &__mainColored {
+    a {
+      color: var(--main-color);
+    }
+  }
+
+  &:hover {
+    background: #F2F2F2;
+    border-bottom: 2px solid var(--main-color);
+  }
+
+}
+
+.headerTitle {
+  margin: 0 0 54px 0;
+  font-weight: bold;
+  font-size: 96px;
+  line-height: 112px;
+  text-align: center;
+  white-space: pre-line;
+
+  @media screen and (max-width: 880px) {
+    font-size: 64px;
+    line-height: 75px;
+  }
+
+  @media screen and (max-width: 460px) {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
+
+.getStartedContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.getStarted {
+  background: var(--main-color);
+  padding: 13px 37px;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.25s;
+
+  &:hover {
+    background: var(--main-color-l);
+  }
+
+  &:active {
+    background: var(--main-color-d);
+  }
+}
+
+.manImage {
+  position: absolute;
+  bottom: 1px;
+  left: 23%;
+  width: 170px;
+  height: 341px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("HomePageMan.png");
+
+  @media screen and (max-height: 716px) {
+   //display: none;
+    height: 200px;
+  }
+
+}

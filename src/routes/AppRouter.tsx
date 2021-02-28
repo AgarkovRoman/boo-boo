@@ -7,6 +7,7 @@ import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
 import { useAuthListener } from '../hooks/useAuthListener'
+import { HomePage } from '../components/pages/HomePage/HomePage'
 
 export const AppRouter: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false)
@@ -29,7 +30,7 @@ export const AppRouter: React.FC = () => {
           </ProtectedRoute>
 
           <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.HOME} exact>
-            <h1>home page</h1>
+            <HomePage />
           </IsUserRedirect>
         </Switch>
       </main>
