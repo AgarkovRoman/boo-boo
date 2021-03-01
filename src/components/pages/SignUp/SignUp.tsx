@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -26,6 +26,10 @@ export const SignUp: React.FC = () => {
   )
 
   console.log('SignUp errors: ', errors)
+
+  useEffect(() => {
+    document.title = `BOO—BOO: SignUp`
+  })
 
   return (
     <div className={mainClasses.mainWrapper}>

@@ -41,7 +41,7 @@ export const Tasks: React.FC = () => {
   const selectedProjectTasks = getFilteredTasks(tasks, selectedProject)
 
   useEffect(() => {
-    document.title = `${projectName}: Todoist`
+    document.title = `BOO—BOO: ${projectName} tasks`
   }, [projectName])
 
   return (
