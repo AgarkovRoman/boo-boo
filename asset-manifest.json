@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/boo-boo/static/css/main.d7fc984d.chunk.css",
-    "main.js": "/boo-boo/static/js/main.07e1ecbe.chunk.js",
-    "main.js.map": "/boo-boo/static/js/main.07e1ecbe.chunk.js.map",
-    "runtime-main.js": "/boo-boo/static/js/runtime-main.e149a195.js",
-    "runtime-main.js.map": "/boo-boo/static/js/runtime-main.e149a195.js.map",
-    "static/css/2.679831fc.chunk.css": "/boo-boo/static/css/2.679831fc.chunk.css",
-    "static/js/2.e72ef172.chunk.js": "/boo-boo/static/js/2.e72ef172.chunk.js",
-    "static/js/2.e72ef172.chunk.js.map": "/boo-boo/static/js/2.e72ef172.chunk.js.map",
-    "index.html": "/boo-boo/index.html",
-    "static/css/2.679831fc.chunk.css.map": "/boo-boo/static/css/2.679831fc.chunk.css.map",
-    "static/css/main.d7fc984d.chunk.css.map": "/boo-boo/static/css/main.d7fc984d.chunk.css.map",
-    "static/js/2.e72ef172.chunk.js.LICENSE.txt": "/boo-boo/static/js/2.e72ef172.chunk.js.LICENSE.txt",
-    "static/media/logo.f91ee324.svg": "/boo-boo/static/media/logo.f91ee324.svg",
-    "static/media/Tasks.scss": "/boo-boo/static/media/notFound-2.e17aefda.png",
-    "static/media/App.scss": "/boo-boo/static/media/roboto-v20-latin_cyrillic-regular.f3cc56e1.woff2"
+    "main.css": "/static/css/main.b6a265df.chunk.css",
+    "main.js": "/static/js/main.07e1ecbe.chunk.js",
+    "main.js.map": "/static/js/main.07e1ecbe.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6dea93d0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6dea93d0.js.map",
+    "static/css/2.679831fc.chunk.css": "/static/css/2.679831fc.chunk.css",
+    "static/js/2.d7a72f7a.chunk.js": "/static/js/2.d7a72f7a.chunk.js",
+    "static/js/2.d7a72f7a.chunk.js.map": "/static/js/2.d7a72f7a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.679831fc.chunk.css.map": "/static/css/2.679831fc.chunk.css.map",
+    "static/css/main.b6a265df.chunk.css.map": "/static/css/main.b6a265df.chunk.css.map",
+    "static/js/2.d7a72f7a.chunk.js.LICENSE.txt": "/static/js/2.d7a72f7a.chunk.js.LICENSE.txt",
+    "static/media/logo.f91ee324.svg": "/static/media/logo.f91ee324.svg",
+    "static/media/Tasks.scss": "/static/media/notFound-2.e17aefda.png",
+    "static/media/App.scss": "/static/media/roboto-v20-latin_cyrillic-regular.f3cc56e1.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.e149a195.js",
+    "static/js/runtime-main.6dea93d0.js",
     "static/css/2.679831fc.chunk.css",
-    "static/js/2.e72ef172.chunk.js",
-    "static/css/main.d7fc984d.chunk.css",
+    "static/js/2.d7a72f7a.chunk.js",
+    "static/css/main.b6a265df.chunk.css",
     "static/js/main.07e1ecbe.chunk.js"
   ]
 }
