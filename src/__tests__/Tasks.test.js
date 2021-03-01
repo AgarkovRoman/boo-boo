@@ -1,8 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { Tasks } from '../components/Tasks/Tasks'
-import { useSelectedProjectsValue } from '../context'
-import { useTasks } from '../hooks'
 
 jest.mock('../context', () => ({
   useSelectedProjectsValue: jest.fn(),
