@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
-import { FaAdjust, FaSignOutAlt, FaPlus, FaHamburger } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
+import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/all'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
 import { signOutTC } from '../../../redux/auth/auth-reducer'
@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderPropsI> = ({ darkMode, setDarkMode }) => {
       <nav className={classes.navigation}>
         <div className={classes.burger} aria-label="Close/Open sidebar">
           <button className={classes.headerBtn} data-testid="Close/Open sidebar" type="button">
-            <FaHamburger />
+            <VscExtensions />
           </button>
         </div>
         <div className={classes.settings}>
@@ -37,19 +37,19 @@ export const Header: React.FC<HeaderPropsI> = ({ darkMode, setDarkMode }) => {
                   setShouldShowMain(true)
                 }}
               >
-                <FaPlus />
+                <VscAdd />
               </button>
             </li>
-            <li aria-label="Toggle dark mode" className={classes.settingsItem}>
-              <button
-                type="button"
-                data-testid="dark-mode-action"
-                className={classes.headerBtn}
-                onClick={() => setDarkMode(!darkMode)}
-              >
-                <FaAdjust />
-              </button>
-            </li>
+            {/* <li aria-label="Toggle dark mode" className={classes.settingsItem}> */}
+            {/*  <button */}
+            {/*    type="button" */}
+            {/*    data-testid="dark-mode-action" */}
+            {/*    className={classes.headerBtn} */}
+            {/*    onClick={() => setDarkMode(!darkMode)} */}
+            {/*  > */}
+            {/*    <VscColorMode /> */}
+            {/*  </button> */}
+            {/* </li> */}
             <li aria-label="Sign out" className={classes.settingsItem}>
               <button
                 type="button"
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderPropsI> = ({ darkMode, setDarkMode }) => {
                 data-testid="sign-out"
                 onClick={signOutHandler}
               >
-                <FaSignOutAlt />
+                <VscSignOut />
               </button>
             </li>
           </ul>

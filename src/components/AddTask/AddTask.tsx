@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { FaRegListAlt, FaRegCalendarAlt, FaRegTimesCircle } from 'react-icons/fa'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
+import { VscAdd } from 'react-icons/all'
 import classes from './AddTask.module.scss'
 import { ProjectOverlay } from '../ProjectOverlay/ProjectOverlay'
 import { TaskDate } from '../TaskDate/TaskDate'
@@ -42,9 +43,9 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
 
     let collatedDate = ''
     if (projectId === 'TODAY') {
-      collatedDate = moment().format('DD/MM/YYYY')
+      collatedDate = dayjs().format('DD/MM/YYYY')
     } else if (projectId === 'NEXT_7') {
-      collatedDate = moment().add(7, 'days').format('DD/MM/YYYY')
+      collatedDate = dayjs().add(7, 'day').format('DD/MM/YYYY')
     }
 
     return (
@@ -72,7 +73,6 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
       : getTaskObject()
   }
 
-  console.log('project: ', project)
   return (
     <div
       className={showQuickAddTask ? classes.overlay : classes.addTask}
@@ -90,7 +90,9 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
           aria-label="Add task"
           role="button"
         >
-          <span className={classes.plus}>+</span>
+          <span className={classes.plus}>
+            <VscAdd />
+          </span>
           <span className={classes.text}>Add Task</span>
         </div>
       )}
@@ -128,16 +130,20 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
               </div>
             </>
           )}
-          <ProjectOverlay
-            setProject={setProject}
-            showProjectOverlay={showProjectOverlay}
-            setShowProjectOverlay={setShowProjectOverlay}
-          />
-          <TaskDate
-            setTaskDate={setTaskDate}
-            showTaskDate={showTaskDate}
-            setShowTaskDate={setShowTaskDate}
-          />
+          <div className={classes.taskProjectOverlay}>
+            <ProjectOverlay
+              setProject={setProject}
+              showProjectOverlay={showProjectOverlay}
+              setShowProjectOverlay={setShowProjectOverlay}
+            />
+          </div>
+          <div className={classes.taskDateOverlay}>
+            <TaskDate
+              setTaskDate={setTaskDate}
+              showTaskDate={showTaskDate}
+              setShowTaskDate={setShowTaskDate}
+            />
+          </div>
           <input
             className={classes.content}
             aria-label="Enter your task"

@@ -1,9 +1,7 @@
 import React from 'react'
-import moment from 'moment'
-import './TaskDate.scss'
+import dayjs from 'dayjs'
 import { FaRegPaperPlane, FaSpaceShuttle, FaSun } from 'react-icons/fa'
-
-// TODO: убраать отступы так, чтобы модалка открывалась прямо под иконкой
+import classes from './TaskDate.module.scss'
 
 interface TaskDatePropsI {
   setShowTaskDate: (value: boolean) => void
@@ -18,19 +16,20 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
 }) => (
   <>
     {showTaskDate && (
-      <div className="task-date" data-testid="task-date-overlay">
-        <ul className="task-date__list">
-          <li>
+      <div className={classes.taskDate} data-testid="task-date-overlay">
+        <ul className={classes.list}>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select today as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().format('DD/MM/YYYY'))
+                setTaskDate(dayjs().format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().format('DD/MM/YYYY'))
                 }
               }}
               role="button"
@@ -44,17 +43,18 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
             </div>
           </li>
 
-          <li>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select tomorrow as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+                setTaskDate(dayjs().add(1, 'day').format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().add(1, 'day').format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().add(1, 'day').format('DD/MM/YYYY'))
                 }
               }}
               role="button"
@@ -68,17 +68,18 @@ export const TaskDate: React.FC<TaskDatePropsI> = ({
             </div>
           </li>
 
-          <li>
+          <li className={classes.listItem}>
             <div
+              className={classes.listItemElement}
               aria-label="Select next week as the task date"
               onClick={() => {
                 setShowTaskDate(false)
-                setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+                setTaskDate(dayjs().add(7, 'day').format('DD/MM/YYYY'))
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   setShowTaskDate(false)
-                  setTaskDate(moment().add(7, 'days').format('DD/MM/YYYY'))
+                  setTaskDate(dayjs().add(7, 'day').format('DD/MM/YYYY'))
                 }
               }}
               role="button"

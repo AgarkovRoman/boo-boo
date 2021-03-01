@@ -1,12 +1,13 @@
-import React, { useCallback, useState } from 'react'
-import { FaTrashAlt } from 'react-icons/fa'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { VscKebabVertical } from 'react-icons/all'
 import classes from './IndividualProject.module.scss'
-import { Button } from '../UI/Button/Button'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
 import { ProjectI, ProjectsStateI } from '../../redux/projects/projects-types'
+import { useOutsideClick } from '../../hooks/useOutSideClick'
+import { SmallModalWindow } from '../UI/SmallModalWindow/SmallModalWindow'
 
 interface IndividualProjectPropsI {
   project: ProjectI
@@ -14,7 +15,7 @@ interface IndividualProjectPropsI {
 
 export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
-
+  const deleteModalRef = useRef(null)
   const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
 
   const dispatch = useDispatch()
@@ -22,6 +23,12 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
   const deleteProject = useCallback((id, userId) => dispatch(deleteProjectTC(id, userId)), [
     dispatch,
   ])
+
+  const toggleDeleteModal = () => {
+    setShowConfirm(!showConfirm)
+  }
+
+  useOutsideClick(deleteModalRef, showConfirm, toggleDeleteModal)
 
   return (
     <>
@@ -55,40 +62,30 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
           <div
             className={classes.delete}
             data-testid="delete-project"
-            onClick={() => setShowConfirm(!showConfirm)}
+            onClick={() => toggleDeleteModal()}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') setShowConfirm(!showConfirm)
+              if (e.key === 'Enter') toggleDeleteModal()
             }}
             tabIndex={0}
             role="button"
             aria-label="Confirm deletion of project"
           >
-            <FaTrashAlt />
+            <VscKebabVertical />
+            {showConfirm && (
+              <div className={classes.deleteModal} ref={deleteModalRef}>
+                <SmallModalWindow
+                  description="Are you sure you want to delete this project?"
+                  deleteTask={() => {
+                    deleteProject(project.docId, project.userId)
+                    selectProject(INBOX)
+                  }}
+                  onClose={() => setShowConfirm(false)}
+                />
+              </div>
+            )}
           </div>
         </div>
       </li>
-      {showConfirm && (
-        <div className="project-delete-modal">
-          <div className="project-delete-modal__inner">
-            <p>Are you sure you want to delete this project?</p>
-            <div className="project-delete-modal__buttons">
-              <Button
-                onClick={() => {
-                  deleteProject(project.docId, project.userId)
-                  selectProject(INBOX)
-                }}
-                label="Delete"
-                color="primary"
-              />
-              <Button
-                onClick={() => setShowConfirm(!showConfirm)}
-                label="Cancel"
-                color="transparent"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

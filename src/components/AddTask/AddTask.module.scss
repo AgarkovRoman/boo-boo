@@ -9,6 +9,8 @@
 .shallow {
   padding: 4px 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &:not(:focus-visible) {
     outline: none;
@@ -16,14 +18,17 @@
 }
 
 .plus {
-  color: #dd4b39;
-  font-size: 18px;
+  color: var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .text {
   display: inline-block;
   color: #545454;
   font-size: 14px;
+  line-height: 17px;
   margin-left: 15px;
 }
 
@@ -34,7 +39,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 100;
   -webkit-transition: opacity 0.2s ease-in;
   transition: opacity 0.2s ease-in;
   height: calc(100vh);
@@ -99,9 +104,24 @@
   float: right;
   color: gray;
   margin: 4px;
-  //margin: 10px 5px;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 .project {
   margin-right: 0;
+}
+
+.taskDateOverlay {
+  bottom: 4px;
+  position: absolute;
+  right: 225px;
+}
+
+.taskProjectOverlay {
+  position: absolute;
+  bottom: 4px;
+  right: 200px;
 }

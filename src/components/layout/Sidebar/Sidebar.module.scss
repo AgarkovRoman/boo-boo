@@ -6,7 +6,7 @@
   position: fixed;
   overflow-x: hidden;
   overflow-y: hidden;
-  border-right: 1px solid #f1f1f1;
+  border-right: var(--generic-border);
   background-color: #fafafa;
 
   @media only screen and (max-width: 900px) {
@@ -14,42 +14,8 @@
   }
 
   li {
-    padding: 2px 4px;
+    padding: 2px 10px 2px 4px ;
   }
-
-  // todo: refactor this styles
-  //&__project {
-  //
-  //  &:nth-child(1) {
-  //    .sidebar__dot {
-  //      color: #6accbc;
-  //    }
-  //  }
-  //
-  //  &:nth-child(2) {
-  //    .sidebar__dot {
-  //      color: #fad003;
-  //    }
-  //  }
-  //
-  //  &:nth-child(3) {
-  //    .sidebar__dot {
-  //      color: #ff8d85;
-  //    }
-  //  }
-  //
-  //  &:nth-child(4) {
-  //    .sidebar__dot {
-  //      color: #ff9932;
-  //    }
-  //  }
-  //
-  //  &:nth-child(5) {
-  //    .sidebar__dot {
-  //      color: #af38eb;
-  //    }
-  //  }
-  //}
 }
 
 .middle {
@@ -58,7 +24,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: var(--generic-border);
   cursor: pointer;
   padding: 11px;
 
@@ -87,9 +53,7 @@
 .generic {
   li {
     list-style-type: none;
-    color: #333;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    color: #333333;
     display: flex;
     cursor: pointer;
     line-height: 1.50;
@@ -98,10 +62,11 @@
     padding-right: 0;
     border-radius: 8px;
     margin-bottom: 2px;
+    transition: font-weight 0.2s;
 
     div {
       display: flex;
-     align-items: center;
+      align-items: center;
 
       .taskCounterContainer {
         margin-left: 6px;
@@ -137,7 +102,7 @@
     }
 
     &.active, &:hover {
-      font-weight: bold;
+      font-weight: 700;
       background-color: white;
     }
   }

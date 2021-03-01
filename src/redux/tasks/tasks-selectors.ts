@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import { INBOX, NEXT_7, TODAY } from '../../constants/defaultProjects'
 import { TaskI, TasksStateI } from './tasks-types'
 
-export const getAllTasks = (state: TasksStateI) => state.tasks.allTasks
+export const getAllTasks = (state: TasksStateI): Array<TaskI> => state.tasks.allTasks
 
 export const getNotArchivedTasks = createSelector(getAllTasks, (tasks: Array<TaskI>) =>
   tasks.filter((task: TaskI) => !task.archived)

@@ -1,13 +1,7 @@
 .checkboxHolder {
   margin-right: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   line-height: 16px;
 
@@ -18,10 +12,36 @@
 
 .checkbox {
   cursor: pointer;
-  color: #343434;
+  color: gray;
   height: 16px;
   width: 16px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid gray;
   border-radius: 16px;
+  transition: border 0.3s ease-in, background-color 0.3s ease-in;
+
+  svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+.checkboxChecked {
+  background-color:  var(--main-color);
+  border-color:  var(--main-color);
+  color: #ffffff;
+  transform: scale(1.1);
+  transition: background-color 0.25s ease-in;
+
+  &:hover {
+    background-color: var(--main-color);
+    border-color:  var(--main-color);
+    color: #ffffff;
+  }
 }

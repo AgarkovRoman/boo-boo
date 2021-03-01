@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { SignIn } from '../components/pages/SignIn/SignIn'
-import { Content } from '../components/layout/Content'
+import { Content } from '../components/layout/Content/Content'
 import { Header } from '../components/layout/Header/Header'
 import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
-import { useAuthListener } from '../hooks'
+import { useAuthListener } from '../hooks/useAuthListener'
+import { HomePage } from '../components/pages/HomePage/HomePage'
 
 export const AppRouter: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false)
@@ -29,7 +30,7 @@ export const AppRouter: React.FC = () => {
           </ProtectedRoute>
 
           <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.HOME} exact>
-            <h1>home page</h1>
+            <HomePage />
           </IsUserRedirect>
         </Switch>
       </main>

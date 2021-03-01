@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
+import { FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
+import { VscChevronDown } from 'react-icons/all'
 import classes from './Sidebar.module.scss'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'
@@ -142,7 +143,7 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
         tabIndex={0}
       >
         <span className={classes.iconChevron}>
-          <FaChevronDown className={!showProjects ? classes.hiddenProject : ''} />
+          <VscChevronDown className={!showProjects ? classes.hiddenProject : ''} />
         </span>
         <h2>Projects</h2>
       </div>

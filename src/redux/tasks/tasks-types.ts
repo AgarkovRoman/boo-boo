@@ -1,4 +1,4 @@
-import { ADD_TASK, ARCHIVED_TASK, SET_TASKS } from './tasks-reducer'
+import { ADD_TASK, ARCHIVED_TASK, DELETE_TASK, SET_TASKS } from './tasks-reducer'
 
 export interface TaskI {
   task: string
@@ -34,7 +34,13 @@ export interface archivedTaskActionCreatorI {
   payload: string
 }
 
+export interface deleteTaskActionCreatorI {
+  type: typeof DELETE_TASK
+  payload: string
+}
+
 export type TasksActionCreatorType =
   | setAllTasksActionCreatorI
   | addTaskActionCreatorI
   | archivedTaskActionCreatorI
+  | deleteTaskActionCreatorI

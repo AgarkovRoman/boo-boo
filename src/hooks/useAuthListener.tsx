@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux'
 import { getUser } from '../helpers/helpers'
 import { authAPI } from '../api/api'
 import { authMeTC } from '../redux/auth/auth-reducer'
+import { UserI } from '../redux/auth/auth-types'
 
 export const useAuthListener = () => {
   const [user, setUser] = useState(getUser())
   const dispatch = useDispatch()
 
-  const auth = (authUser) => {
+  const auth = (authUser: UserI) => {
     if (authUser) {
       localStorage.setItem('authUser', JSON.stringify(authUser))
       setUser(authUser)

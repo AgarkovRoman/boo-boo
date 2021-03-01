@@ -1,0 +1,24 @@
+.taskBody {
+  display: flex;
+  width: 90%;
+}
+
+.name {
+  max-width: 700px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kebab {
+  cursor: pointer;
+  position: relative;
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.modal {
+  position: absolute;
+  right: 205px;
+}

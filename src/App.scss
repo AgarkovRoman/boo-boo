@@ -1,6 +1,44 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900');
+/* roboto-300 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-300.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-300.woff') format('woff');
+  font-display: swap;
+}
+/* roboto-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-regular.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-regular.woff') format('woff');
+  font-display: swap;
+}
+/* roboto-500 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-500.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-500.woff') format('woff');
+  font-display: swap;
+}
+/* roboto-700 - latin_cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-700.woff2') format('woff2'),
+  url('./assets/fonts/roboto-v20-latin_cyrillic-700.woff') format('woff');
+  font-display: swap;
+}
 
-// General Settings
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -13,9 +51,20 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #202020;
   background-color: #fafafa;
-  font-smooth: always;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  --main-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
+  --generic-border: 1px solid #f1f1f1;
+  --main-color: #3B4371;
+  --main-color-l: #535d9a;
+  --main-color-d: #2f3665;
+
+  --orange-color: #F3904F;
+
+  --main-body-padding: 0 60px;
+  --main-body-padding-for-768px: 0 30px;
+  --main-body-padding-for-560px: 0 15px;
+
 }
 
 ul {
@@ -23,141 +72,3 @@ ul {
   padding: 0;
 }
 
-//Variables
-$generic-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 11px;
-$generic-border: 1px solid #f1f1f1;
-$generic-bg: #db4c3f;
-
-/*Mixins
-==============================*/
-@mixin box-overlay {
-  box-shadow: $generic-box-shadow;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  top: 85px;
-  border-radius: 3px
-}
-
-@mixin va($va-align: center) {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-
-  @if $va-align != center {
-    justify-content: left;
-  } @else {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-}
-
-@mixin no-select {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@mixin btn($width) {
-  width: ($width);
-  background-color: $generic-bg;
-  color: #fff !important;
-  border: 1px solid transparent;
-  margin-right: 5px;
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 13px !important;
-  line-height: 17px;
-  padding: 6px 12px 7px 12px;
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
-  border-radius: 3px !important;
-  text-decoration: none !important;
-  text-align: center;
-  cursor: pointer;
-}
-
-@mixin transparent-button() {
-  background-color: transparent;
-  border: 0;
-}
-
-@mixin task-item() {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  line-height: 18px;
-  color: #333;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 14px;
-  list-style: none;
-  border-bottom: 1px solid #f0f0f0;
-  padding-left: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f9f9f9;
-  }
-}
-
-@mixin mq($from) {
-  @media(max-width: $from) {
-    @content;
-  }
-}
-
-/*Darkmode
-==============================*/
-.darkmode {
-  header {
-    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-    background-color: #282828;
-    border-color: transparent;
-  }
-}
-
-/* Show Confirm Delete
-  ============================================ */
-.project-delete-modal {
-  position: relative;
-
-  &__inner {
-    @include box-overlay();
-    z-index: 99;
-    width: 200px;
-    padding: 10px;
-    top: 10px;
-    right: 0;
-    background-color: white;
-
-    p {
-      margin-top: 5px;
-      margin-bottom: 5px;
-      line-height: normal;
-      font-weight: normal;
-      font-size: 15px;
-    }
-  }
-}
-
-/* Main Content
-  ============================================ */
-.content {
-  display: grid;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  grid-template-columns: 1fr auto;
-  max-width: 922px;
-  margin: auto;
-}

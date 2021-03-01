@@ -70,4 +70,8 @@ export const tasksAPI = {
       .collection('tasks')
       .add({ ...task })
   },
+
+  deleteTask(docId) {
+    return firebase.firestore().collection('tasks').doc(docId).delete()
+  },
 }

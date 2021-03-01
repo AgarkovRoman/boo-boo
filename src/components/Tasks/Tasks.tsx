@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import './Tasks.scss'
 import { useSelector } from 'react-redux'
 import { v4 as uuid } from 'uuid'
-import { Checkbox } from '../UI/Checkbox/Checkbox'
 import { collatedTasks } from '../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
@@ -10,6 +9,7 @@ import { getAllTasks } from '../../redux/tasks/tasks-selectors'
 import { getActiveProject, getAllProjects } from '../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../redux/projects/projects-types'
 import { TaskI, TasksStateI } from '../../redux/tasks/tasks-types'
+import { Task } from '../Task/Task'
 
 export const Tasks: React.FC = () => {
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
@@ -24,11 +24,11 @@ export const Tasks: React.FC = () => {
       selectedProject &&
       !collatedTasksExist(selectedProject)
     ) {
-      name = getTitle(projects, selectedProject).name
+      name = getTitle(projects, selectedProject)
     }
 
     if (collatedTasksExist(selectedProject) && selectedProject) {
-      name = getCollatedTitle(collatedTasks, selectedProject).name
+      name = getCollatedTitle(collatedTasks, selectedProject)
     }
 
     return name
@@ -41,7 +41,7 @@ export const Tasks: React.FC = () => {
   const selectedProjectTasks = getFilteredTasks(tasks, selectedProject)
 
   useEffect(() => {
-    document.title = `${projectName}: Todoist`
+    document.title = `BOO—BOO: ${projectName} tasks`
   }, [projectName])
 
   return (
@@ -51,10 +51,7 @@ export const Tasks: React.FC = () => {
       {selectedProjectTasks.length > 0 && (
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
-            <li key={uuid()} data-testid="task">
-              <Checkbox id={task.id} taskDesc={task.task} />
-              <span>{task.task}</span>
-            </li>
+            <Task key={uuid()} name={task.task} id={task.id} />
           ))}
         </ul>
       )}
