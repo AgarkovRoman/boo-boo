@@ -31,9 +31,6 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Clean cache
-        run: npm cache clean --force
-
       - name: Install dependencies
         run: npm install
 
