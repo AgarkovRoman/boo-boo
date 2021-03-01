@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/boo-boo/static/css/main.4b2f42ae.chunk.css",
+    "main.js": "/boo-boo/static/js/main.f1457a8b.chunk.js",
+    "main.js.map": "/boo-boo/static/js/main.f1457a8b.chunk.js.map",
+    "runtime-main.js": "/boo-boo/static/js/runtime-main.e149a195.js",
+    "runtime-main.js.map": "/boo-boo/static/js/runtime-main.e149a195.js.map",
+    "static/css/2.679831fc.chunk.css": "/boo-boo/static/css/2.679831fc.chunk.css",
+    "static/js/2.fe5fa31c.chunk.js": "/boo-boo/static/js/2.fe5fa31c.chunk.js",
+    "static/js/2.fe5fa31c.chunk.js.map": "/boo-boo/static/js/2.fe5fa31c.chunk.js.map",
+    "index.html": "/boo-boo/index.html",
+    "static/css/2.679831fc.chunk.css.map": "/boo-boo/static/css/2.679831fc.chunk.css.map",
+    "static/css/main.4b2f42ae.chunk.css.map": "/boo-boo/static/css/main.4b2f42ae.chunk.css.map",
+    "static/js/2.fe5fa31c.chunk.js.LICENSE.txt": "/boo-boo/static/js/2.fe5fa31c.chunk.js.LICENSE.txt",
+    "static/media/logo.f91ee324.svg": "/boo-boo/static/media/logo.f91ee324.svg",
+    "static/media/Tasks.scss": "/boo-boo/static/media/notFound-2.e17aefda.png",
+    "static/media/App.scss": "/boo-boo/static/media/roboto-v20-latin_cyrillic-regular.f3cc56e1.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e149a195.js",
+    "static/css/2.679831fc.chunk.css",
+    "static/js/2.fe5fa31c.chunk.js",
+    "static/css/main.4b2f42ae.chunk.css",
+    "static/js/main.f1457a8b.chunk.js"
+  ]
+}
