@@ -1,0 +1,89 @@
+.mainWrapper {
+  background: #000000;
+  padding: 70px;
+  width: 100vw;
+  height: 100vh;
+
+  @media screen and (max-width: 768px) {
+    padding: 40px 30px;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 20px 10px;
+  }
+}
+
+.header {
+  height: 65px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 65px);
+  align-items: center;
+}
+
+.formBox {
+  background: rgba(white, 0.5);
+  border-radius: 13px;
+  padding: 18px 10px 14px;
+}
+
+.title {
+  color: #202020;
+  margin: 0 0 16px 0;
+  font-size: 32px;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    width: 100%;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 16px;
+    line-height: 21px;
+    border: 3px solid rgba(165, 178, 188, 0.3);
+    transition: border-color 0.3s, border-width 0.3s;
+    margin-bottom: 10px;
+    margin-top: 4px;
+  }
+}
+
+.button {
+  padding: 10px 12px;
+  color: #ffffff;
+  border-radius: 6px;
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color-d);
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--main-color-l);
+  }
+
+  &:active {
+    background-color: var(--main-color-d);
+  }
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.footerParagraph {
+  margin: 8px 0 0;
+}
+
+.footerLink {
+  color: #202020;
+}

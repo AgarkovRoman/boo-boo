@@ -1,15 +1,16 @@
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-  background-image: url("signup.png"),  linear-gradient(144deg, var(--main-color), #41295a);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
+  background: linear-gradient(144deg, var(--main-color), #41295a);
+  height: 100%;
+  border-radius: 32px;
+  padding: var(--main-body-padding);
+  max-width: 1300px;
+  margin: 0 auto;
 
-  @media (max-width: 600px) {
-    background-position: top;
+  @media screen and (max-width: 768px) {
+    padding: var(--main-body-padding-for-768px);
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: var(--main-body-padding-for-560px);
   }
 }

@@ -3,13 +3,21 @@ import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignIn.module.scss'
+import mainClasses from '../mainStylesForPages.module.scss'
 import * as ROUTER from '../../../constants/routes'
 import { signInTC } from '../../../redux/auth/auth-reducer'
+import { Logo } from '../HomePage/HomePage'
 
 type FormData = {
   Email: string
   Password: string
 }
+
+export const Header: React.FC = () => (
+  <header className={mainClasses.header}>
+    <Logo />
+  </header>
+)
 
 export const SignIn: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
@@ -23,43 +31,49 @@ export const SignIn: React.FC = () => {
   console.log('SignIn errors: ', errors)
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.formBox}>
-        <h3 className={classes.title}>Sign In</h3>
-        {error}
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-          <label className={classes.label}>
-            Email
-            <input
-              type="text"
-              placeholder="Email"
-              name="Email"
-              ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-            />
-            {/* {errors.Email && <p>Require field</p>} */}
-          </label>
+    <div className={mainClasses.mainWrapper}>
+      <div className={classes.wrapper}>
+        <Header />
 
-          <label className={classes.label}>
-            Password
-            <input
-              type="password"
-              placeholder="Password"
-              name="Password"
-              ref={register({ required: true, minLength: 6 })}
-            />
-            {/* {errors.Password && <p>Require field</p>} */}
-          </label>
-          <button className={classes.button} data-testid="sign-in" type="submit">
-            Sign In
-          </button>
-        </form>
+        <div className={mainClasses.main}>
+          <div className={mainClasses.formBox}>
+            <h3 className={mainClasses.title}>Sign In</h3>
+            {error}
+            <form className={mainClasses.form} onSubmit={handleSubmit(onSubmit)}>
+              <label className={mainClasses.label}>
+                Email
+                <input
+                  type="text"
+                  placeholder="Email"
+                  name="Email"
+                  ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+                />
+                {/* {errors.Email && <p>Require field</p>} */}
+              </label>
 
-        <p className={classes.footerParagraph}>
-          Don't have an account yet?
-          <NavLink className={classes.footerLink} to={ROUTER.SIGN_UP}>
-            Sign up now
-          </NavLink>
-        </p>
+              <label className={mainClasses.label}>
+                Password
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="Password"
+                  ref={register({ required: true, minLength: 6 })}
+                />
+                {/* {errors.Password && <p>Require field</p>} */}
+              </label>
+              <button className={mainClasses.button} data-testid="sign-in" type="submit">
+                Sign In
+              </button>
+            </form>
+
+            <p className={mainClasses.footerParagraph}>
+              Don't have an account yet?
+              <NavLink className={mainClasses.footerLink} to={ROUTER.SIGN_UP}>
+                Sign up now
+              </NavLink>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )

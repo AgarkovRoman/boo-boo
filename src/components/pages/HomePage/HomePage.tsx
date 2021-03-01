@@ -3,14 +3,19 @@ import { NavLink } from 'react-router-dom'
 import logo from './logo.svg'
 import classes from './HomePage.module.scss'
 import * as ROUTES from '../../../constants/routes'
+import mainClasses from '../mainStylesForPages.module.scss'
+
+export const Logo: React.FC = () => (
+  <NavLink to={ROUTES.HOME}>
+    <img className={classes.logo} src={logo} alt="Boo-Boo logo" height="28" width="120" />
+  </NavLink>
+)
 
 export const HomePage: React.FC = () => (
-  <div className={classes.homePage}>
+  <div className={mainClasses.mainWrapper}>
     <div className={classes.homePageBody}>
       <header className={classes.header}>
-        <NavLink to={ROUTES.HOME}>
-          <img className={classes.logo} src={logo} alt="Boo-Boo logo" height="28" width="120" />
-        </NavLink>
+        <Logo />
         <nav className={classes.navList}>
           <ul className={classes.navListUl}>
             <li className={classes.navListElement}>
