@@ -3,34 +3,34 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AddProject } from '../components/AddProject/AddProject'
 
-jest.mock('../context', () => ({
-  useSelectedProjectValue: jest.fn(),
-  useProjectsValue: jest.fn(() => ({
-    projects: [
-      {
-        name: '🔧 Renovation',
-        projectId: '2',
-        userId: 'RM6FGvtHAMviIDJNas',
-      },
-      {
-        name: '💻 Work',
-        projectId: '1',
-        userId: 'RM6FGvtHAMviIDJNas',
-      },
-    ],
-    setProjects: jest.fn(),
-  })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectValue: jest.fn(),
+//   useProjectsValue: jest.fn(() => ({
+//     projects: [
+//       {
+//         name: '🔧 Renovation',
+//         projectId: '2',
+//         userId: 'RM6FGvtHAMviIDJNas',
+//       },
+//       {
+//         name: '💻 Work',
+//         projectId: '1',
+//         userId: 'RM6FGvtHAMviIDJNas',
+//       },
+//     ],
+//     setProjects: jest.fn(),
+//   })),
+// }))
 
-jest.mock('../firebase', () => ({
-  firebase: {
-    firestore: jest.fn(() => ({
-      collection: jest.fn(() => ({
-        add: jest.fn(() => Promise.resolve('I am resolved!')),
-      })),
-    })),
-  },
-}))
+// jest.mock('../firebase', () => ({
+//   firebase: {
+//     firestore: jest.fn(() => ({
+//       collection: jest.fn(() => ({
+//         add: jest.fn(() => Promise.resolve('I am resolved!')),
+//       })),
+//     })),
+//   },
+// }))
 
 describe('< AddProject />', () => {
   afterEach(() => {
