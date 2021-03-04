@@ -13,7 +13,7 @@ export const SmallModalWindow: React.FC<SmallModalWindowPropsI> = ({
   deleteTask,
   onClose,
 }) => (
-  <div className={classes.modal}>
+  <div className={classes.modal} data-testid="small-modal-window">
     <p className={classes.title}>{description}</p>
     <div className={classes.buttons}>
       <Button
@@ -22,8 +22,14 @@ export const SmallModalWindow: React.FC<SmallModalWindowPropsI> = ({
         }}
         label="Delete"
         color="primary"
+        dataTestId="small-modal-window-delete"
       />
-      <Button onClick={() => onClose()} label="Cancel" color="transparent" />
+      <Button
+        onClick={() => onClose()}
+        label="Cancel"
+        color="transparent"
+        dataTestId="small-modal-window-cancel"
+      />
     </div>
   </div>
 )
