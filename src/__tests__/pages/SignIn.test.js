@@ -1,14 +1,19 @@
 import React from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { act } from 'react-dom/test-utils'
 import { BrowserRouter } from 'react-router-dom'
-import { Header, SignIn } from '../../components/pages/SignIn/SignIn'
+import { SignIn } from '../../components/pages/SignIn/SignIn'
 import { FirebaseContext } from '../../context/firebase'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory: () => ({}),
+}))
+
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn((fn) => fn()),
+  useDispatch: () => jest.fn(),
 }))
 
 const firebase = {
@@ -22,9 +27,7 @@ describe('< Sign In />', () => {
     const { getByTestId, queryByTestId, getByPlaceholderText } = render(
       <BrowserRouter>
         <FirebaseContext.Provider value={{ firebase }}>
-          <SignIn>
-            <Header />
-          </SignIn>
+          <SignIn />
         </FirebaseContext.Provider>
       </BrowserRouter>
     )

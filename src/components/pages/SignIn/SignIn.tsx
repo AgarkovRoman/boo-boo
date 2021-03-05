@@ -6,7 +6,7 @@ import classes from './SignIn.module.scss'
 import mainClasses from '../mainStylesForPages.module.scss'
 import * as ROUTER from '../../../constants/routes'
 import { signInTC } from '../../../redux/auth/auth-reducer'
-import { Logo } from '../HomePage/HomePage'
+import { Logo } from '../../UI/Logo/Logo'
 
 type FormData = {
   Email: string
