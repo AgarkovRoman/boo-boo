@@ -2,23 +2,23 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { Tasks } from '../components/Tasks/Tasks'
 
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(),
-  useProjectsValue: jest.fn(() => ({
-    projects: [
-      {
-        name: '🔧 Renovation',
-        projectId: '2',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-      {
-        name: '💻 Work',
-        projectId: '1',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-    ],
-  })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectsValue: jest.fn(),
+//   useProjectsValue: jest.fn(() => ({
+//     projects: [
+//       {
+//         name: '🔧 Renovation',
+//         projectId: '2',
+//         userId: 'RM6FGvtHAMviaIDJNas',
+//       },
+//       {
+//         name: '💻 Work',
+//         projectId: '1',
+//         userId: 'RM6FGvtHAMviaIDJNas',
+//       },
+//     ],
+//   })),
+// }))
 
 jest.mock('../hooks', () => ({
   useTasks: jest.fn(() => ({

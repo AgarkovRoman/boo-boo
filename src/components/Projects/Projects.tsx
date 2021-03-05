@@ -9,8 +9,8 @@ export const Projects: React.FC = () => {
   const projects = useSelector((state: ProjectsStateI) => getAllProjects(state))
 
   return (
-    <>
+    <div data-testid="all-projects">
       {projects && projects.map((project) => <IndividualProject key={uuid()} project={project} />)}
-    </>
+    </div>
   )
 }

@@ -90,9 +90,9 @@ export const signUpTC = (
     .signUp(email, password, name)
     .then((result) => {
       authAPI.addUser({
-        email,
-        name,
-        userId: result.user?.uid,
+        userEmail: email,
+        userName: name,
+        userId: result.user ? result.user.uid : '',
       })
       return result.user?.updateProfile({ displayName: name })
     })

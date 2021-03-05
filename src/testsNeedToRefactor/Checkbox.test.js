@@ -2,18 +2,22 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Checkbox } from '../components/UI/Checkbox/Checkbox'
+import { archiveTaskTC } from '../redux/tasks/tasks-reducer'
 
-jest.mock('../firebase', () => ({
-  firebase: {
-    firestore: jest.fn(() => ({
-      collection: jest.fn(() => ({
-        doc: jest.fn(() => ({
-          update: jest.fn(),
-        })),
-      })),
-    })),
-  },
-}))
+jest.mock('../redux/tasks/tasks-reducer')
+const archiveTaskTCMock = archiveTaskTC
+
+// jest.mock('../firebase', () => ({
+//   firebase: {
+//     firestore: jest.fn(() => ({
+//       collection: jest.fn(() => ({
+//         doc: jest.fn(() => ({
+//           update: jest.fn(),
+//         })),
+//       })),
+//     })),
+//   },
+// }))
 
 describe('<Checkbox/>', () => {
   describe('Success', () => {

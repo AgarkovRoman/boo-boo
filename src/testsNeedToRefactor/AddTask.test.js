@@ -2,22 +2,21 @@ import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AddTask } from '../components/AddTask/AddTask'
-import { useSelectedProjectsValue } from '../context'
 
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({ selectedProject: '1' })),
-  useProjectsValue: jest.fn(() => ({ projects: [] })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectsValue: jest.fn(() => ({ selectedProject: '1' })),
+//   useProjectsValue: jest.fn(() => ({ projects: [] })),
+// }))
 
-jest.mock('../firebase', () => ({
-  firebase: {
-    firestore: jest.fn(() => ({
-      collection: jest.fn(() => ({
-        add: jest.fn(() => Promise.resolve('Never mockk')),
-      })),
-    })),
-  },
-}))
+// jest.mock('../firebase', () => ({
+//   firebase: {
+//     firestore: jest.fn(() => ({
+//       collection: jest.fn(() => ({
+//         add: jest.fn(() => Promise.resolve('Never mockk')),
+//       })),
+//     })),
+//   },
+// }))
 
 describe('< AddTask />', () => {
   afterEach(() => {

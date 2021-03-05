@@ -16,21 +16,21 @@ jest.mock('../firebase', () => ({
   },
 }))
 
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({
-    setSelectedProject: jest.fn(() => 'INBOX'),
-  })),
-  useProjectsValue: jest.fn(() => ({
-    setProjects: jest.fn(),
-    projects: [
-      {
-        name: '🔧 Renovation',
-        projectId: '2',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-    ],
-  })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectsValue: jest.fn(() => ({
+//     setSelectedProject: jest.fn(() => 'INBOX'),
+//   })),
+//   useProjectsValue: jest.fn(() => ({
+//     setProjects: jest.fn(),
+//     projects: [
+//       {
+//         name: '🔧 Renovation',
+//         projectId: '2',
+//         userId: 'RM6FGvtHAMviaIDJNas',
+//       },
+//     ],
+//   })),
+// }))
 
 describe('< IndividualProject />', () => {
   const project = {

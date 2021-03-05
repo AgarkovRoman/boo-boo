@@ -20,10 +20,10 @@ const firebase = {
   })),
 }
 
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({ selectedProject: 1 })),
-  useProjectsValue: jest.fn(() => ({ projects: [] })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectsValue: jest.fn(() => ({ selectedProject: 1 })),
+//   useProjectsValue: jest.fn(() => ({ projects: [] })),
+// }))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

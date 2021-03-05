@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { VscKebabVertical } from 'react-icons/all'
+import { VscKebabVertical } from 'react-icons/vsc'
 import classes from './IndividualProject.module.scss'
 import { INBOX } from '../../constants/defaultProjects'
 import { deleteProjectTC, setActiveProject } from '../../redux/projects/projects-reducer'

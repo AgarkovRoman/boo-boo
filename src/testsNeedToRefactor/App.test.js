@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { App } from '../App'
 
-describe('<App/>', () => {
+describe('< App />', () => {
   it('render the application', () => {
     const { getByTestId } = render(<App />)
     expect(getByTestId('application')).toBeTruthy()

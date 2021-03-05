@@ -14,7 +14,7 @@ type FormData = {
 }
 
 export const Header: React.FC = () => (
-  <header className={mainClasses.header}>
+  <header className={mainClasses.header} data-testid="header">
     <Logo />
   </header>
 )

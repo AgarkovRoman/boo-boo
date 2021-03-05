@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/all'
+import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/vsc'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
 import { signOutTC } from '../../../redux/auth/auth-reducer'

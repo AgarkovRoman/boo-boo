@@ -2,13 +2,12 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
-import { useProjectsValue } from '../context'
 
-jest.mock('../context', () => ({
-  useProjectsValue: jest.fn(() => ({
-    projects: [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }],
-  })),
-}))
+// jest.mock('../context', () => ({
+//   useProjectsValue: jest.fn(() => ({
+//     projects: [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }],
+//   })),
+// }))
 
 describe('< ProjectOverlay />', () => {
   afterEach(() => {

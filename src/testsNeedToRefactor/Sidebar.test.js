@@ -3,21 +3,21 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Sidebar } from '../components/layout/Sidebar/Sidebar'
 
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({
-    setSelectedProject: jest.fn(() => 'INBOX'),
-  })),
-  useProjectsValue: jest.fn(() => ({
-    setProjects: jest.fn(),
-    projects: [
-      {
-        name: '🔧 Renovation',
-        projectId: '2',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-    ],
-  })),
-}))
+// jest.mock('../context', () => ({
+//   useSelectedProjectsValue: jest.fn(() => ({
+//     setSelectedProject: jest.fn(() => 'INBOX'),
+//   })),
+//   useProjectsValue: jest.fn(() => ({
+//     setProjects: jest.fn(),
+//     projects: [
+//       {
+//         name: '🔧 Renovation',
+//         projectId: '2',
+//         userId: 'RM6FGvtHAMviaIDJNas',
+//       },
+//     ],
+//   })),
+// }))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
