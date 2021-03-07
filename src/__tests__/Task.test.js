@@ -3,8 +3,6 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Task } from '../components/Task/Task'
 
-const deleteTask = jest.fn()
-
 jest.mock('react-redux', () => ({
   useSelector: jest.fn((fn) => fn()),
   useDispatch: () => jest.fn(),
