@@ -43,7 +43,9 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "src/**/*.ts",
-      "src/**/*.tsx"
+      "src/**/*.tsx",
+      "!src/index.js",
+      "!src/firebase.js"
     ],
     "coverageThreshold": {
       "global": {
@@ -58,8 +60,7 @@
       "text"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-icons)/)",
-      "node_modules/(?!(normalize.css)/)"
+      "node_modules/(?!(react-icons|normalize.css)/)"
     ]
   },
   "browserslist": {
