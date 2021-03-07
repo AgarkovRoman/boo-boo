@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import firebase from 'firebase'
+import { firebase } from '../firebase'
 import { TaskI } from '../redux/tasks/tasks-types'
 import { ProjectI } from '../redux/projects/projects-types'
 import { UserI } from '../redux/auth/auth-types'
