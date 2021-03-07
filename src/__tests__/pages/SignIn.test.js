@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event'
 import { act } from 'react-dom/test-utils'
 import { BrowserRouter } from 'react-router-dom'
 import { SignIn } from '../../components/pages/SignIn/SignIn'
-import { FirebaseContext } from '../../context/firebase'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -16,19 +15,11 @@ jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
 }))
 
-const firebase = {
-  auth: jest.fn(() => ({
-    signInWithEmailAndPassword: jest.fn(() => Promise.resolve('sign in')),
-  })),
-}
-
 describe('< Sign In />', () => {
   it('render < Sign In />', async () => {
     const { getByTestId, queryByTestId, getByPlaceholderText } = render(
       <BrowserRouter>
-        <FirebaseContext.Provider value={{ firebase }}>
-          <SignIn />
-        </FirebaseContext.Provider>
+        <SignIn />
       </BrowserRouter>
     )
 

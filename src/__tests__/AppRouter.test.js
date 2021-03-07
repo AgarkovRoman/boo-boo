@@ -5,12 +5,6 @@ import configureStore from 'redux-mock-store'
 import { AppRouter } from '../routes/AppRouter'
 import { FirebaseContext } from '../context/firebase'
 
-// const firebase = {
-//   auth: jest.fn(() => ({
-//     onAuthStateChanged: jest.fn(() => Promise.resolve('sign in')),
-//   })),
-// }
-
 const firebase = {
   auth: jest.fn(() => ({
     currentUser: { displayName: 'Roman', email: 'Roman@gmail.com' },
@@ -23,10 +17,6 @@ const firebase = {
     })),
   })),
 }
-
-// jest.mock('../hooks', () => ({
-//   useAuthListener: jest.fn(() => ({ user: {} })),
-// }))
 
 describe('< AppRouter />', () => {
   const mockStore = configureStore()
