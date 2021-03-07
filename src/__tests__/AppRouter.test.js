@@ -1,40 +1,45 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import configureStore from 'redux-mock-store'
+import { render, screen } from '@testing-library/react'
+import { useSelector } from 'react-redux'
 import { AppRouter } from '../routes/AppRouter'
-import { FirebaseContext } from '../context/firebase'
+import { getUser } from '../helpers/helpers'
 
-const firebase = {
-  auth: jest.fn(() => ({
-    currentUser: { displayName: 'Roman', email: 'Roman@gmail.com' },
-    signOut: jest.fn(() => Promise.resolve('I am signed out!')),
-  })),
-  firestore: jest.fn(() => ({
-    collection: jest.fn(() => ({
-      get: jest.fn(() => Promise.resolve('I get content!')),
-      add: jest.fn(() => Promise.resolve('I add content!')),
-    })),
-  })),
+const user = {
+  userId: '12323131231',
+  userEmail: 'test@test.ru',
+  userName: 'Name',
 }
 
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: jest.fn().mockImplementation((fn) => fn()),
+}))
+
+jest.mock('../redux/auth/auth-selectors', () => ({
+  ...jest.requireActual('../redux/auth/auth-selectors'),
+  getUser: jest.fn().mockReturnValue(user),
+}))
+
 describe('< AppRouter />', () => {
-  const mockStore = configureStore()
+  // const mockStore = configureStore()
 
-  it('render the AppRouter', async () => {
-    // Initialize mockStore with empty state
-    const initialState = {}
-    const store = mockStore(initialState)
-
-    const { queryByTestId } = render(
-      <Provider store={store}>
-        <FirebaseContext.Provider value={{ firebase }}>
-          <AppRouter />
-        </FirebaseContext.Provider>
-      </Provider>
-    )
-
+  // it('render the AppRouter', async () => {
+  //   // Initialize mockStore with empty state
+  //   const initialState = {}
+  //   const store = mockStore(initialState)
+  //
+  //   const { queryByTestId } = render(
+  //     <Provider store={store}>
+  //       <AppRouter />
+  //     </Provider>
+  //   )
+  //
+  //   expect(queryByTestId('application')).toBeTruthy()
+  //   // expect(getByTestId('application').classList.contains('darkmode')).toBeFalsy()
+  // })
+  test('render the AppRouter', async () => {
+    const { queryByTestId } = render(<AppRouter />)
+    screen.debug()
     expect(queryByTestId('application')).toBeTruthy()
-    // expect(getByTestId('application').classList.contains('darkmode')).toBeFalsy()
   })
 })

@@ -23,7 +23,6 @@ export const AppRouter: React.FC = () => {
           <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.SIGN_UP} exact>
             <SignUp />
           </IsUserRedirect>
-
           <ProtectedRoute user={user} path={ROUTES.APP} exact>
             <BooBoo userId={user.userId} />
           </ProtectedRoute>
