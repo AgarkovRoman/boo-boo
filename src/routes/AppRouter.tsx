@@ -1,18 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { SignIn } from '../components/pages/SignIn/SignIn'
-import { Content } from '../components/layout/Content/Content'
-import { Header } from '../components/layout/Header/Header'
 import { SignUp } from '../components/pages/SignUp/SignUp'
 import * as ROUTES from '../constants/routes'
 import { IsUserRedirect, ProtectedRoute } from '../helpers/routes'
-import { useAuthListener } from '../hooks/useAuthListener'
 import { HomePage } from '../components/pages/HomePage/HomePage'
 import { BooBoo } from '../components/pages/BooBoo/BooBoo'
+import { getUser } from '../redux/auth/auth-selectors'
+import { AuthStateI } from '../redux/auth/auth-types'
 
 export const AppRouter: React.FC = () => {
-  const { user } = useAuthListener()
-  console.log('uer', user)
+  const user = useSelector((state: AuthStateI) => getUser(state))
+
   return (
     <BrowserRouter>
       <main data-testid="application">
@@ -25,9 +25,7 @@ export const AppRouter: React.FC = () => {
           </IsUserRedirect>
 
           <ProtectedRoute user={user} path={ROUTES.APP} exact>
-            <Header />
-            <Content userId={user && user.uid && user.uid} />
-            {/* <BooBoo userId={user && user.uid && user.uid} /> */}
+            <BooBoo userId={user.userId} />
           </ProtectedRoute>
           <IsUserRedirect user={user} loggedInPath={ROUTES.APP} path={ROUTES.HOME} exact>
             <HomePage />
