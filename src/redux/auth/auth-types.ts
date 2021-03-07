@@ -5,9 +5,7 @@ export interface AuthStateI {
 }
 
 export interface AuthI {
-  userId: string
-  userEmail: string
-  userName: string
+  user: UserI
 }
 
 export interface UserI {
