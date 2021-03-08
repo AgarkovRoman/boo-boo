@@ -1,6 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { v4 as uuid } from 'uuid'
 import { Projects } from '../components/Projects/Projects'
+import { IndividualProject } from '../components/IndividualProject/IndividualProject'
 
 const projects = [
   { name: 'test1', projectId: '1', userId: '54321' },
@@ -8,12 +10,17 @@ const projects = [
 ]
 
 jest.mock('react-redux', () => ({
-  useSelector: jest.fn().mockImplementation((selector) => selector()),
+  useSelector: jest.fn((fn) => fn()),
+  useDispatch: () => jest.fn(),
 }))
 
-jest.mock('../redux/projects/projects-selectors', () => ({
-  getAllProjects: jest.fn().mockReturnValue(projects),
-}))
+// jest.mock('react-redux', () => ({
+//   useSelector: jest.fn().mockImplementation((selector) => selector()),
+// }))
+
+// jest.mock('../redux/projects/projects-selectors', () => ({
+//   getAllProjects: jest.fn().mockReturnValue(projects),
+// }))
 
 describe('< Projects/>', () => {
   afterEach(() => {
@@ -22,7 +29,12 @@ describe('< Projects/>', () => {
 
   describe('Success', () => {
     test('renders the Projects', () => {
-      const { getByTestId } = render(<Projects />)
+      const { getByTestId } = render(
+        <div data-testid="all-projects">
+          {projects &&
+            projects.map((project) => <IndividualProject key={uuid()} project={project} />)}
+        </div>
+      )
       expect(getByTestId('all-projects')).toBeTruthy()
     })
 
