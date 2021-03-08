@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
 import { getAllProjects } from '../redux/projects/projects-selectors'
 import { projectsReducer } from '../redux/projects/projects-reducer'
-import { INBOX } from '../constants/defaultProjects'
 
 const projects = [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }]
 
@@ -40,15 +39,6 @@ describe('< ProjectOverlay />', () => {
           setProject={setProject}
         />
       )
-
-      // const { getByTestId, findByTestId } = render(
-      //   <ProjectOverlay
-      //     showProjectOverlay
-      //     setShowProjectOverlay={setShowProjectOverlay}
-      //     setProject={setProject}
-      //   />
-      // )
-      screen.debug()
       expect(findByTestId('project-overlay')).toBeTruthy()
       userEvent.click(getByTestId('project-overlay-action'))
       expect(setProject).toHaveBeenCalled()
