@@ -22,15 +22,11 @@ import { AddProject } from '../components/AddProject/AddProject'
 //   })),
 // }))
 
-// jest.mock('../firebase', () => ({
-//   firebase: {
-//     firestore: jest.fn(() => ({
-//       collection: jest.fn(() => ({
-//         add: jest.fn(() => Promise.resolve('I am resolved!')),
-//       })),
-//     })),
-//   },
-// }))
+jest.mock('react-redux', () => ({
+  // ...jest.requireActual('react-redux'),
+  useSelector: jest.fn((fn) => fn()),
+  useDispatch: () => jest.fn(),
+}))
 
 describe('< AddProject />', () => {
   afterEach(() => {
@@ -38,14 +34,18 @@ describe('< AddProject />', () => {
   })
 
   describe('Success', () => {
-    it('renders < AddProject />', () => {
-      const { queryByTestId, getByTestId } = render(<AddProject />)
+    test('renders < AddProject />', () => {
+      const { queryByTestId, getByTestId } = render(
+        <AddProject shouldShow={false} userId="123456" />
+      )
       expect(getByTestId('add-project')).toBeTruthy()
       expect(getByTestId('add-project-action')).toBeTruthy()
     })
 
-    it('renders < AddProject /> and show overlay using onClick', () => {
-      const { queryByTestId, getByTestId } = render(<AddProject />)
+    test('renders < AddProject /> and show overlay using onClick', () => {
+      const { queryByTestId, getByTestId } = render(
+        <AddProject shouldShow={false} userId="123456" />
+      )
       expect(getByTestId('add-project')).toBeTruthy()
       expect(getByTestId('add-project-action')).toBeTruthy()
       userEvent.click(getByTestId('add-project-action'))
@@ -54,8 +54,10 @@ describe('< AddProject />', () => {
       expect(queryByTestId('hide-project-overlay')).toBeTruthy()
     })
 
-    it('renders < AddProject /> and show overlay using keyDown', () => {
-      const { queryByTestId, getByTestId } = render(<AddProject />)
+    test('renders < AddProject /> and show overlay using keyDown', () => {
+      const { queryByTestId, getByTestId } = render(
+        <AddProject shouldShow={false} userId="123456" />
+      )
       expect(getByTestId('add-project')).toBeTruthy()
       expect(getByTestId('add-project-action')).toBeTruthy()
       fireEvent.keyDown(getByTestId('add-project-action'), {
@@ -71,9 +73,9 @@ describe('< AddProject />', () => {
       expect(queryByTestId('hide-project-overlay')).toBeTruthy()
     })
 
-    it('renders < AddProject /> and adds a project using onClick', () => {
+    test('renders < AddProject /> and adds a project using onClick', () => {
       const setShow = jest.fn(() => !setShow)
-      const { queryByTestId, getByTestId } = render(<AddProject shouldShow />)
+      const { queryByTestId, getByTestId } = render(<AddProject shouldShow userId="123456" />)
       expect(getByTestId('add-project')).toBeTruthy()
       expect(queryByTestId('add-project-inner')).toBeTruthy()
 
@@ -83,7 +85,7 @@ describe('< AddProject />', () => {
     })
 
     it('hides the project overlay when cancelled using onClick', () => {
-      const { queryByTestId, getByText } = render(<AddProject shouldShow />)
+      const { queryByTestId, getByText } = render(<AddProject shouldShow userId="123456" />)
       expect(queryByTestId('add-project')).toBeTruthy()
       expect(queryByTestId('add-project-inner')).toBeTruthy()
 
