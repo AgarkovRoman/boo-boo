@@ -1,25 +1,15 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
 import { getAllProjects } from '../redux/projects/projects-selectors'
-import { projectsReducer } from '../redux/projects/projects-reducer'
+import { renderWithRedux } from './utils/renderWithRedux'
 
-const projects = [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }]
+const projects = [{ name: 'Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }]
 
 jest.mock('../redux/projects/projects-selectors', () => ({
   getAllProjects: jest.fn(),
 }))
-
-const renderWithRedux = (
-  component,
-  { initialState, store = createStore(projectsReducer, initialState) } = {}
-) => ({
-  ...render(<Provider store={store}>{component}</Provider>),
-  store,
-})
 
 describe('< ProjectOverlay />', () => {
   afterEach(() => {
