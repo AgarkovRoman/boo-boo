@@ -30,12 +30,16 @@ export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
     >
       <span
         className={`${classes.checkbox} ${checked && classes.checkboxChecked}`}
+        data-testid="checkbox-circle"
         onMouseEnter={() => setMouseEnter(true)}
         onMouseOver={() => setMouseEnter(true)}
-        onFocus={() => setMouseEnter(true)}
         onMouseLeave={() => setMouseEnter(false)}
       >
-        {(mouseEnter || checked) && <VscCheck />}
+        {(mouseEnter || checked) && (
+          <span data-testid="checkbox-icon">
+            <VscCheck />
+          </span>
+        )}
       </span>
     </div>
   )
