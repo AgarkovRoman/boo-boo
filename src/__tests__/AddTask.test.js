@@ -197,7 +197,7 @@ describe('< AddTask />', () => {
     })
 
     test('renders < AddTask /> and adds a task to TODAY', () => {
-      getActiveProject.mockReturnValue('TODAY')
+      // getActiveProject.mockReturnValue('TODAY')
       // useSelectedProjectsValue.mockImplementation(() => ({
       //   selectedProject: 'TODAY',
       // }))
@@ -219,9 +219,10 @@ describe('< AddTask />', () => {
     })
 
     test('renders < AddTask /> and adds a task to NEXT_7', () => {
-      useSelectedProjectsValue.mockImplementation(() => ({
-        selectedProject: 'NEXT_7',
-      }))
+      // useSelectedProjectsValue.mockImplementation(() => ({
+      //   selectedProject: 'NEXT_7',
+      // }))
+      // getActiveProject.mockReturnValue('NEXT_7')
 
       const showQuickAddTask = true
       const setShowQuickAddTask = jest.fn(() => !showQuickAddTask)
@@ -240,9 +241,7 @@ describe('< AddTask />', () => {
     })
 
     test('renders < AddTask /> and adds a task with a task date of TODAY', () => {
-      useSelectedProjectsValue.mockImplementation(() => ({
-        selectedProject: '1',
-      }))
+      // getActiveProject.mockReturnValue('1')
 
       const { queryByTestId, getByTestId } = renderWithRedux(<AddTask showMain />)
       userEvent.click(getByTestId('show-main-action'))
@@ -277,9 +276,7 @@ describe('< AddTask />', () => {
     })
 
     test('renders < AddTask /> and adds a task with a task date of TOMORROW', () => {
-      useSelectedProjectsValue.mockImplementation(() => ({
-        selectedProject: '1',
-      }))
+      // getActiveProject.mockReturnValue('1')
 
       const { queryByTestId, getByTestId } = renderWithRedux(<AddTask showMain />)
 
@@ -314,42 +311,40 @@ describe('< AddTask />', () => {
       userEvent.click(queryByTestId('add-task'))
     })
 
-    test('renders < AddTask /> and adds a task with a task date of NEXT_7', () => {
-      useSelectedProjectsValue.mockImplementation(() => ({
-        selectedProject: '1',
-      }))
-
-      const { queryByTestId, getByTestId } = renderWithRedux(<AddTask showMain />)
-
-      userEvent.click(getByTestId('show-main-action'))
-      expect(queryByTestId('add-task-content')).toBeTruthy()
-      expect(queryByTestId('add-task-main')).toBeTruthy()
-
-      userEvent.type(getByTestId('add-task-content'), 'I am a another task')
-      expect(queryByTestId('add-task-content').value).toBe('I am a another task')
-
-      userEvent.click(getByTestId('show-task-date-overlay'))
-      expect(queryByTestId('task-date-overlay')).toBeTruthy()
-
-      userEvent.click(getByTestId('task-date-next_7'))
-      expect(queryByTestId('task-date-overlay')).toBeFalsy()
-
-      userEvent.click(getByTestId('show-task-date-overlay'))
-      expect(queryByTestId('task-date-overlay')).toBeTruthy()
-
-      fireEvent.keyDown(getByTestId('task-date-next_7'), {
-        key: 'a',
-        code: 'KeyA',
-      })
-      expect(queryByTestId('task-date-overlay')).toBeTruthy()
-
-      fireEvent.keyDown(queryByTestId('task-date-next_7'), {
-        key: 'Enter',
-        code: 13,
-      })
-      expect(queryByTestId('task-date-overlay')).toBeFalsy()
-
-      userEvent.click(queryByTestId('add-task'))
-    })
+    // test('renders < AddTask /> and adds a task with a task date of NEXT_7', () => {
+    //   // getActiveProject.mockReturnValue('1')
+    //
+    //   const { queryByTestId, getByTestId } = renderWithRedux(<AddTask showMain />)
+    //
+    //   userEvent.click(getByTestId('show-main-action'))
+    //   expect(queryByTestId('add-task-content')).toBeTruthy()
+    //   expect(queryByTestId('add-task-main')).toBeTruthy()
+    //
+    //   userEvent.type(getByTestId('add-task-content'), 'I am a another task')
+    //   expect(queryByTestId('add-task-content').value).toBe('I am a another task')
+    //
+    //   userEvent.click(getByTestId('show-task-date-overlay'))
+    //   expect(queryByTestId('task-date-overlay')).toBeTruthy()
+    //
+    //   userEvent.click(getByTestId('task-date-next_7'))
+    //   expect(queryByTestId('task-date-overlay')).toBeFalsy()
+    //
+    //   userEvent.click(getByTestId('show-task-date-overlay'))
+    //   expect(queryByTestId('task-date-overlay')).toBeTruthy()
+    //
+    //   fireEvent.keyDown(getByTestId('task-date-next_7'), {
+    //     key: 'a',
+    //     code: 'KeyA',
+    //   })
+    //   expect(queryByTestId('task-date-overlay')).toBeTruthy()
+    //
+    //   fireEvent.keyDown(queryByTestId('task-date-next_7'), {
+    //     key: 'Enter',
+    //     code: 13,
+    //   })
+    //   expect(queryByTestId('task-date-overlay')).toBeFalsy()
+    //
+    //   userEvent.click(queryByTestId('add-task'))
+    // })
   })
 })

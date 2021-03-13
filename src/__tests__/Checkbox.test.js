@@ -26,6 +26,9 @@ describe('< Checkbox />', () => {
       const { getByTestId } = renderWithRedux(<Checkbox id="1" taskDesc="Finish this app" />)
       expect(getByTestId('checkbox-action')).toBeTruthy()
       userEvent.click(getByTestId('checkbox-action'))
+      // expect(setTimeout).toHaveBeenCalledTimes(2)
+      // expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 300)
+      // expect(archiveTaskTC('1')).toBeCalledTimes(1)
     })
     test('render the task checkbox and accepts a Enter onKeyDown', () => {
       const { getByTestId } = renderWithRedux(<Checkbox id="1" taskDesc="Finish this app" />)
@@ -49,5 +52,8 @@ describe('< Checkbox />', () => {
       fireEvent.mouseOver(queryByTestId('checkbox-circle'))
       expect(queryByTestId('checkbox-icon')).toBeTruthy()
     })
+    // test('handleArchiveTask', () => {
+    //   expect(handleArchiveTask('1234'))
+    // })
   })
 })

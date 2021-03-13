@@ -9,14 +9,13 @@ const AuthUserResult = {
 }
 
 jest.mock('../api/api')
-const authAPIMock = authAPI as jest.Mocked<typeof authAPI>
+const authAPIMock = authAPI
 
-// @ts-ignore
 authAPIMock.authMe.mockReturnValue(Promise.resolve(AuthUserResult))
 
 describe('authReducer', () => {
-  it('setAuthUserData', () => {
-    const state: AuthI = {
+  test('setAuthUserData', () => {
+    const state = {
       userId: '',
       userEmail: '',
       userName: '',
@@ -33,8 +32,8 @@ describe('authReducer', () => {
     expect(newState.userEmail === 'test@test.ru').toBeTruthy()
     expect(newState.userName === 'name').toBeTruthy()
   })
-  it('signOutUser', () => {
-    const state: AuthI = {
+  test('signOutUser', () => {
+    const state = {
       userId: '123',
       userEmail: 'test@test.ru',
       userName: 'name',
@@ -51,13 +50,12 @@ describe('authReducer', () => {
     expect(newState.userEmail === '').toBeTruthy()
     expect(newState.userName === '').toBeTruthy()
   })
-
-  it('authMeTC', async () => {
+  test('authMeTC', async () => {
     const dispatch = jest.fn()
     const thunkAuthMe = authMeTC()
     const getStateMock = jest.fn()
 
     await thunkAuthMe(dispatch, getStateMock, {})
-    // expect(dispatch).toBeCalledTimes(1)
+    expect(dispatch).toBeCalledTimes(1)
   })
 })
