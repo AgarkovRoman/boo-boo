@@ -26,6 +26,7 @@ export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
         </div>
         <div
           className={classes.kebab}
+          data-testid="task-kebab"
           role="button"
           tabIndex={0}
           aria-label={`${isModalDisplay ? 'Close' : 'Open'} delete task "${name}" modal?`}

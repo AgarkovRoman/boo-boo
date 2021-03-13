@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { VscChevronDown } from 'react-icons/all'
+import { VscChevronDown } from 'react-icons/vsc'
 import classes from './Sidebar.module.scss'
 import { Projects } from '../../Projects/Projects'
 import { AddProject } from '../../AddProject/AddProject'

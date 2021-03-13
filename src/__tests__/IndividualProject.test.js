@@ -2,51 +2,65 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { IndividualProject } from '../components/IndividualProject/IndividualProject'
+import { renderWithRedux } from './utils/renderWithRedux'
 
-jest.mock('../firebase', () => ({
-  firebase: {
-    firestore: jest.fn(() => ({
-      collection: jest.fn(() => ({
-        doc: jest.fn(() => ({
-          delete: jest.fn(() => Promise.resolve('resolve')),
-          update: jest.fn(),
-        })),
-      })),
-    })),
-  },
-}))
-
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({
-    setSelectedProject: jest.fn(() => 'INBOX'),
-  })),
-  useProjectsValue: jest.fn(() => ({
-    setProjects: jest.fn(),
-    projects: [
-      {
-        name: '🔧 Renovation',
-        projectId: '2',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-    ],
-  })),
-}))
+const project = {
+  name: '🔧 Renovation',
+  projectId: '2',
+  userId: 'RM6FGvtHAMviaIDJNas',
+}
 
 describe('< IndividualProject />', () => {
-  const project = {
-    name: '🔧 Renovation',
-    projectId: '2',
-    userId: 'RM6FGvtHAMviaIDJNas',
-  }
-
   describe('Success', () => {
-    it('renders our project', () => {
-      const { getByText } = render(<IndividualProject project={project} />)
+    test('renders our project', () => {
+      const { getByText } = renderWithRedux(<IndividualProject project={project} />)
       expect(getByText('🔧 Renovation')).toBeTruthy()
     })
 
-    it('renders the delete overlay and then deletes a project using onClick', () => {
-      const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
+    test('render and select an active project using onClick', () => {
+      const { getByTestId } = renderWithRedux(<IndividualProject project={project} />)
+      expect(getByTestId('project-action')).toBeTruthy()
+      userEvent.click(getByTestId('project-action'))
+      expect(getByTestId('project-action-parent').classList.contains('active')).toBeTruthy()
+    })
+
+    test('renders the projects and selects an active project using onKeyDown', () => {
+      const { getByTestId, queryByTestId } = renderWithRedux(
+        <IndividualProject project={project} />
+      )
+      expect(getByTestId('project-action')).toBeTruthy()
+      fireEvent.keyDown(getByTestId('project-action'), {
+        key: 'a',
+        code: 65,
+      })
+      expect(queryByTestId('project-action-parent').classList.contains('active')).toBeFalsy()
+
+      fireEvent.keyDown(getByTestId('project-action'), {
+        key: 'Enter',
+        code: 13,
+      })
+      expect(getByTestId('project-action-parent').classList.contains('active')).toBeTruthy()
+    })
+
+    it('renders the projects with no active value', () => {
+      const { queryByTestId } = renderWithRedux(<IndividualProject project={project} />)
+      expect(queryByTestId('project-action')).toBeTruthy()
+
+      fireEvent.keyDown(queryByTestId('project-action'), {
+        key: 'a',
+        code: 65,
+      })
+      expect(queryByTestId('project-action-parent').classList.contains('active')).toBeFalsy()
+
+      fireEvent.keyDown(queryByTestId('project-action'), {
+        key: 'Enter',
+        code: 13,
+      })
+      expect(queryByTestId('project-action-parent').classList.contains('active')).toBeTruthy()
+    })
+
+    test('renders the delete overlay and then deletes a project using onClick', () => {
+      const { queryByTestId, getByText } = renderWithRedux(<IndividualProject project={project} />)
 
       userEvent.click(queryByTestId('delete-project'))
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
@@ -54,8 +68,8 @@ describe('< IndividualProject />', () => {
       userEvent.click(getByText('Delete'))
     })
 
-    it('renders the delete overlay and then deletes a project using onKeyDown', () => {
-      const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
+    test('renders the delete overlay and then deletes a project using onKeyDown', () => {
+      const { queryByTestId, getByText } = renderWithRedux(<IndividualProject project={project} />)
 
       fireEvent.keyDown(queryByTestId('delete-project'), {
         key: 'a',
@@ -71,8 +85,8 @@ describe('< IndividualProject />', () => {
       userEvent.click(getByText('Delete'))
     })
 
-    it('renders the delete overlay and then cancels using onClick', () => {
-      const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
+    test('renders the delete overlay and then cancels using onClick', () => {
+      const { queryByTestId, getByText } = renderWithRedux(<IndividualProject project={project} />)
 
       userEvent.click(queryByTestId('delete-project'))
       expect(getByText('Are you sure you want to delete this project?')).toBeTruthy()
@@ -80,8 +94,8 @@ describe('< IndividualProject />', () => {
       userEvent.click(getByText('Cancel'))
     })
 
-    it('renders the delete overlay and then cancels using onKeyDown', () => {
-      const { queryByTestId, getByText } = render(<IndividualProject project={project} />)
+    test('renders the delete overlay and then cancels using onKeyDown', () => {
+      const { queryByTestId, getByText } = renderWithRedux(<IndividualProject project={project} />)
 
       fireEvent.keyDown(queryByTestId('delete-project'), {
         key: 'a',

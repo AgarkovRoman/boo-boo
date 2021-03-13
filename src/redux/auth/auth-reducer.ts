@@ -15,9 +15,11 @@ export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 export const SIGN_OUT_USER = 'SIGN_OUT_USER'
 
 const initialState: AuthI = {
-  userId: '',
-  userEmail: '',
-  userName: '',
+  user: {
+    userId: '',
+    userEmail: '',
+    userName: '',
+  },
 }
 
 export const authReducer = (state = initialState, action: AuthActionCreatorsType): AuthI => {
@@ -25,13 +27,13 @@ export const authReducer = (state = initialState, action: AuthActionCreatorsType
     case SET_AUTH_USER_DATA: {
       return {
         ...state,
-        ...action.payload,
+        user: { ...action.payload },
       }
     }
     case SIGN_OUT_USER: {
       return {
         ...state,
-        ...action.payload,
+        user: { ...action.payload },
       }
     }
     default:
@@ -56,17 +58,23 @@ export const signOutUser = ({ userId, userEmail, userName }: UserI): signOutUser
 })
 
 /* ThunkCreators */
-
 export const authMeTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  await authAPI.authMe((user: FirebaseUserI) => {
-    if (user) {
-      const { uid, email, displayName }: FirebaseUserI = user
-      dispatch(setAuthUserData({ userId: uid, userEmail: email, userName: displayName }))
-      // localStorage.setItem('authUser', JSON.stringify(user))
-      return user
-    }
-    return null
-  })
+  const userFromLocalStorage: string | null = localStorage.getItem('authUser')
+  if (typeof userFromLocalStorage === 'string') {
+    const userFromLocalStorageParse: UserI = JSON.parse(userFromLocalStorage)
+    dispatch(setAuthUserData(userFromLocalStorageParse))
+  } else {
+    await authAPI.authMe((user: FirebaseUserI) => {
+      if (user) {
+        const { uid, email, displayName }: FirebaseUserI = user
+        const authUser = { userId: uid, userEmail: email, userName: displayName }
+        dispatch(setAuthUserData(authUser))
+        localStorage.setItem('authUser', JSON.stringify(authUser))
+        return authUser
+      }
+      return { userId: '', userEmail: '', userName: '' }
+    })
+  }
 }
 
 export const signInTC = (
@@ -90,9 +98,9 @@ export const signUpTC = (
     .signUp(email, password, name)
     .then((result) => {
       authAPI.addUser({
-        email,
-        name,
-        userId: result.user?.uid,
+        userEmail: email,
+        userName: name,
+        userId: result.user ? result.user.uid : '',
       })
       return result.user?.updateProfile({ displayName: name })
     })
@@ -106,6 +114,7 @@ export const signOutTC = (): ThunkAction<void, AuthStateI, unknown, Action> => a
     .signOut()
     .then(() => {
       dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
+      localStorage.removeItem('authUser')
     })
     .catch((error) => console.log(error))
 }

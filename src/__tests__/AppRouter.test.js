@@ -1,47 +1,23 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { AppRouter } from '../routes/AppRouter'
-import { FirebaseContext } from '../context/firebase'
+import { getUser } from '../redux/auth/auth-selectors'
+import { renderWithRedux } from './utils/renderWithRedux'
 
-const firebase = {
-  auth: jest.fn(() => ({
-    onAuthStateChanged: jest.fn(() => Promise.resolve('sign in')),
-  })),
+const user = {
+  userId: '12323131231',
+  userEmail: 'test@test.ru',
+  userName: 'Name',
 }
 
-jest.mock('../hooks', () => ({
-  useAuthListener: jest.fn(() => ({ user: {} })),
-}))
-
-jest.mock('../context', () => ({
-  useSelectedProjectsValue: jest.fn(() => ({ selectedProject: '1' })),
-  useProjectsValue: jest.fn(() => ({ projects: [] })),
-}))
-
-jest.mock('../hooks', () => ({
-  useTasks: jest.fn(() => ({
-    tasks: [
-      {
-        id: '0HTGB1k3BXUYVh6nn2Vy',
-        archived: false,
-        date: '15/11/2020',
-        projectId: '1',
-        task: 'задача на завтра в ворк',
-        userId: 'RM6FGvtHAMviaIDJNas',
-      },
-    ],
-  })),
+jest.mock('../redux/auth/auth-selectors', () => ({
+  getUser: jest.fn(),
 }))
 
 describe('< AppRouter />', () => {
-  it('render the AppRouter', () => {
-    const { getByTestId, queryByTestId } = render(
-      <FirebaseContext.Provider value={{ firebase }}>
-        <AppRouter />
-      </FirebaseContext.Provider>
-    )
-
+  test('render the AppRouter', async () => {
+    getUser.mockReturnValue(user)
+    const { queryByTestId } = renderWithRedux(<AppRouter />)
     expect(queryByTestId('application')).toBeTruthy()
-    // expect(getByTestId('application').classList.contains('darkmode')).toBeFalsy()
   })
 })

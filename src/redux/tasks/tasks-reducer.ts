@@ -21,7 +21,7 @@ export const ADD_TASK = 'ADD_TASK'
 export const ARCHIVED_TASK = 'ARCHIVED_TASK'
 export const DELETE_TASK = 'DELETE_TASK'
 
-const archivedTaskHandler = (tasks: Array<TaskI>, taskId: Array<TaskI> | TaskI | string) =>
+export const archivedTaskHandler = (tasks: Array<TaskI>, taskId: Array<TaskI> | TaskI | string) =>
   tasks.map((task) => {
     if (task.id !== taskId) {
       return { ...task }

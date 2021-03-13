@@ -6,5 +6,11 @@ interface TasksCounterPropsI {
 }
 
 export const TasksCounter: React.FC<TasksCounterPropsI> = ({ count }) => (
-  <>{count > 0 && <span className={classes.counter}>{count}</span>}</>
+  <>
+    {count > 0 && (
+      <span data-testid="task-counter" className={classes.counter}>
+        {count}
+      </span>
+    )}
+  </>
 )

@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { firebase } from '../firebase'
+import { TaskI } from '../redux/tasks/tasks-types'
+import { ProjectI } from '../redux/projects/projects-types'
+import { UserI } from '../redux/auth/auth-types'
 
 export const authAPI = {
-  authMe(callback) {
+  authMe(callback: (user: any) => void) {
     return firebase.auth().onAuthStateChanged(callback)
   },
 
-  signIn(email, password) {
+  signIn(email: string, password: string) {
     return firebase.auth().signInWithEmailAndPassword(email, password)
   },
 
@@ -14,20 +17,20 @@ export const authAPI = {
     return firebase.auth().signOut()
   },
 
-  addUser(user) {
+  addUser(user: UserI) {
     return firebase
       .firestore()
       .collection('users')
       .add({ ...user })
   },
 
-  signUp(email, password, name) {
+  signUp(email: string, password: string, name: string) {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
   },
 }
 
 export const projectsAPI = {
-  getAllProjectsById(userId) {
+  getAllProjectsById(userId: string) {
     return firebase
       .firestore()
       .collection('projects')
@@ -36,20 +39,20 @@ export const projectsAPI = {
       .get()
   },
 
-  addProject(project) {
+  addProject(project: ProjectI) {
     return firebase
       .firestore()
       .collection('projects')
       .add({ ...project })
   },
 
-  deleteProject(docId) {
+  deleteProject(docId: string) {
     return firebase.firestore().collection('projects').doc(docId).delete()
   },
 }
 
 export const tasksAPI = {
-  getAllTasksById(userId) {
+  getAllTasksById(userId: string) {
     return (
       firebase
         .firestore()
@@ -60,18 +63,18 @@ export const tasksAPI = {
     )
   },
 
-  archivedTasksById(taskId) {
+  archivedTasksById(taskId: string) {
     return firebase.firestore().collection('tasks').doc(taskId).update({ archived: true })
   },
 
-  addTask(task) {
+  addTask(task: TaskI) {
     return firebase
       .firestore()
       .collection('tasks')
       .add({ ...task })
   },
 
-  deleteTask(docId) {
+  deleteTask(docId: string) {
     return firebase.firestore().collection('tasks').doc(docId).delete()
   },
 }

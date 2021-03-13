@@ -18,7 +18,7 @@ export const SET_ALL_PROJECTS = 'SET_ALL_PROJECTS'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const DELETE_PROJECT = 'DELETE_PROJECT'
 
-const initialState: ProjectsI = {
+export const initialState: ProjectsI = {
   activeProject: INBOX,
   allProjects: [],
 }

@@ -3,7 +3,7 @@ import { authReducer } from './auth/auth-reducer'
 import { projectsReducer } from './projects/projects-reducer'
 import { tasksReducer } from './tasks/tasks-reducer'
 
-const reducer = {
+export const reducer = {
   auth: authReducer,
   projects: projectsReducer,
   tasks: tasksReducer,

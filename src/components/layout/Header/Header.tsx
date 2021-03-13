@@ -1,16 +1,16 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/all'
+import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/vsc'
 import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
 import { signOutTC } from '../../../redux/auth/auth-reducer'
 
-interface HeaderPropsI {
-  darkMode: boolean
-  setDarkMode: (darkMode: boolean) => void
-}
+// interface HeaderPropsI {
+// darkMode: boolean
+// setDarkMode: (darkMode: boolean) => void
+// }
 
-export const Header: React.FC<HeaderPropsI> = ({ darkMode, setDarkMode }) => {
+export const Header: React.FC = () => {
   const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState<boolean>(false)
 

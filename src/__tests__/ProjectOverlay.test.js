@@ -1,13 +1,14 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
-import { useProjectsValue } from '../context'
+import { getAllProjects } from '../redux/projects/projects-selectors'
+import { renderWithRedux } from './utils/renderWithRedux'
 
-jest.mock('../context', () => ({
-  useProjectsValue: jest.fn(() => ({
-    projects: [{ name: '🔧 Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }],
-  })),
+const projects = [{ name: 'Renovation', projectId: '2', userId: 'RM6FGvtHAaIDJNas' }]
+
+jest.mock('../redux/projects/projects-selectors', () => ({
+  getAllProjects: jest.fn(),
 }))
 
 describe('< ProjectOverlay />', () => {
@@ -16,30 +17,30 @@ describe('< ProjectOverlay />', () => {
   })
 
   describe('Success', () => {
-    it('renders the project overlay and calls setShowProjectOverlay using onClick', () => {
+    test('renders the project overlay and calls setShowProjectOverlay using onClick', () => {
       const showProjectOverlay = true
       const setProject = jest.fn()
       const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
-
-      const { getByTestId } = render(
+      getAllProjects.mockReturnValue(projects)
+      const { getByTestId, findByTestId } = renderWithRedux(
         <ProjectOverlay
           showProjectOverlay
           setShowProjectOverlay={setShowProjectOverlay}
           setProject={setProject}
         />
       )
-
-      expect(getByTestId('project-overlay')).toBeTruthy()
+      expect(findByTestId('project-overlay')).toBeTruthy()
       userEvent.click(getByTestId('project-overlay-action'))
       expect(setProject).toHaveBeenCalled()
     })
 
-    it('renders the project overlay and calls setShowProjectOverlay using onKeyDown Enter', () => {
+    test('renders the project overlay and calls setShowProjectOverlay using onKeyDown Enter', () => {
       const showProjectOverlay = true
       const setProject = jest.fn()
       const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
+      getAllProjects.mockReturnValue(projects)
 
-      const { getByTestId } = render(
+      const { getByTestId, findByTestId } = renderWithRedux(
         <ProjectOverlay
           showProjectOverlay
           setShowProjectOverlay={setShowProjectOverlay}
@@ -47,7 +48,7 @@ describe('< ProjectOverlay />', () => {
         />
       )
 
-      expect(getByTestId('project-overlay')).toBeTruthy()
+      expect(findByTestId('project-overlay')).toBeTruthy()
       fireEvent.keyDown(getByTestId('project-overlay-action'), {
         key: 'Enter',
         code: 13,
@@ -55,12 +56,13 @@ describe('< ProjectOverlay />', () => {
       expect(setProject).toHaveBeenCalled()
     })
 
-    it('renders the project overlay and calls setShowProjectOverlay using wrong onKeyDown', () => {
+    test('renders the project overlay and calls setShowProjectOverlay using wrong onKeyDown', () => {
       const showProjectOverlay = true
       const setProject = jest.fn()
       const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
+      getAllProjects.mockReturnValue(projects)
 
-      const { getByTestId } = render(
+      const { getByTestId } = renderWithRedux(
         <ProjectOverlay
           showProjectOverlay
           setShowProjectOverlay={setShowProjectOverlay}
@@ -76,12 +78,19 @@ describe('< ProjectOverlay />', () => {
   })
 
   describe('Failure', () => {
-    it('does not render the project overlay with any projects', () => {
-      useProjectsValue.mockImplementation(() => ({
-        projects: [],
-      }))
+    test('does not render the project overlay with any projects', () => {
+      const showProjectOverlay = true
+      const setProject = jest.fn()
+      const setShowProjectOverlay = jest.fn(() => !showProjectOverlay)
 
-      const { getByTestId, queryByTestId } = render(<ProjectOverlay showProjectOverlay />)
+      getAllProjects.mockImplementation(() => [])
+      const { getByTestId, queryByTestId } = renderWithRedux(
+        <ProjectOverlay
+          showProjectOverlay
+          setShowProjectOverlay={setShowProjectOverlay}
+          setProject={setProject}
+        />
+      )
       expect(getByTestId('project-overlay')).toBeTruthy()
       expect(queryByTestId('project-overlay-action')).toBeFalsy()
     })
