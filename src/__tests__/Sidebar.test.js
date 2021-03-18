@@ -11,20 +11,20 @@ jest.mock('react-router-dom', () => ({
 }))
 
 describe('< Sidebar />', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks()
   })
 
   describe('Success', () => {
-    test('renders the < Sidebar />', () => {
+    test('renders the < Sidebar />', async () => {
       const { queryByTestId } = renderWithRedux(<Sidebar userId={userId} />)
-      expect(queryByTestId('sidebar')).toBeTruthy()
+      expect(await queryByTestId('sidebar')).toBeTruthy()
     })
 
-    test('changes the active project to Inbox in collated tasks using onClick', () => {
+    test('changes the active project to Inbox in collated tasks using onClick', async () => {
       const { queryByTestId } = renderWithRedux(<Sidebar userId={userId} />)
-      expect(queryByTestId('sidebar')).toBeTruthy()
-      userEvent.click(queryByTestId('inbox-action'))
+      expect(await queryByTestId('sidebar')).toBeTruthy()
+      await userEvent.click(queryByTestId('inbox-action'))
       expect(queryByTestId('inbox').classList.contains('active')).toBeTruthy()
       expect(queryByTestId('today').classList.contains('active')).toBeFalsy()
       expect(queryByTestId('next_7').classList.contains('active')).toBeFalsy()

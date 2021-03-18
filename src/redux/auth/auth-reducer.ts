@@ -60,7 +60,7 @@ export const signOutUser = ({ userId, userEmail, userName }: UserI): signOutUser
 /* ThunkCreators */
 export const authMeTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
   const userFromLocalStorage: string | null = localStorage.getItem('authUser')
-  if (typeof userFromLocalStorage === 'string') {
+  if (typeof userFromLocalStorage === 'string' && userFromLocalStorage.length > 0) {
     const userFromLocalStorageParse: UserI = JSON.parse(userFromLocalStorage)
     dispatch(setAuthUserData(userFromLocalStorageParse))
   } else {

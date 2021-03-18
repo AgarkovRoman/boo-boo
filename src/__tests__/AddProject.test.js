@@ -3,25 +3,6 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AddProject } from '../components/AddProject/AddProject'
 
-// jest.mock('../context', () => ({
-//   useSelectedProjectValue: jest.fn(),
-//   useProjectsValue: jest.fn(() => ({
-//     projects: [
-//       {
-//         name: '🔧 Renovation',
-//         projectId: '2',
-//         userId: 'RM6FGvtHAMviIDJNas',
-//       },
-//       {
-//         name: '💻 Work',
-//         projectId: '1',
-//         userId: 'RM6FGvtHAMviIDJNas',
-//       },
-//     ],
-//     setProjects: jest.fn(),
-//   })),
-// }))
-
 jest.mock('react-redux', () => ({
   // ...jest.requireActual('react-redux'),
   useSelector: jest.fn((fn) => fn()),
