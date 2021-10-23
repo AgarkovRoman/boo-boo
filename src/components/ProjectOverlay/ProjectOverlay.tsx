@@ -23,17 +23,17 @@ export const ProjectOverlay: React.FC<ProjectOverlayPropsI> = ({
         <div className={classes.projectOverlay} data-testid="project-overlay">
           <ul className={classes.overlayList}>
             {projects.map((project) => (
-              <li className={classes.listItem} key={project.projectId}>
+              <li className={classes.listItem} key={project.id}>
                 <div
                   className={classes.listElement}
                   data-testid="project-overlay-action"
                   onClick={() => {
-                    setProject(project.projectId)
+                    setProject(project.id)
                     setShowProjectOverlay(false)
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      setProject(project.projectId)
+                      setProject(project.id)
                       setShowProjectOverlay(false)
                     }
                   }}

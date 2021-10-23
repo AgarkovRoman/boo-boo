@@ -1,14 +1,30 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { firebase } from '../firebase'
 import { TaskI } from '../redux/tasks/tasks-types'
-import { ProjectI } from '../redux/projects/projects-types'
+import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
 const axiosInstance = axios.create({
   // baseURL: 'https://boo-boo-server.herokuapp.com/api/',
   baseURL: 'http://localhost:8080/api/',
-  headers: { 'Access-Control-Allow-Origin': '*' },
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 })
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    if (config.url?.includes('/auth/login' || '/auth/registration')) {
+      return config
+    }
+    const authUser = JSON.parse(localStorage.getItem('authUser') || '')
+    if (config.headers) {
+      config.headers.Authorization = authUser ? `Bearer ${authUser?.accessToken}` : ''
+      return config
+    }
+  },
+  (error) => Promise.reject(error)
+)
 
 export const authAPI = {
   // authMe(callback: (user: any) => void) {
@@ -49,24 +65,25 @@ export const authAPI = {
 }
 
 export const projectsAPI = {
-  getAllProjectsById(userId: string) {
-    return firebase
-      .firestore()
-      .collection('projects')
-      .where('userId', '==', userId)
-      .orderBy('projectId')
-      .get()
+  getAllProjectsById() {
+    return axiosInstance
+      .get<ProjectI[]>('/project/byUser')
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  addProject(project: ProjectI) {
-    return firebase
-      .firestore()
-      .collection('projects')
-      .add({ ...project })
+  addProject(project: CreateProjectI) {
+    return axiosInstance
+      .post('/project/create', project)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  deleteProject(docId: string) {
-    return firebase.firestore().collection('projects').doc(docId).delete()
+  deleteProject(id: string) {
+    return axiosInstance
+      .delete<DeleteProjectI>(`/project/${id}`)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 }
 

@@ -27,7 +27,7 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
 
   const dispatch = useDispatch()
   // Get all projects & tasks from back and set it in redux
-  const getAllProjects = useCallback(() => dispatch(getAllProjectTC(userId)), [dispatch, userId])
+  const getAllProjects = useCallback(() => dispatch(getAllProjectTC()), [dispatch, userId])
   const getAllTasks = useCallback(() => dispatch(getAllTasksTC(userId)), [dispatch, userId])
 
   const selectProject = useCallback((projectId) => dispatch(setActiveProject(projectId)), [

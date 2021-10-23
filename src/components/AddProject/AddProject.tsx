@@ -12,15 +12,14 @@ interface AddProjectPropsI {
   userId: string
 }
 
-export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false, userId }) => {
+export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false }) => {
   const [show, setShow] = useState<boolean>(shouldShow)
   const [project, setProject] = useState<ProjectI>({
     name: '',
-    userId,
-    projectId: '',
+    description: '',
+    id: '',
   })
   const dispatch = useDispatch()
-  const projectId = uuid()
 
   const addProject = useCallback((item) => dispatch(addProjectTC(item)), [dispatch])
 
@@ -68,7 +67,7 @@ export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false, use
             <Button
               color="primary"
               label="Add Project"
-              onClick={() => handleAddProject({ ...project, projectId })}
+              onClick={() => handleAddProject(project)}
               dataTestId="add-project-submit"
             />
             <Button
