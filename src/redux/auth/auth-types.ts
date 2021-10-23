@@ -14,10 +14,12 @@ export interface UserI {
   userName: string
 }
 
-export interface FirebaseUserI {
-  uid: string
-  email: string
-  displayName: string
+export interface UserIServer {
+  id: string
+  email?: string
+  name?: string
+  accessToken: string
+  refreshToken: string
 }
 
 export type setAuthUserDataActionType = {

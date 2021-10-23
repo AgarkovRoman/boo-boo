@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux'
 import { AppRouter } from './routes/AppRouter'
 import { authMeTC } from './redux/auth/auth-reducer'
 
-export const App: React.FC = () => {
+export const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(authMeTC())
-  })
+  }, [dispatch])
 
   return <AppRouter />
 }

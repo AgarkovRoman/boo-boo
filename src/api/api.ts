@@ -1,31 +1,50 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import axios from 'axios'
 import { firebase } from '../firebase'
 import { TaskI } from '../redux/tasks/tasks-types'
 import { ProjectI } from '../redux/projects/projects-types'
-import { UserI } from '../redux/auth/auth-types'
+
+const axiosInstance = axios.create({
+  // baseURL: 'https://boo-boo-server.herokuapp.com/api/',
+  baseURL: 'http://localhost:8080/api/',
+  headers: { 'Access-Control-Allow-Origin': '*' },
+})
 
 export const authAPI = {
-  authMe(callback: (user: any) => void) {
-    return firebase.auth().onAuthStateChanged(callback)
+  // authMe(callback: (user: any) => void) {
+  //   return firebase.auth().onAuthStateChanged(callback)
+  // },
+
+  signIn(login: string, password: string) {
+    const data = {
+      login,
+      password,
+    }
+    return axiosInstance
+      .post('/auth/login', data)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  signIn(email: string, password: string) {
-    return firebase.auth().signInWithEmailAndPassword(email, password)
+  signUp(login: string, password: string) {
+    const data = {
+      login,
+      password,
+    }
+    return axiosInstance
+      .post('/auth/registration/', data)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  signOut() {
-    return firebase.auth().signOut()
-  },
-
-  addUser(user: UserI) {
-    return firebase
-      .firestore()
-      .collection('users')
-      .add({ ...user })
-  },
-
-  signUp(email: string, password: string, name: string) {
-    return firebase.auth().createUserWithEmailAndPassword(email, password)
+  signOut(token: string) {
+    const data = {
+      token,
+    }
+    return axiosInstance
+      .post('/auth/logout/', data)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 }
 
