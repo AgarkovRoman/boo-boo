@@ -4,8 +4,7 @@ import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
 const axiosInstance = axios.create({
-  // baseURL: 'https://boo-boo-server.herokuapp.com/api/',
-  baseURL: 'http://localhost:8080/api/',
+  baseURL: 'https://boo-boo-server.herokuapp.com/api/',
   headers: {
     'Access-Control-Allow-Origin': '*',
   },
