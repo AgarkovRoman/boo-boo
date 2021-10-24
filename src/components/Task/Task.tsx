@@ -23,7 +23,6 @@ export const Task: React.FC<TaskPropsI> = ({
   date,
   projectId,
 }) => {
-  debugger
   const [isModalDisplay, setIsModalDisplay] = useState(false)
 
   const dispatch = useDispatch()
