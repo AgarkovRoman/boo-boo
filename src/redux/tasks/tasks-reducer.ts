@@ -4,6 +4,7 @@ import { tasksAPI } from '../../api/api'
 import {
   addTaskActionCreatorI,
   archivedTaskActionCreatorI,
+  CreateTaskI,
   deleteTaskActionCreatorI,
   setAllTasksActionCreatorI,
   TaskI,
@@ -46,7 +47,7 @@ export const tasksReducer = (state = initialState, action: TasksActionCreatorTyp
       return { ...state, allTasks: archivedTaskHandler(state.allTasks, payload) } as TasksI
     }
     case DELETE_TASK: {
-      return { ...state, allTasks: state.allTasks.filter((task) => task.docId !== payload) }
+      return { ...state, allTasks: state.allTasks.filter((task) => task.id !== payload) }
     }
     default:
       return state
@@ -65,53 +66,52 @@ export const archivedTask = (taskId: string): archivedTaskActionCreatorI => ({
   payload: taskId,
 })
 
+// export const updateTask = (taskId: string): archivedTaskActionCreatorI => ({
+//   type: ARCHIVED_TASK,
+//   payload: taskId,
+// })
+
 export const deleteTask = (taskId: string): deleteTaskActionCreatorI => ({
   type: DELETE_TASK,
   payload: taskId,
 })
 
-export const getAllTasksTC = (
-  userId: string
-): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
-  await tasksAPI.getAllTasksById(userId).then((snapshot) => {
-    const allTasks = snapshot.docs.map((task) => {
-      const data = task.data()
-      return {
-        task: data.task,
-        createDate: data.createDate,
-        date: data.date,
-        archived: data.archived,
-        userId: data.userId,
-        projectId: data.projectId,
-        id: task.id,
-        docId: task.id,
-      }
-    })
-
-    const sortTasks = allTasks.sort((a, b) => a.createDate - b.createDate)
-    dispatch(setAllTasks(sortTasks))
-  })
-}
-
-export const addTaskTC = (task: TaskI): ThunkAction<void, TasksStateI, unknown, Action> => async (
+export const getAllTasksTC = (): ThunkAction<void, TasksStateI, unknown, Action> => async (
   dispatch
 ) => {
-  dispatch(addTask(task))
-  await tasksAPI.addTask(task).then(() => {
-    dispatch(getAllTasksTC(task.userId))
+  await tasksAPI.getAllTasksById().then((tasks) => (tasks ? dispatch(setAllTasks(tasks)) : null))
+}
+
+export const addTaskTC = (
+  task: CreateTaskI
+): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
+  await tasksAPI.addTask(task).then((res) => {
+    if (res) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const { id, name, archived, date, description, projectId, userId } = res
+      dispatch(addTask({ id, name, archived, date, description, projectId, userId }))
+    }
   })
 }
 
 export const archiveTaskTC = (
-  taskId: string
+  taskId: string,
+  task: CreateTaskI
 ): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
-  await tasksAPI.archivedTasksById(taskId)
-  dispatch(archivedTask(taskId))
+  debugger
+  await tasksAPI.updateTaskById(taskId, task).then(() => dispatch(archivedTask(taskId)))
 }
+
+// export const updateTaskTC = (
+//   taskId: string,
+//   task: CreateTaskI
+// ): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
+//   await tasksAPI.updateTaskById(taskId, task).then(() => dispatch(updateTask(taskId)))
+// }
 
 export const deleteTaskTC = (
   taskId: string
 ): ThunkAction<void, TasksStateI, unknown, Action> => async (dispatch) => {
-  await tasksAPI.deleteTask(taskId)
-  dispatch(deleteTask(taskId))
+  await tasksAPI.deleteTask(taskId).then(() => dispatch(deleteTask(taskId)))
 }

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import axios, { AxiosResponse } from 'axios'
-import { firebase } from '../firebase'
-import { TaskI } from '../redux/tasks/tasks-types'
+import axios from 'axios'
+import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
 const axiosInstance = axios.create({
@@ -11,6 +10,20 @@ const axiosInstance = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 })
+
+// const authInterceptor = axiosInstance.interceptors.request.use(
+//   (config) => {
+//     if (config.url?.includes('/auth/login' || '/auth/registration')) {
+//       return config
+//     }
+//     const authUser = JSON.parse(localStorage.getItem('authUser') || '')
+//     if (config.headers) {
+//       config.headers.Authorization = authUser ? `Bearer ${authUser?.accessToken}` : ''
+//       return config
+//     }
+//   },
+//   (error) => Promise.reject(error)
+// )
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -25,6 +38,8 @@ axiosInstance.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 )
+
+// const deleteIntercepter = () =>  axiosInstance.interceptors.request.eject(authInterceptor)
 
 export const authAPI = {
   // authMe(callback: (user: any) => void) {
@@ -88,29 +103,31 @@ export const projectsAPI = {
 }
 
 export const tasksAPI = {
-  getAllTasksById(userId: string) {
-    return (
-      firebase
-        .firestore()
-        .collection('tasks')
-        .where('userId', '==', userId)
-        // .orderBy('projectId')
-        .get()
-    )
+  addTask(task: CreateTaskI) {
+    return axiosInstance
+      .post('/task/create', task)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  archivedTasksById(taskId: string) {
-    return firebase.firestore().collection('tasks').doc(taskId).update({ archived: true })
+  getAllTasksById() {
+    return axiosInstance
+      .get<TaskI[]>('/task/byUser')
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  addTask(task: TaskI) {
-    return firebase
-      .firestore()
-      .collection('tasks')
-      .add({ ...task })
+  updateTaskById(taskId: string, task: CreateTaskI) {
+    return axiosInstance
+      .patch(`/task/${taskId}`, task)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 
-  deleteTask(docId: string) {
-    return firebase.firestore().collection('tasks').doc(docId).delete()
+  deleteTask(id: string) {
+    return axiosInstance
+      .delete<DeleteTaskI>(`/task/${id}`)
+      .then((res) => res.data)
+      .catch((e) => console.log(e))
   },
 }

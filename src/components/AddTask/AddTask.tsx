@@ -35,7 +35,6 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
 
   const dispatch = useDispatch()
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
-  const userId = useSelector((state: AuthStateI) => getUserId(state))
   const addTaskHandler = useCallback((task) => dispatch(addTaskTC(task)), [dispatch])
 
   const getTaskObject = () => {
@@ -52,12 +51,11 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
       taskName &&
       projectId &&
       addTaskHandler({
+        name: taskName,
+        description: '',
+        date: collatedDate || taskDate,
         archived: false,
         projectId,
-        createDate: Date.now(),
-        task: taskName,
-        date: collatedDate || taskDate,
-        userId,
       })
     )
   }

@@ -51,7 +51,15 @@ export const Tasks: React.FC = () => {
       {selectedProjectTasks.length > 0 && (
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
-            <Task key={uuid()} name={task.task} id={task.id} />
+            <Task
+              key={uuid()}
+              id={task.id}
+              name={task.name}
+              archived={task.archived}
+              projectId={selectedProject}
+              date={task.date}
+              description={task.description}
+            />
           ))}
         </ul>
       )}

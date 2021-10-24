@@ -1,30 +1,29 @@
-import React, { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 import { VscCheck } from 'react-icons/vsc'
 import classes from './Checkbox.module.scss'
-import { CheckboxPropsI } from './index'
-import { archiveTaskTC } from '../../../redux/tasks/tasks-reducer'
 
-export const Checkbox: React.FC<CheckboxPropsI> = ({ id, taskDesc }) => {
+type CheckboxPropsI = {
+  archiveTask: () => void
+  name: string
+}
+export const Checkbox: React.FC<CheckboxPropsI> = ({ name, archiveTask }) => {
   const [mouseEnter, setMouseEnter] = useState<boolean>(false)
   const [checked, setChecked] = useState<boolean>(false)
-  const dispatch = useDispatch()
-  const archiveTask = useCallback((taskId) => dispatch(archiveTaskTC(taskId)), [dispatch])
 
-  const handleArchiveTask = (taskId: string) => {
+  const handleArchiveTask = () => {
     setChecked(true)
-    setTimeout(() => archiveTask(taskId), 300)
+    setTimeout(() => archiveTask(), 300)
   }
 
   return (
     <div
       className={classes.checkboxHolder}
       data-testid="checkbox-action"
-      onClick={() => handleArchiveTask(id)}
+      onClick={() => handleArchiveTask()}
       onKeyDown={(e) => {
-        if (e.key === 'Enter') handleArchiveTask(id)
+        if (e.key === 'Enter') handleArchiveTask()
       }}
-      aria-label={`Mark ${taskDesc} as done?`}
+      aria-label={`Mark ${name} as done?`}
       role="button"
       tabIndex={0}
     >

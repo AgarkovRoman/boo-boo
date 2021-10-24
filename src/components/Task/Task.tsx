@@ -3,25 +3,42 @@ import { VscKebabVertical } from 'react-icons/vsc'
 import { useDispatch } from 'react-redux'
 import classes from './Task.module.scss'
 import { Checkbox } from '../UI/Checkbox/Checkbox'
-import { deleteTaskTC } from '../../redux/tasks/tasks-reducer'
+import { archiveTaskTC, deleteTaskTC } from '../../redux/tasks/tasks-reducer'
 import { SmallModalWindow } from '../UI/SmallModalWindow/SmallModalWindow'
 
 interface TaskPropsI {
   name: string
   id: string
+  projectId: string
+  archived: boolean
+  date: string
+  description: string
 }
 
-export const Task: React.FC<TaskPropsI> = ({ name, id }) => {
+export const Task: React.FC<TaskPropsI> = ({
+  id,
+  name,
+  description,
+  archived,
+  date,
+  projectId,
+}) => {
+  debugger
   const [isModalDisplay, setIsModalDisplay] = useState(false)
 
   const dispatch = useDispatch()
   const deleteTask = useCallback((taskId: string) => dispatch(deleteTaskTC(taskId)), [dispatch])
 
+  const archiveTask = useCallback(
+    () => dispatch(archiveTaskTC(id, { name, description, archived, date, projectId })),
+    [dispatch, id, name, description, archived, date, projectId]
+  )
+
   return (
     <>
       <li data-testid="task">
         <div className={classes.taskBody}>
-          <Checkbox id={id} taskDesc={name} />
+          <Checkbox name={name} archiveTask={archiveTask} />
           <span className={classes.name}>{name}</span>
         </div>
         <div
