@@ -26,7 +26,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    if (config.url?.includes('/auth/login' || '/auth/registration')) {
+    if (
+      typeof config.url === 'string' &&
+      (config.url.includes('/auth/login') || config.url.includes('/auth/registration'))
+    ) {
       return config
     }
     const authUser = JSON.parse(localStorage.getItem('authUser') || '')
@@ -62,7 +65,7 @@ export const authAPI = {
       password,
     }
     return axiosInstance
-      .post('/auth/registration/', data)
+      .post('/auth/registration', data)
       .then((res) => res.data)
       .catch((e) => console.log(e))
   },

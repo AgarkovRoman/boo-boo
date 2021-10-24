@@ -95,10 +95,13 @@ export const signUpTC = (
   login: string,
   password: string
 ): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  await authAPI.signUp(login, password).then((authUser) => {
-    localStorage.setItem('authUser', JSON.stringify(authUser))
-    dispatch(authMeTC())
-  })
+  await authAPI
+    .signUp(login, password)
+    .then((authUser) => {
+      localStorage.setItem('authUser', JSON.stringify(authUser))
+      dispatch(authMeTC())
+    })
+    .catch((error) => console.log(error))
 }
 
 export const signOutTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
