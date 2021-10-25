@@ -1,15 +1,18 @@
 import { ADD_TASK, ARCHIVED_TASK, DELETE_TASK, SET_TASKS } from './tasks-reducer'
 
 export interface TaskI {
-  task: string
-  createDate: number
-  date: string
-  archived: boolean
-  userId: string
-  projectId: string
   id: string
-  docId: string
+  name: string
+  archived: boolean
+  date: string
+  description: string
+  projectId: string
+  userId: string
 }
+
+export type CreateTaskI = Pick<TaskI, 'name' | 'description' | 'archived' | 'date' | 'projectId'>
+
+export type DeleteTaskI = { success: boolean }
 
 export interface TasksI {
   allTasks: Array<TaskI>

@@ -10,7 +10,7 @@ import { signOutTC } from '../../../redux/auth/auth-reducer'
 // setDarkMode: (darkMode: boolean) => void
 // }
 
-export const Header: React.FC = () => {
+export const Header = () => {
   const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState<boolean>(false)
 

@@ -9,22 +9,22 @@ import { signInTC } from '../../../redux/auth/auth-reducer'
 import { Logo } from '../../UI/Logo/Logo'
 
 type FormData = {
-  Email: string
-  Password: string
+  email: string
+  password: string
 }
 
-export const Header: React.FC = () => (
+export const Header = () => (
   <header className={mainClasses.header} data-testid="header">
     <Logo />
   </header>
 )
 
-export const SignIn: React.FC = () => {
+export const SignIn = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
   const [error, setError] = useState<string>('')
 
   const dispatch = useDispatch()
-  const onSubmit = useCallback((data: FormData) => dispatch(signInTC(data.Email, data.Password)), [
+  const onSubmit = useCallback((data: FormData) => dispatch(signInTC(data.email, data.password)), [
     dispatch,
   ])
 
@@ -47,9 +47,10 @@ export const SignIn: React.FC = () => {
               <label className={mainClasses.label}>
                 Email
                 <input
+                  autoComplete="on"
                   type="text"
                   placeholder="Email"
-                  name="Email"
+                  name="email"
                   ref={register({ required: true, pattern: /^\S+@\S+$/i })}
                 />
                 {/* {errors.Email && <p>Require field</p>} */}
@@ -58,9 +59,10 @@ export const SignIn: React.FC = () => {
               <label className={mainClasses.label}>
                 Password
                 <input
+                  autoComplete="on"
                   type="password"
                   placeholder="Password"
-                  name="Password"
+                  name="password"
                   ref={register({ required: true, minLength: 6 })}
                 />
                 {/* {errors.Password && <p>Require field</p>} */}

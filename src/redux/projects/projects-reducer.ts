@@ -11,6 +11,7 @@ import {
   deleteProjectActionCreatorI,
   ProjectsStateI,
   ProjectsActionCreatorsType,
+  CreateProjectI,
 } from './projects-types'
 
 export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT'
@@ -51,7 +52,7 @@ export const projectsReducer = (
     case DELETE_PROJECT: {
       return {
         ...state,
-        allProjects: state.allProjects.filter((project) => project.docId !== payload),
+        allProjects: state.allProjects.filter((project) => project.id !== payload),
       } as ProjectsI
     }
     default:
@@ -71,43 +72,39 @@ export const addProject = (project: ProjectI): setAddProjectActionCreatorI => ({
   type: ADD_PROJECT,
   payload: project,
 })
-export const deleteProject = (docId: string): deleteProjectActionCreatorI => ({
+export const deleteProject = (id: string): deleteProjectActionCreatorI => ({
   type: DELETE_PROJECT,
-  payload: docId,
+  payload: id,
 })
 
-export const getAllProjectTC = (
-  userId: string
-): ThunkAction<void, ProjectsStateI, unknown, Action> => async (dispatch) => {
-  await projectsAPI.getAllProjectsById(userId).then((snapshot) => {
-    const allProjects: Array<ProjectI> = snapshot.docs.map((project) => {
-      const data = project.data()
-      return {
-        userId: data.userId,
-        projectId: project.id,
-        name: data.name,
-        docId: project.id,
-      }
-    })
-    dispatch(setAllProjects(allProjects))
-  })
+export const getAllProjectTC = (): ThunkAction<void, ProjectsStateI, unknown, Action> => async (
+  dispatch
+) => {
+  await projectsAPI
+    .getAllProjectsById()
+    .then((allProjects) => (allProjects ? dispatch(setAllProjects(allProjects)) : null))
+    .catch((e) => console.log(e))
 }
 
 export const addProjectTC = (
-  project: ProjectI
+  project: CreateProjectI
 ): ThunkAction<void, ProjectsStateI, unknown, Action> => async (dispatch) => {
-  dispatch(addProject(project))
-  await projectsAPI.addProject({ ...project }).then(() => {
-    dispatch(getAllProjectTC(project.userId))
+  await projectsAPI.addProject(project).then((res) => {
+    if (res) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const { id, name, description } = res
+      dispatch(addProject({ id, name, description }))
+    }
   })
 }
 
 export const deleteProjectTC = (
-  docId: string,
-  userId: string
+  id: string
 ): ThunkAction<void, ProjectsStateI, unknown, Action> => async (dispatch) => {
-  dispatch(deleteProject(docId))
-  await projectsAPI.deleteProject(docId).then(() => {
-    dispatch(getAllProjectTC(userId))
+  await projectsAPI.deleteProject(id).then((res) => {
+    if (res && res.success) {
+      dispatch(deleteProject(id))
+    }
   })
 }

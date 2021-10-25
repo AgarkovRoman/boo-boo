@@ -20,9 +20,7 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
 
   const dispatch = useDispatch()
   const selectProject = useCallback((id) => dispatch(setActiveProject(id)), [dispatch])
-  const deleteProject = useCallback((id, userId) => dispatch(deleteProjectTC(id, userId)), [
-    dispatch,
-  ])
+  const deleteProject = useCallback((id) => dispatch(deleteProjectTC(id)), [dispatch])
 
   const toggleDeleteModal = () => {
     setShowConfirm(!showConfirm)
@@ -33,10 +31,8 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
   return (
     <>
       <li
-        key={project.projectId}
-        className={`${classes.project} ${
-          activeProject === project.projectId ? classes.active : ''
-        }`}
+        key={project.id}
+        className={`${classes.project} ${activeProject === project.id ? classes.active : ''}`}
         data-testid="project-action-parent"
       >
         <div className={classes.projectAction}>
@@ -45,14 +41,13 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
             data-testid="project-action"
             aria-label={`Select ${project.name} as the task project`}
             role="button"
-            data-doc-id={project.docId}
             tabIndex={0}
             onClick={() => {
-              selectProject(project.projectId)
+              selectProject(project.id)
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                selectProject(project.projectId)
+                selectProject(project.id)
               }
             }}
           >
@@ -76,7 +71,7 @@ export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }
                 <SmallModalWindow
                   description="Are you sure you want to delete this project?"
                   deleteTask={() => {
-                    deleteProject(project.docId, project.userId)
+                    deleteProject(project.id)
                     selectProject(INBOX)
                   }}
                   onClose={() => setShowConfirm(false)}

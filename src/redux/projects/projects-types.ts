@@ -6,11 +6,14 @@ import {
 } from './projects-reducer'
 
 export interface ProjectI {
-  userId: string
+  id: string
   name: string
-  projectId: string
-  docId?: string
+  description: string
 }
+
+export type CreateProjectI = Pick<ProjectI, 'name' | 'description'>
+
+export type DeleteProjectI = { success: boolean }
 
 export interface ProjectsStateI {
   projects: ProjectsI

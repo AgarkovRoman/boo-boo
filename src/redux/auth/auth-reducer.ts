@@ -5,10 +5,10 @@ import {
   AuthActionCreatorsType,
   AuthI,
   AuthStateI,
-  FirebaseUserI,
   setAuthUserDataActionType,
   signOutUserActionType,
   UserI,
+  UserIServer,
 } from './auth-types'
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -42,7 +42,6 @@ export const authReducer = (state = initialState, action: AuthActionCreatorsType
 }
 
 /* ActionCreators */
-
 export const setAuthUserData = ({
   userId,
   userEmail,
@@ -60,61 +59,64 @@ export const signOutUser = ({ userId, userEmail, userName }: UserI): signOutUser
 /* ThunkCreators */
 export const authMeTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
   const userFromLocalStorage: string | null = localStorage.getItem('authUser')
-  if (typeof userFromLocalStorage === 'string') {
-    const userFromLocalStorageParse: UserI = JSON.parse(userFromLocalStorage)
-    dispatch(setAuthUserData(userFromLocalStorageParse))
-  } else {
-    await authAPI.authMe((user: FirebaseUserI) => {
-      if (user) {
-        const { uid, email, displayName }: FirebaseUserI = user
-        const authUser = { userId: uid, userEmail: email, userName: displayName }
-        dispatch(setAuthUserData(authUser))
-        localStorage.setItem('authUser', JSON.stringify(authUser))
-        return authUser
-      }
-      return { userId: '', userEmail: '', userName: '' }
-    })
+  if (typeof userFromLocalStorage === 'string' && userFromLocalStorage.length > 0) {
+    const userFromLocalStorageParse: UserIServer = JSON.parse(userFromLocalStorage)
+    const { id: userId, email: userEmail = '', name: userName = '' } = userFromLocalStorageParse
+    dispatch(setAuthUserData({ userId, userEmail, userName }))
   }
+  // else {
+  //   await authAPI.authMe((user: FirebaseUserI) => {
+  //     if (user) {
+  //       const { uid, email, displayName }: FirebaseUserI = user
+  //       const authUser = { userId: uid, userEmail: email, userName: displayName }
+  //       dispatch(setAuthUserData(authUser))
+  //       localStorage.setItem('authUser', JSON.stringify(authUser))
+  //       return authUser
+  //     }
+  //     return { userId: '', userEmail: '', userName: '' }
+  //   })
+  // }
 }
 
 export const signInTC = (
-  email: string,
+  login: string,
   password: string
 ): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
   await authAPI
-    .signIn(email, password)
-    .then(() => {
+    .signIn(login, password)
+    .then((authUser) => {
+      localStorage.setItem('authUser', JSON.stringify(authUser))
       dispatch(authMeTC())
     })
     .catch((error) => console.log(error))
 }
 
 export const signUpTC = (
-  email: string,
-  password: string,
-  name: string
+  login: string,
+  password: string
 ): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
   await authAPI
-    .signUp(email, password, name)
-    .then((result) => {
-      authAPI.addUser({
-        userEmail: email,
-        userName: name,
-        userId: result.user ? result.user.uid : '',
-      })
-      return result.user?.updateProfile({ displayName: name })
-    })
-    .then(() => {
+    .signUp(login, password)
+    .then((authUser) => {
+      localStorage.setItem('authUser', JSON.stringify(authUser))
       dispatch(authMeTC())
     })
+    .catch((error) => console.log(error))
 }
 
 export const signOutTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  await authAPI
-    .signOut()
-    .then(() => {
-      dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
-      localStorage.removeItem('authUser')
-    })
-    .catch((error) => console.log(error))
+  const userFromLocalStorage: string | null = localStorage.getItem('authUser')
+  if (typeof userFromLocalStorage === 'string' && userFromLocalStorage.length > 0) {
+    const userFromLocalStorageParse: UserIServer = JSON.parse(userFromLocalStorage)
+
+    await authAPI
+      .signOut(userFromLocalStorageParse.refreshToken)
+      .then(() => {
+        dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
+        localStorage.removeItem('authUser')
+      })
+      .catch((error) => console.log(error))
+  } else {
+    console.log(`Sorry, we can't logout you, try again later :(`)
+  }
 }
