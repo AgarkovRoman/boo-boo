@@ -15,11 +15,13 @@ type FormData = {
   // RepeatPassword: string
 }
 
-export const SignUp: React.FC = () => {
+export const SignUp = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
-  const [error, setError] = useState<string>('')
+  const [
+    error,
+    // setError
+  ] = useState<string>('')
   const dispatch = useDispatch()
-
   const onSubmit = useCallback((data: FormData) => dispatch(signUpTC(data.Email, data.Password)), [
     dispatch,
   ])

@@ -4,6 +4,7 @@ import * as ROUTES from '../constants/routes'
 
 const isUserExist = (user) => user.userId && user.userId.length > 0
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
   return (
     <Route
@@ -21,6 +22,7 @@ export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function ProtectedRoute({ user, children, ...rest }) {
   return (
     <Route

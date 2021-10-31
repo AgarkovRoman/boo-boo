@@ -5,11 +5,6 @@ import classes from './Header.module.scss'
 import { AddTask } from '../../AddTask/AddTask'
 import { signOutTC } from '../../../redux/auth/auth-reducer'
 
-// interface HeaderPropsI {
-// darkMode: boolean
-// setDarkMode: (darkMode: boolean) => void
-// }
-
 export const Header = () => {
   const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState<boolean>(false)

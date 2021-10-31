@@ -19,5 +19,3 @@ export const getCollatedTitle = (projects: Array<collatedTaskI>, key: string): s
 
 export const collatedTasksExist = (selectedProject: string): collatedTaskI | undefined =>
   collatedTasks.find((task) => task.key === selectedProject)
-
-export const getUser = () => JSON.parse(<string>localStorage.getItem('authUser'))

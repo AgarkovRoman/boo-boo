@@ -1,8 +1,15 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, RefObject } from 'react'
 
-export const useOutsideClick = (ref: any, display: boolean, callback: () => void) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const useOutsideClick = (
+  ref: RefObject<HTMLDivElement>,
+  display: boolean,
+  callback: () => void
+) => {
   const handleClick = useCallback(
     (e: Event) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       if (ref.current && !ref.current.contains(e.target)) {
         callback()
       }

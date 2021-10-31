@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { v4 as uuid } from 'uuid'
 import { VscAdd } from 'react-icons/vsc'
 import classes from './AddProject.module.scss'
 import { Button } from '../UI/Button/Button'

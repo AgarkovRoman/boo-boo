@@ -1,28 +1,26 @@
-import { createSelector } from 'reselect'
-import { getAllTasks, getNotArchivedTasks } from '../redux/tasks/tasks-selectors'
+import { getAllTasks } from '../redux/tasks/tasks-selectors'
+import { TasksStateI } from '../redux/tasks/tasks-types'
 
-const mockState = {
+const mockState: TasksStateI = {
   tasks: {
     allTasks: [
       {
-        task: 'test1',
-        createDate: 123231,
+        name: 'test1',
+        description: '',
         date: '4321',
         archived: false,
         userId: '999',
         projectId: '123',
         id: '132313123',
-        docId: '132313123',
       },
       {
-        task: 'test2',
-        createDate: 1232331,
+        name: 'test2',
+        description: '',
         date: '43231',
         archived: false,
         userId: '999',
         projectId: '123',
         id: '132313123',
-        docId: '132313123',
       },
     ],
   },

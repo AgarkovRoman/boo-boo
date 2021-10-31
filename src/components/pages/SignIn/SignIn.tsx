@@ -21,7 +21,10 @@ export const Header = () => (
 
 export const SignIn = () => {
   const { register, handleSubmit, errors } = useForm<FormData>()
-  const [error, setError] = useState<string>('')
+  const [
+    error,
+    // setError
+  ] = useState<string>('')
 
   const dispatch = useDispatch()
   const onSubmit = useCallback((data: FormData) => dispatch(signInTC(data.email, data.password)), [

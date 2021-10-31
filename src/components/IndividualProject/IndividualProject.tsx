@@ -15,7 +15,7 @@ interface IndividualProjectPropsI {
 
 export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }) => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
-  const deleteModalRef = useRef(null)
+  const deleteModalRef = useRef<HTMLDivElement>(null)
   const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
 
   const dispatch = useDispatch()

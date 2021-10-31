@@ -41,7 +41,8 @@
     "no-debugger": 0,
     "no-alert": 0,
     "react/prop-types": 0,
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "prefer-const": [
       "error",
       {
@@ -137,7 +138,15 @@
         ]
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.jsx", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["off"]
+      }
+    }
+  ]
 }
 
 

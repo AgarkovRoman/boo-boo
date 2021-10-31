@@ -1,5 +1,4 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
 import { AppRouter } from '../routes/AppRouter'
 import { getUser } from '../redux/auth/auth-selectors'
 import { renderWithRedux } from './utils/renderWithRedux'

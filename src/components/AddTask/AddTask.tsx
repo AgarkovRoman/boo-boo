@@ -9,9 +9,7 @@ import { TaskDate } from '../TaskDate/TaskDate'
 import { Button } from '../UI/Button/Button'
 import { getActiveProject } from '../../redux/projects/projects-selectors'
 import { addTaskTC } from '../../redux/tasks/tasks-reducer'
-import { getUserId } from '../../redux/auth/auth-selectors'
 import { ProjectsStateI } from '../../redux/projects/projects-types'
-import { AuthStateI } from '../../redux/auth/auth-types'
 
 interface AddTaskPropsI {
   showAddTaskMain?: boolean
