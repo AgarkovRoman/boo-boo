@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tasks } from '../components/Tasks/Tasks'
+import { Tasks } from '../pages/components/Tasks/Tasks'
 import { getAllTasks } from '../redux/tasks/tasks-selectors'
 import { getActiveProject, getAllProjects } from '../redux/projects/projects-selectors'
 import { renderWithRedux } from './utils/renderWithRedux'

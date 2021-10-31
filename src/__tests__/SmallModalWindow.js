@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { SmallModalWindow } from '../components/UI/SmallModalWindow/SmallModalWindow'
+import { SmallModalWindow } from '../common/UI/SmallModalWindow/SmallModalWindow'
 
 const deleteTask = jest.fn()
 const onClose = jest.fn()

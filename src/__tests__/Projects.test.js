@@ -1,6 +1,6 @@
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { Projects } from '../components/Projects/Projects'
+import { Projects } from '../pages/components/Projects/Projects'
 import { renderWithRedux } from './utils/renderWithRedux'
 import { getAllProjects } from '../redux/projects/projects-selectors'
 

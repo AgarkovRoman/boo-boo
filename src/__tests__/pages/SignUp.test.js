@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { act } from 'react-dom/test-utils'
 import { BrowserRouter } from 'react-router-dom'
-import { SignUp } from '../../components/pages/SignUp/SignUp'
+import { SignUp } from '../../pages/SignUp/SignUp'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

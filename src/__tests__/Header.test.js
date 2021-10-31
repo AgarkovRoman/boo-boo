@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Header } from '../components/layout/Header/Header'
+import { Header } from '../pages/components/Header/Header'
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn((fn) => fn()),

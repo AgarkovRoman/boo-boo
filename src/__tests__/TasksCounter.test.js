@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { TasksCounter } from '../components/UI/TasksCounter/TasksCounter'
+import { TasksCounter } from '../common/UI/TasksCounter/TasksCounter'
 
 describe('< TasksCounter />', () => {
   test('render counter with count > 0', () => {

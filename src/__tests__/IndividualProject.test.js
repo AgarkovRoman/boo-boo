@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, act, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { IndividualProject } from '../components/IndividualProject/IndividualProject'
+import { IndividualProject } from '../pages/components/IndividualProject/IndividualProject'
 import { renderWithRedux } from './utils/renderWithRedux'
 
 const project = {

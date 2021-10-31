@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { TaskDate } from '../components/TaskDate/TaskDate'
+import { TaskDate } from '../pages/components/TaskDate/TaskDate'
 
 const setShowTaskDate = jest.fn()
 const setTaskDate = jest.fn()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BooBoo } from '../../components/pages/BooBoo/BooBoo'
+import { BooBoo } from '../../pages/BooBoo/BooBoo'
 import { renderWithRedux } from '../utils/renderWithRedux'
 
 describe(' < BooBoo />', () => {

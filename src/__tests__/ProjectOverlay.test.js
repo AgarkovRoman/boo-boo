@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { ProjectOverlay } from '../components/ProjectOverlay/ProjectOverlay'
+import { ProjectOverlay } from '../pages/components/ProjectOverlay/ProjectOverlay'
 import { getAllProjects } from '../redux/projects/projects-selectors'
 import { renderWithRedux } from './utils/renderWithRedux'
 

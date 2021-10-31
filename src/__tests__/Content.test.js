@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { Content } from '../components/layout/Content/Content'
+import { Content } from '../pages/components/Content/Content'
 import { renderWithRedux } from './utils/renderWithRedux'
 
 describe('< Content />', () => {

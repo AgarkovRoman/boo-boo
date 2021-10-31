@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Checkbox } from '../components/UI/Checkbox/Checkbox'
+import { Checkbox } from '../common/UI/Checkbox/Checkbox'
 import { renderWithRedux } from './utils/renderWithRedux'
 
 jest.mock('../redux/tasks/tasks-reducer', () => ({

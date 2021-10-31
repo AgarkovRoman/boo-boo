@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { AddTask } from '../components/AddTask/AddTask'
+import { AddTask } from '../pages/components/AddTask/AddTask'
 import { renderWithRedux } from './utils/renderWithRedux'
 import { getActiveProject } from '../redux/projects/projects-selectors'
 

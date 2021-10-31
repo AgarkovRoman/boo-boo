@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Sidebar } from '../components/layout/Sidebar/Sidebar'
+import { Sidebar } from '../pages/components/Sidebar/Sidebar'
 import { renderWithRedux } from './utils/renderWithRedux'
 
 const userId = 'RM6FGvtHAMviaIDJNas'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Task } from '../components/Task/Task'
+import { Task } from '../pages/components/Task/Task'
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn((fn) => fn()),

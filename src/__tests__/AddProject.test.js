@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { AddProject } from '../components/AddProject/AddProject'
+import { AddProject } from '../pages/components/AddProject/AddProject'
 
 jest.mock('react-redux', () => ({
   // ...jest.requireActual('react-redux'),
