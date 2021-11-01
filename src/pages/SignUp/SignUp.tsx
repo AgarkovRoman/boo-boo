@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -9,20 +9,21 @@ import { signUpTC } from '../../redux/auth/auth-reducer'
 import { Header } from '../SignIn/SignIn'
 
 type FormData = {
-  Name: string
-  Email: string
-  Password: string
-  // RepeatPassword: string
+  name: string
+  email: string
+  password: string
+  // repeatPassword: string
 }
 
 export const SignUp = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>()
-  const [
-    error,
-    // setError
-  ] = useState<string>('')
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>()
+
   const dispatch = useDispatch()
-  const onSubmit = useCallback((data: FormData) => dispatch(signUpTC(data.Email, data.Password)), [
+  const onSubmit = useCallback((data: FormData) => dispatch(signUpTC(data.email, data.password)), [
     dispatch,
   ])
 
@@ -39,7 +40,7 @@ export const SignUp = () => {
         <div className={mainClasses.main}>
           <div className={mainClasses.formBox}>
             <h3 className={mainClasses.title}>Sign Up</h3>
-            {error}
+
             <form className={mainClasses.form} onSubmit={handleSubmit(onSubmit)}>
               {/* <label> */}
               {/*  Name */}
@@ -51,26 +52,43 @@ export const SignUp = () => {
               {/*  /> */}
               {/*  /!* {errors.Email && <p>Require field</p>} *!/ */}
               {/* </label> */}
-              <label>
+              <label className={mainClasses.label}>
                 Email
                 <input
                   type="text"
                   placeholder="Email"
-                  name="Email"
-                  ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+                  {...register('email', {
+                    pattern: { value: /^\S+@\S+$/i, message: 'Incorrect email' },
+                    required: 'This input is required.',
+                  })}
                 />
-                {/* {errors.Email && <p>Require field</p>} */}
               </label>
-              <label>
+              <div>
+                {errors?.email && (
+                  <p className={mainClasses.errorMessage}>{errors?.email.message}</p>
+                )}
+              </div>
+
+              <label className={mainClasses.label}>
                 Password
                 <input
                   type="password"
                   placeholder="Password"
-                  name="Password"
-                  ref={register({ required: true, minLength: 6 })}
+                  {...register('password', {
+                    minLength: {
+                      value: 6,
+                      message: 'Password length should exceed 6 characters',
+                    },
+                    required: 'This input is required.',
+                  })}
                 />
-                {/* {errors.Password && <p>Require field</p>} */}
               </label>
+              <div>
+                {errors?.password && (
+                  <p className={mainClasses.errorMessage}>{errors?.password.message}</p>
+                )}
+              </div>
+
               {/* <label>Repeat Password */}
               {/*    <input type="password" placeholder="Repeat Password" name="RepeatPassword" */}
               {/*           ref={register({required: true, minLength: 6})}/> */}
