@@ -67,13 +67,6 @@ export const authAPI = {
 }
 
 export const projectsAPI = {
-  getAllProjectsById() {
-    return axiosInstance
-      .get<ProjectI[]>('/project/byUser')
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
   addProject(project: CreateProjectI) {
     return axiosInstance
       .post('/project/create', project)
@@ -102,7 +95,7 @@ export const projects2API = createApi({
     },
   }),
   endpoints: (build) => ({
-    getAllProjectsById: build.query({
+    getAllProjectsById: build.query<ProjectI[], string>({
       query: () => ({
         url: '/project/byUser',
       }),

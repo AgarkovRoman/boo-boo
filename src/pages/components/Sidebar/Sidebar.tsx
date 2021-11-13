@@ -14,7 +14,7 @@ import {
   getTodayTasksCounter,
 } from '../../../redux/tasks/tasks-selectors'
 import { getAllTasksTC } from '../../../redux/tasks/tasks-reducer'
-import { getAllProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer'
+import { setActiveProject } from '../../../redux/projects/projects-reducer'
 import { TasksStateI } from '../../../redux/tasks/tasks-types'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
 
@@ -26,7 +26,6 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
   const [showProjects, setShowProjects] = useState<boolean>(true)
 
   const dispatch = useDispatch()
-  const getAllProjects = useCallback(() => dispatch(getAllProjectTC()), [dispatch])
   const getAllTasks = useCallback(() => dispatch(getAllTasksTC()), [dispatch])
 
   const selectProject = useCallback((projectId) => dispatch(setActiveProject(projectId)), [
@@ -47,9 +46,8 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
   // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
 
   useEffect(() => {
-    getAllProjects()
     getAllTasks()
-  }, [dispatch, getAllProjects, getAllTasks])
+  }, [dispatch, getAllTasks])
 
   return (
     <div className={classes.sidebar} data-testid="sidebar">
