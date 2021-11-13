@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios from 'axios'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
@@ -9,20 +10,6 @@ const axiosInstance = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 })
-
-// const authInterceptor = axiosInstance.interceptors.request.use(
-//   (config) => {
-//     if (config.url?.includes('/auth/login' || '/auth/registration')) {
-//       return config
-//     }
-//     const authUser = JSON.parse(localStorage.getItem('authUser') || '')
-//     if (config.headers) {
-//       config.headers.Authorization = authUser ? `Bearer ${authUser?.accessToken}` : ''
-//       return config
-//     }
-//   },
-//   (error) => Promise.reject(error)
-// )
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -40,8 +27,6 @@ axiosInstance.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 )
-
-// const deleteIntercepter = () =>  axiosInstance.interceptors.request.eject(authInterceptor)
 
 export const authAPI = {
   // authMe(callback: (user: any) => void) {
@@ -103,6 +88,27 @@ export const projectsAPI = {
       .catch((e) => console.log(e))
   },
 }
+
+export const projects2API = createApi({
+  reducerPath: 'projectsAPI',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:8080/api',
+    prepareHeaders: (headers) => {
+      const authUser = JSON.parse(localStorage.getItem('authUser') || '')
+      if (authUser) {
+        headers.set('authorization', `Bearer ${authUser?.accessToken}`)
+      }
+      return headers
+    },
+  }),
+  endpoints: (build) => ({
+    getAllProjectsById: build.query({
+      query: () => ({
+        url: '/project/byUser',
+      }),
+    }),
+  }),
+})
 
 export const tasksAPI = {
   addTask(task: CreateTaskI) {
