@@ -1,8 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import classes from './ProjectOverlay.module.scss'
-import { getAllProjects } from '../../../redux/projects/projects-selectors'
-import { ProjectsStateI } from '../../../redux/projects/projects-types'
+import { projectsAPI } from '../../../api/api'
 
 interface ProjectOverlayPropsI {
   setProject: (value: string) => void
@@ -15,7 +13,7 @@ export const ProjectOverlay: React.FC<ProjectOverlayPropsI> = ({
   showProjectOverlay,
   setShowProjectOverlay,
 }) => {
-  const projects = useSelector((state: ProjectsStateI) => getAllProjects(state))
+  const { data: projects } = projectsAPI.useGetAllProjectsByIdQuery('')
 
   return (
     <>

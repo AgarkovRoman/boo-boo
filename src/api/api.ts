@@ -66,23 +66,7 @@ export const authAPI = {
   },
 }
 
-export const projectsAPI = {
-  addProject(project: CreateProjectI) {
-    return axiosInstance
-      .post('/project/create', project)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  deleteProject(id: string) {
-    return axiosInstance
-      .delete<DeleteProjectI>(`/project/${id}`)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-}
-
-export const projects2API = createApi({
+export const projectsAPI = createApi({
   reducerPath: 'projectsAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8080/api',
@@ -98,6 +82,19 @@ export const projects2API = createApi({
     getAllProjectsById: build.query<ProjectI[], string>({
       query: () => ({
         url: '/project/byUser',
+      }),
+    }),
+    deleteProject: build.mutation<DeleteProjectI, string>({
+      query: (id) => ({
+        url: `/project/${id}`,
+        method: 'DELETE',
+      }),
+    }),
+    addProject: build.mutation<ProjectI, CreateProjectI>({
+      query: (project) => ({
+        url: '/project/create',
+        method: 'POST',
+        body: project,
       }),
     }),
   }),

@@ -6,14 +6,15 @@ import { collatedTasks } from '../../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
 import { getAllTasks } from '../../../redux/tasks/tasks-selectors'
-import { getActiveProject, getAllProjects } from '../../../redux/projects/projects-selectors'
+import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
 import { TaskI, TasksStateI } from '../../../redux/tasks/tasks-types'
 import { Task } from '../Task/Task'
+import { projectsAPI } from '../../../api/api'
 
 export const Tasks: React.FC = () => {
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
-  const projects = useSelector((state: ProjectsStateI) => getAllProjects(state))
+  const { data: projects } = projectsAPI.useGetAllProjectsByIdQuery('')
   const tasks = useSelector((state: TasksStateI) => getAllTasks(state))
 
   const createProjectName = () => {

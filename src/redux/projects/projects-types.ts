@@ -14,5 +14,4 @@ export interface ProjectsStateI {
 
 export interface ProjectsI {
   activeProject: string
-  allProjects: Array<ProjectI>
 }

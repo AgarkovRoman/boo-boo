@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
 import { VscAdd } from 'react-icons/vsc'
 import classes from './AddProject.module.scss'
 import { Button } from '../../../common/UI/Button/Button'
-import { addProjectTC } from '../../../redux/projects/projects-reducer'
 import { ProjectI } from '../../../redux/projects/projects-types'
+import { projectsAPI } from '../../../api/api'
 
 interface AddProjectPropsI {
   shouldShow?: boolean
@@ -18,15 +17,21 @@ export const AddProject: React.FC<AddProjectPropsI> = ({ shouldShow = false }) =
     description: '',
     id: '',
   })
-  const dispatch = useDispatch()
 
-  const addProject = useCallback((item) => dispatch(addProjectTC(item)), [dispatch])
+  const { refetch } = projectsAPI.useGetAllProjectsByIdQuery('')
+  const [addProject, { data: addProjectResponse, isLoading }] = projectsAPI.useAddProjectMutation()
 
   const handleAddProject = (item: ProjectI) => {
     addProject(item)
     setProject({ ...project, name: '' })
     setShow(false)
   }
+
+  useEffect(() => {
+    if (!isLoading && addProjectResponse) {
+      refetch()
+    }
+  }, [addProjectResponse, isLoading])
 
   return (
     <div className={classes.wrapper} data-testid="add-project">

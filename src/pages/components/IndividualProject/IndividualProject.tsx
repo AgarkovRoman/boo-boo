@@ -1,32 +1,45 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { VscKebabVertical } from 'react-icons/vsc'
 import classes from './IndividualProject.module.scss'
 import { INBOX } from '../../../constants/defaultProjects'
-import { deleteProjectTC, setActiveProject } from '../../../redux/projects/projects-reducer'
+import { setActiveProject } from '../../../redux/projects/projects-reducer'
 import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { ProjectI, ProjectsStateI } from '../../../redux/projects/projects-types'
 import { useOutsideClick } from '../../../hooks/useOutSideClick'
 import { SmallModalWindow } from '../../../common/UI/SmallModalWindow/SmallModalWindow'
+import { projectsAPI } from '../../../api/api'
 
 interface IndividualProjectPropsI {
   project: ProjectI
+  refetch: () => void
 }
 
-export const IndividualProject: React.FC<IndividualProjectPropsI> = ({ project }) => {
+export const IndividualProject = ({ project, refetch }: IndividualProjectPropsI) => {
   const [showConfirm, setShowConfirm] = useState<boolean>(false)
   const deleteModalRef = useRef<HTMLDivElement>(null)
+
   const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
 
   const dispatch = useDispatch()
   const selectProject = useCallback((id) => dispatch(setActiveProject(id)), [dispatch])
-  const deleteProject = useCallback((id) => dispatch(deleteProjectTC(id)), [dispatch])
+
+  const [
+    deleteProject,
+    { data: deleteProjectResponse, isLoading },
+  ] = projectsAPI.useDeleteProjectMutation()
 
   const toggleDeleteModal = () => {
     setShowConfirm(!showConfirm)
   }
 
   useOutsideClick(deleteModalRef, showConfirm, toggleDeleteModal)
+
+  useEffect(() => {
+    if (!isLoading && deleteProjectResponse && deleteProjectResponse.success) {
+      refetch()
+    }
+  }, [deleteProjectResponse, isLoading])
 
   return (
     <>
