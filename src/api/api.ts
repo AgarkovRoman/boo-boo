@@ -4,8 +4,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
+const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
+
 const axiosInstance = axios.create({
-  baseURL: 'https://boo-boo-server.herokuapp.com/api/',
+  baseURL: BASE_URL,
   headers: {
     'Access-Control-Allow-Origin': '*',
   },
@@ -69,7 +71,7 @@ export const authAPI = {
 export const projectsAPI = createApi({
   reducerPath: 'projectsAPI',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8080/api',
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const authUser = JSON.parse(localStorage.getItem('authUser') || '')
       if (authUser) {
