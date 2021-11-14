@@ -10,7 +10,7 @@ import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { TasksCounter } from '../../../common/UI/TasksCounter/TasksCounter'
 import { setActiveProject } from '../../../redux/projects/projects-reducer'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
-import { tasks2API } from '../../../api/api'
+import { tasksAPI } from '../../../api/api'
 
 interface SidebarPropsI {
   userId: string
@@ -25,7 +25,7 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
     dispatch,
   ])
 
-  const { data: tasks } = tasks2API.useGetAllTasksByIdQuery('')
+  const { data: tasks } = tasksAPI.useGetAllTasksByIdQuery('')
   const inboxTaskCount = tasks?.filter((elem) => elem.projectId === INBOX).length || 0
   const todayTaskCount = tasks?.filter((elem) => elem.projectId === TODAY).length || 0
   const next7TaskCount = tasks?.filter((elem) => elem.projectId === NEXT_7).length || 0

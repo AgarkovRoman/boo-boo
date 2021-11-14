@@ -110,7 +110,7 @@ type UpdateTaskById = {
   task: CreateTaskI
 }
 
-export const tasks2API = createApi({
+export const tasksAPI = createApi({
   reducerPath: 'tasksAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,

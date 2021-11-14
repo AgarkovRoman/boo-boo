@@ -3,7 +3,7 @@ import { VscKebabVertical } from 'react-icons/vsc'
 import classes from './Task.module.scss'
 import { Checkbox } from '../../../common/UI/Checkbox/Checkbox'
 import { SmallModalWindow } from '../../../common/UI/SmallModalWindow/SmallModalWindow'
-import { tasks2API } from '../../../api/api'
+import { tasksAPI } from '../../../api/api'
 
 interface TaskPropsI {
   name: string
@@ -21,11 +21,11 @@ export const Task = ({ id, name, description, archived, date, projectId, refetch
   const [
     deleteTask,
     { isLoading: isDeleteTaskLoading, data: deleteTaskResponse },
-  ] = tasks2API.useDeleteTaskMutation()
+  ] = tasksAPI.useDeleteTaskMutation()
   const [
     updateTask,
     { isLoading: isUpdateTaskLoading, data: updateTaskResponse },
-  ] = tasks2API.useUpdateTaskByIdMutation()
+  ] = tasksAPI.useUpdateTaskByIdMutation()
 
   const archiveTask = useCallback(
     () => updateTask({ taskId: id, task: { name, description, archived: true, date, projectId } }),

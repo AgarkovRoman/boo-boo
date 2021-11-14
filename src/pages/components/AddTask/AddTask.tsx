@@ -9,7 +9,7 @@ import { TaskDate } from '../TaskDate/TaskDate'
 import { Button } from '../../../common/UI/Button/Button'
 import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
-import { tasks2API } from '../../../api/api'
+import { tasksAPI } from '../../../api/api'
 
 interface AddTaskPropsI {
   showAddTaskMain?: boolean
@@ -32,8 +32,8 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
   const [showTaskDate, setShowTaskDate] = useState<boolean>(false)
 
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
-  const [addTaskHandler, { data: addTaskResponse, isLoading }] = tasks2API.useAddTaskMutation()
-  const { refetch } = tasks2API.useGetAllTasksByIdQuery('')
+  const [addTaskHandler, { data: addTaskResponse, isLoading }] = tasksAPI.useAddTaskMutation()
+  const { refetch } = tasksAPI.useGetAllTasksByIdQuery('')
 
   const getTaskObject = () => {
     const projectId = project || selectedProject

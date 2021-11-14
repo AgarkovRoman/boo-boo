@@ -9,13 +9,13 @@ import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
 import { TaskI } from '../../../redux/tasks/tasks-types'
 import { Task } from '../Task/Task'
-import { projectsAPI, tasks2API } from '../../../api/api'
+import { projectsAPI, tasksAPI } from '../../../api/api'
 
 export const Tasks: React.FC = () => {
   const [selectedProjectTasks, setSelectedProjectTasks] = useState<TaskI[]>([])
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
   const { data: projects } = projectsAPI.useGetAllProjectsByIdQuery('')
-  const { data: tasks, refetch } = tasks2API.useGetAllTasksByIdQuery('')
+  const { data: tasks, refetch } = tasksAPI.useGetAllTasksByIdQuery('')
 
   const createProjectName = () => {
     let name = ''
