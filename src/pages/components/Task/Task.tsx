@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { VscKebabVertical } from 'react-icons/vsc'
-import { useDispatch } from 'react-redux'
 import classes from './Task.module.scss'
 import { Checkbox } from '../../../common/UI/Checkbox/Checkbox'
-import { archiveTaskTC, deleteTaskTC } from '../../../redux/tasks/tasks-reducer'
 import { SmallModalWindow } from '../../../common/UI/SmallModalWindow/SmallModalWindow'
+import { tasks2API } from '../../../api/api'
 
 interface TaskPropsI {
   name: string
@@ -13,25 +12,37 @@ interface TaskPropsI {
   archived: boolean
   date: string
   description: string
+  refetch: () => void
 }
 
-export const Task: React.FC<TaskPropsI> = ({
-  id,
-  name,
-  description,
-  archived,
-  date,
-  projectId,
-}) => {
+export const Task = ({ id, name, description, archived, date, projectId, refetch }: TaskPropsI) => {
   const [isModalDisplay, setIsModalDisplay] = useState(false)
 
-  const dispatch = useDispatch()
-  const deleteTask = useCallback((taskId: string) => dispatch(deleteTaskTC(taskId)), [dispatch])
+  const [
+    deleteTask,
+    { isLoading: isDeleteTaskLoading, data: deleteTaskResponse },
+  ] = tasks2API.useDeleteTaskMutation()
+  const [
+    updateTask,
+    { isLoading: isUpdateTaskLoading, data: updateTaskResponse },
+  ] = tasks2API.useUpdateTaskByIdMutation()
 
   const archiveTask = useCallback(
-    () => dispatch(archiveTaskTC(id, { name, description, archived, date, projectId })),
-    [dispatch, id, name, description, archived, date, projectId]
+    () => updateTask({ taskId: id, task: { name, description, archived: true, date, projectId } }),
+    [id, name, description, archived, date, projectId]
   )
+
+  useEffect(() => {
+    if (!isUpdateTaskLoading && updateTaskResponse) {
+      refetch()
+    }
+  }, [isUpdateTaskLoading, updateTaskResponse])
+
+  useEffect(() => {
+    if (!isDeleteTaskLoading && deleteTaskResponse && deleteTaskResponse.success) {
+      refetch()
+    }
+  }, [isDeleteTaskLoading, deleteTaskResponse])
 
   return (
     <>

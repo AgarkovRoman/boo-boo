@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegListAlt, FaRegCalendarAlt, FaRegTimesCircle } from 'react-icons/fa'
 import dayjs from 'dayjs'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { VscAdd } from 'react-icons/vsc'
 import classes from './AddTask.module.scss'
 import { ProjectOverlay } from '../ProjectOverlay/ProjectOverlay'
 import { TaskDate } from '../TaskDate/TaskDate'
 import { Button } from '../../../common/UI/Button/Button'
 import { getActiveProject } from '../../../redux/projects/projects-selectors'
-import { addTaskTC } from '../../../redux/tasks/tasks-reducer'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
+import { tasks2API } from '../../../api/api'
 
 interface AddTaskPropsI {
   showAddTaskMain?: boolean
@@ -31,9 +31,9 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
   const [showProjectOverlay, setShowProjectOverlay] = useState<boolean>(false)
   const [showTaskDate, setShowTaskDate] = useState<boolean>(false)
 
-  const dispatch = useDispatch()
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
-  const addTaskHandler = useCallback((task) => dispatch(addTaskTC(task)), [dispatch])
+  const [addTaskHandler, { data: addTaskResponse, isLoading }] = tasks2API.useAddTaskMutation()
+  const { refetch } = tasks2API.useGetAllTasksByIdQuery('')
 
   const getTaskObject = () => {
     const projectId = project || selectedProject
@@ -69,6 +69,11 @@ export const AddTask: React.FC<AddTaskPropsI> = ({
       : getTaskObject()
   }
 
+  useEffect(() => {
+    if (!isLoading && addTaskResponse) {
+      refetch()
+    }
+  }, [isLoading, addTaskResponse])
   return (
     <div
       className={showQuickAddTask ? classes.overlay : classes.addTask}

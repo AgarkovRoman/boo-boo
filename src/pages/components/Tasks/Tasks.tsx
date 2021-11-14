@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Tasks.scss'
 import { useSelector } from 'react-redux'
 import { v4 as uuid } from 'uuid'
 import { collatedTasks } from '../../../constants/collatedTasks'
 import { getTitle, getCollatedTitle, collatedTasksExist } from '../../../helpers/helpers'
 import { AddTask } from '../AddTask/AddTask'
-import { getAllTasks } from '../../../redux/tasks/tasks-selectors'
 import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
-import { TaskI, TasksStateI } from '../../../redux/tasks/tasks-types'
+import { TaskI } from '../../../redux/tasks/tasks-types'
 import { Task } from '../Task/Task'
-import { projectsAPI } from '../../../api/api'
+import { projectsAPI, tasks2API } from '../../../api/api'
 
 export const Tasks: React.FC = () => {
+  const [selectedProjectTasks, setSelectedProjectTasks] = useState<TaskI[]>([])
   const selectedProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
   const { data: projects } = projectsAPI.useGetAllProjectsByIdQuery('')
-  const tasks = useSelector((state: TasksStateI) => getAllTasks(state))
+  const { data: tasks, refetch } = tasks2API.useGetAllTasksByIdQuery('')
 
   const createProjectName = () => {
     let name = ''
@@ -39,17 +39,23 @@ export const Tasks: React.FC = () => {
     allTasks.filter((task: TaskI) => task.projectId === selectProjectId && !task.archived)
 
   const projectName = createProjectName()
-  const selectedProjectTasks = getFilteredTasks(tasks, selectedProject)
 
   useEffect(() => {
     document.title = `BOO—BOO: ${projectName} tasks`
   }, [projectName])
 
+  useEffect(() => {
+    if (tasks) {
+      const projectTasks = getFilteredTasks(tasks, selectedProject)
+      setSelectedProjectTasks(projectTasks)
+    }
+  }, [tasks, selectedProject])
+
   return (
     <div className="tasks" data-testid="tasks">
       <h2 data-testid="project-name">{projectName}</h2>
 
-      {selectedProjectTasks.length > 0 && (
+      {tasks && selectedProjectTasks.length > 0 && (
         <ul className="tasks__list">
           {selectedProjectTasks.map((task) => (
             <Task
@@ -60,6 +66,7 @@ export const Tasks: React.FC = () => {
               projectId={selectedProject}
               date={task.date}
               description={task.description}
+              refetch={refetch}
             />
           ))}
         </ul>

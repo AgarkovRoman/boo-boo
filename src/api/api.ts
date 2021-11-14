@@ -4,7 +4,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 
-const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
+// const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
+const BASE_URL = 'http://localhost:8080/api/'
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -68,17 +69,19 @@ export const authAPI = {
   },
 }
 
+function prepareAuthorizationHeaders(headers: Headers): Headers {
+  const authUser = JSON.parse(localStorage.getItem('authUser') || '')
+  if (authUser) {
+    headers.set('authorization', `Bearer ${authUser?.accessToken}`)
+  }
+  return headers
+}
+
 export const projectsAPI = createApi({
   reducerPath: 'projectsAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    prepareHeaders: (headers) => {
-      const authUser = JSON.parse(localStorage.getItem('authUser') || '')
-      if (authUser) {
-        headers.set('authorization', `Bearer ${authUser?.accessToken}`)
-      }
-      return headers
-    },
+    prepareHeaders: prepareAuthorizationHeaders,
   }),
   endpoints: (build) => ({
     getAllProjectsById: build.query<ProjectI[], string>({
@@ -102,32 +105,42 @@ export const projectsAPI = createApi({
   }),
 })
 
-export const tasksAPI = {
-  addTask(task: CreateTaskI) {
-    return axiosInstance
-      .post('/task/create', task)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  getAllTasksById() {
-    return axiosInstance
-      .get<TaskI[]>('/task/byUser')
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  updateTaskById(taskId: string, task: CreateTaskI) {
-    return axiosInstance
-      .patch(`/task/${taskId}`, task)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  deleteTask(id: string) {
-    return axiosInstance
-      .delete<DeleteTaskI>(`/task/${id}`)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
+type UpdateTaskById = {
+  taskId: string
+  task: CreateTaskI
 }
+
+export const tasks2API = createApi({
+  reducerPath: 'tasksAPI',
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+    prepareHeaders: prepareAuthorizationHeaders,
+  }),
+  endpoints: (build) => ({
+    getAllTasksById: build.query<TaskI[], string>({
+      query: () => ({
+        url: '/task/byUser',
+      }),
+    }),
+    addTask: build.mutation<TaskI, CreateTaskI>({
+      query: (task) => ({
+        url: '/task/create',
+        method: 'POST',
+        body: task,
+      }),
+    }),
+    updateTaskById: build.mutation<TaskI, UpdateTaskById>({
+      query: ({ taskId, task }) => ({
+        url: `/task/${taskId}`,
+        method: 'PATCH',
+        body: task,
+      }),
+    }),
+    deleteTask: build.mutation<DeleteTaskI, string>({
+      query: (taskId) => ({
+        url: `/task/${taskId}`,
+        method: 'DELETE',
+      }),
+    }),
+  }),
+})

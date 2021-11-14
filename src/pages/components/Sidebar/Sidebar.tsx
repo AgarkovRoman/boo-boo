@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { VscChevronDown } from 'react-icons/vsc'
@@ -8,15 +8,9 @@ import { AddProject } from '../AddProject/AddProject'
 import { INBOX, NEXT_7, TODAY } from '../../../constants/defaultProjects'
 import { getActiveProject } from '../../../redux/projects/projects-selectors'
 import { TasksCounter } from '../../../common/UI/TasksCounter/TasksCounter'
-import {
-  getInboxTasksCounter,
-  getNext7TasksCounter,
-  getTodayTasksCounter,
-} from '../../../redux/tasks/tasks-selectors'
-import { getAllTasksTC } from '../../../redux/tasks/tasks-reducer'
 import { setActiveProject } from '../../../redux/projects/projects-reducer'
-import { TasksStateI } from '../../../redux/tasks/tasks-types'
 import { ProjectsStateI } from '../../../redux/projects/projects-types'
+import { tasks2API } from '../../../api/api'
 
 interface SidebarPropsI {
   userId: string
@@ -26,28 +20,17 @@ export const Sidebar: React.FC<SidebarPropsI> = ({ userId }) => {
   const [showProjects, setShowProjects] = useState<boolean>(true)
 
   const dispatch = useDispatch()
-  const getAllTasks = useCallback(() => dispatch(getAllTasksTC()), [dispatch])
 
   const selectProject = useCallback((projectId) => dispatch(setActiveProject(projectId)), [
     dispatch,
   ])
 
-  const selectInboxTaskCountMemoized = useMemo(() => getInboxTasksCounter, [])
-  const selectTodayTaskCountMemoized = useMemo(() => getTodayTasksCounter, [])
-  const selectNext7TaskCountMemoized = useMemo(() => getNext7TasksCounter, [])
-
-  const inboxTaskCount = useSelector((state: TasksStateI) => selectInboxTaskCountMemoized(state))
-  const todayTaskCount = useSelector((state: TasksStateI) => selectTodayTaskCountMemoized(state))
-  const next7TaskCount = useSelector((state: TasksStateI) => selectNext7TaskCountMemoized(state))
+  const { data: tasks } = tasks2API.useGetAllTasksByIdQuery('')
+  const inboxTaskCount = tasks?.filter((elem) => elem.projectId === INBOX).length || 0
+  const todayTaskCount = tasks?.filter((elem) => elem.projectId === TODAY).length || 0
+  const next7TaskCount = tasks?.filter((elem) => elem.projectId === NEXT_7).length || 0
 
   const activeProject = useSelector((state: ProjectsStateI) => getActiveProject(state))
-  // const inboxTaskCount = useSelector((state) => getInboxTasksCounter(state))
-  // const todayTaskCount = useSelector((state) => getTodayTasksCounter(state))
-  // const next7TaskCount = useSelector((state) => getNext7TasksCounter(state))
-
-  useEffect(() => {
-    getAllTasks()
-  }, [dispatch, getAllTasks])
 
   return (
     <div className={classes.sidebar} data-testid="sidebar">
