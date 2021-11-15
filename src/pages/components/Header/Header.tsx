@@ -5,7 +5,7 @@ import classes from './Header.module.scss'
 import { AddTask } from '../AddTask/AddTask'
 import { UserIServer } from '../../../redux/auth/auth-types'
 import { authAPI } from '../../../api/api'
-import { signOutUser } from '../../../redux/auth/auth-reducer'
+import { setAuthUser } from '../../../redux/auth/auth-reducer'
 
 export const Header = () => {
   const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
@@ -22,7 +22,7 @@ export const Header = () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (res && res?.data?.success) {
-          dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
+          dispatch(setAuthUser({ userId: '', userEmail: '', userName: '' }))
           localStorage.removeItem('authUser')
         }
       })

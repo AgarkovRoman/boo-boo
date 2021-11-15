@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authReducer } from './auth/auth-reducer'
+import authReducer from './auth/auth-reducer'
 import projectsReducer from './projects/projects-reducer'
-import { projectsAPI, tasksAPI } from '../api/api'
+import { authAPI, projectsAPI, tasksAPI } from '../api/api'
 
 export const store = configureStore({
   reducer: {
@@ -9,7 +9,8 @@ export const store = configureStore({
     projects: projectsReducer,
     [projectsAPI.reducerPath]: projectsAPI.reducer,
     [tasksAPI.reducerPath]: tasksAPI.reducer,
+    [authAPI.reducerPath]: authAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(projectsAPI.middleware, tasksAPI.middleware),
+    getDefaultMiddleware().concat(projectsAPI.middleware, tasksAPI.middleware, authAPI.middleware),
 })

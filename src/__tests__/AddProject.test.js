@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AddProject } from '../pages/components/AddProject/AddProject'
 
@@ -16,9 +16,7 @@ describe('< AddProject />', () => {
 
   describe('Success', () => {
     test('renders < AddProject />', () => {
-      const { queryByTestId, getByTestId } = render(
-        <AddProject shouldShow={false} userId="123456" />
-      )
+      const { getByTestId } = render(<AddProject shouldShow={false} userId="123456" />)
       expect(getByTestId('add-project')).toBeTruthy()
       expect(getByTestId('add-project-action')).toBeTruthy()
     })

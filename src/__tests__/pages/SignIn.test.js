@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { act } from 'react-dom/test-utils'
 import { BrowserRouter } from 'react-router-dom'
@@ -28,7 +28,6 @@ describe('< Sign In />', () => {
       await userEvent.type(getByPlaceholderText('Password'), 'r.agarkov.roman@gmail.com')
       userEvent.click(queryByTestId('sign-in'))
       expect(getByTestId('header')).toBeTruthy()
-      screen.debug()
     })
   })
 })
