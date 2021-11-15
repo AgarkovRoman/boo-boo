@@ -4,8 +4,8 @@ import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
 import { LogoutResponseI, SignInI, UserIServer } from '../redux/auth/auth-types'
 
-// const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
-const BASE_URL = 'http://localhost:8080/api/'
+const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
+// const BASE_URL = 'http://localhost:8080/api/'
 
 function prepareAuthorizationHeaders(headers: Headers): Headers {
   headers.set('Access-Control-Allow-Origin', '*')
