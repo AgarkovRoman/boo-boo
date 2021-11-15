@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AddTask } from '../pages/components/AddTask/AddTask'
 import { renderWithRedux } from './utils/renderWithRedux'
@@ -33,9 +33,7 @@ describe('< AddTask />', () => {
     })
 
     test('render the < AddTask/> main using onClick', async () => {
-      const { getByTestId, findByTestId, queryByTestId } = renderWithRedux(
-        <AddTask showAddTaskMain />
-      )
+      const { getByTestId, findByTestId } = renderWithRedux(<AddTask showAddTaskMain />)
       userEvent.click(getByTestId('show-main-action'))
       expect(await findByTestId('add-task-main')).toBeTruthy()
       expect(await findByTestId('add-task-content')).toBeTruthy()
@@ -45,9 +43,7 @@ describe('< AddTask />', () => {
     })
 
     test('render the < AddTask/> main using onKeyDown', async () => {
-      const { getByTestId, queryByTestId, findByTestId } = renderWithRedux(
-        <AddTask showAddTaskMain />
-      )
+      const { getByTestId, findByTestId } = renderWithRedux(<AddTask showAddTaskMain />)
       fireEvent.keyDown(getByTestId('show-main-action'), { key: 'Enter', keyCode: 'Enter' })
       expect(await findByTestId('add-task-main')).toBeTruthy()
       expect(await findByTestId('add-task-content')).toBeTruthy()
@@ -79,9 +75,7 @@ describe('< AddTask />', () => {
     })
 
     test('render the < AddTask/> project overlay using onKeyDown', async () => {
-      const { queryByTestId, findByTestId, getByTestId } = renderWithRedux(
-        <AddTask showAddTaskMain />
-      )
+      const { findByTestId, getByTestId } = renderWithRedux(<AddTask showAddTaskMain />)
 
       fireEvent.keyDown(getByTestId('show-main-action'), { key: 'Enter', keyCode: 'Enter' })
       expect(await findByTestId('add-task-main')).toBeTruthy()
@@ -115,9 +109,7 @@ describe('< AddTask />', () => {
     })
 
     test('render the < AddTask /> date overlay using Enter onKeyDown', async () => {
-      const { queryByTestId, findByTestId, getByTestId } = renderWithRedux(
-        <AddTask showAddTaskMain />
-      )
+      const { findByTestId, getByTestId } = renderWithRedux(<AddTask showAddTaskMain />)
 
       fireEvent.keyDown(getByTestId('show-main-action'), { key: 'Enter', keyCode: 'Enter' })
       expect(await findByTestId('add-task-main')).toBeTruthy()
@@ -151,7 +143,7 @@ describe('< AddTask />', () => {
     })
 
     test('hides the < AddTask /> main when cancel is clicked using Enter onKeyDown', async () => {
-      const { queryByTestId, findByTestId, getByTestId } = renderWithRedux(<AddTask />)
+      const { queryByTestId, findByTestId } = renderWithRedux(<AddTask />)
 
       fireEvent.keyDown(queryByTestId('show-main-action'), { key: 'Enter', keyCode: 'Enter' })
       expect(await findByTestId('add-task-main')).toBeTruthy()
