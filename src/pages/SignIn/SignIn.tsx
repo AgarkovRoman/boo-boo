@@ -6,7 +6,8 @@ import classes from './SignIn.module.scss'
 import mainClasses from '../mainStylesForPages.module.scss'
 import * as ROUTER from '../../constants/routes'
 import { Logo } from '../../common/UI/Logo/Logo'
-import { signInTC } from '../../redux/auth/auth-reducer'
+import { authMeTC } from '../../redux/auth/auth-reducer'
+import { authAPI } from '../../api/api'
 
 type FormData = {
   email: string
@@ -26,9 +27,18 @@ export const SignIn = () => {
     formState: { errors },
   } = useForm<FormData>()
 
+  const [signIn] = authAPI.useSignInMutation()
+
   const dispatch = useDispatch()
+
   const onSubmit: SubmitHandler<FormData> = useCallback(
-    (data: FormData) => dispatch(signInTC(data.email, data.password)),
+    ({ email: login, password }: FormData) =>
+      signIn({ login, password }).then((res) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        localStorage.setItem('authUser', JSON.stringify(res.data))
+        dispatch(authMeTC())
+      }),
     [dispatch]
   )
 

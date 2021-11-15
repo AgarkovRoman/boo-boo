@@ -3,6 +3,7 @@ import axios from 'axios'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { CreateTaskI, DeleteTaskI, TaskI } from '../redux/tasks/tasks-types'
 import { CreateProjectI, DeleteProjectI, ProjectI } from '../redux/projects/projects-types'
+import { LogoutResponseI, SignInI, UserIServer } from '../redux/auth/auth-types'
 
 // const BASE_URL = 'https://boo-boo-server.herokuapp.com/api/'
 const BASE_URL = 'http://localhost:8080/api/'
@@ -31,44 +32,6 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-export const authAPI = {
-  // authMe(callback: (user: any) => void) {
-  //   return firebase.auth().onAuthStateChanged(callback)
-  // },
-
-  signIn(login: string, password: string) {
-    const data = {
-      login,
-      password,
-    }
-    return axiosInstance
-      .post('/auth/login', data)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  signUp(login: string, password: string) {
-    const data = {
-      login,
-      password,
-    }
-    return axiosInstance
-      .post('/auth/registration', data)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-
-  signOut(token: string) {
-    const data = {
-      token,
-    }
-    return axiosInstance
-      .post('/auth/logout/', data)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
-  },
-}
-
 function prepareAuthorizationHeaders(headers: Headers): Headers {
   const authUser = JSON.parse(localStorage.getItem('authUser') || '')
   if (authUser) {
@@ -76,6 +39,36 @@ function prepareAuthorizationHeaders(headers: Headers): Headers {
   }
   return headers
 }
+
+export const authAPI = createApi({
+  reducerPath: 'authAPI',
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+  }),
+  endpoints: (build) => ({
+    logOut: build.mutation<LogoutResponseI, string>({
+      query: (token) => ({
+        url: '/auth/logout/',
+        method: 'POST',
+        body: token,
+      }),
+    }),
+    signIn: build.mutation<UserIServer, SignInI>({
+      query: ({ login, password }) => ({
+        url: '/auth/login/',
+        method: 'POST',
+        body: { login, password },
+      }),
+    }),
+    signUp: build.mutation<UserIServer, SignInI>({
+      query: ({ login, password }) => ({
+        url: '/auth/registration/',
+        method: 'POST',
+        body: { login, password },
+      }),
+    }),
+  }),
+})
 
 export const projectsAPI = createApi({
   reducerPath: 'projectsAPI',

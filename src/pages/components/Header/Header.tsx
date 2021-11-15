@@ -1,16 +1,33 @@
 import React, { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { VscAdd, VscExtensions, VscSignOut } from 'react-icons/vsc'
+import { useDispatch } from 'react-redux'
 import classes from './Header.module.scss'
 import { AddTask } from '../AddTask/AddTask'
-import { signOutTC } from '../../../redux/auth/auth-reducer'
+import { UserIServer } from '../../../redux/auth/auth-types'
+import { authAPI } from '../../../api/api'
+import { signOutUser } from '../../../redux/auth/auth-reducer'
 
 export const Header = () => {
   const [shouldShowMain, setShouldShowMain] = useState<boolean>(false)
   const [showQuickAddTask, setShowQuickAddTask] = useState<boolean>(false)
 
   const dispatch = useDispatch()
-  const signOutHandler = useCallback(() => dispatch(signOutTC()), [dispatch])
+  const [logOut] = authAPI.useLogOutMutation()
+
+  const signOutHandler = useCallback(() => {
+    const userFromLocalStorage: string | null = localStorage.getItem('authUser')
+    if (typeof userFromLocalStorage === 'string' && userFromLocalStorage.length > 0) {
+      const userFromLocalStorageParse: UserIServer = JSON.parse(userFromLocalStorage)
+      logOut(userFromLocalStorageParse.refreshToken).then((res) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (res && res?.data?.success) {
+          dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
+          localStorage.removeItem('authUser')
+        }
+      })
+    }
+  }, [])
 
   return (
     <header className={classes.header} data-testid="header">

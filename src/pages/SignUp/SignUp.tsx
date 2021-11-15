@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import classes from './SignUp.module.scss'
 import mainClasses from '../mainStylesForPages.module.scss'
 import * as ROUTER from '../../constants/routes'
-import { signUpTC } from '../../redux/auth/auth-reducer'
+import { authMeTC } from '../../redux/auth/auth-reducer'
 import { Header } from '../SignIn/SignIn'
+import { authAPI } from '../../api/api'
 
 type FormData = {
   name: string
@@ -23,9 +24,18 @@ export const SignUp = () => {
   } = useForm<FormData>()
 
   const dispatch = useDispatch()
-  const onSubmit = useCallback((data: FormData) => dispatch(signUpTC(data.email, data.password)), [
-    dispatch,
-  ])
+  const [signUp] = authAPI.useSignUpMutation()
+
+  const onSubmit: SubmitHandler<FormData> = useCallback(
+    ({ email: login, password }: FormData) =>
+      signUp({ login, password }).then((res) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        localStorage.setItem('authUser', JSON.stringify(res.data))
+        dispatch(authMeTC())
+      }),
+    [dispatch]
+  )
 
   console.log('SignUp errors: ', errors)
 

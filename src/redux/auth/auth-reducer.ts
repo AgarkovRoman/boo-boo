@@ -1,6 +1,5 @@
 import { Action } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
-import { authAPI } from '../../api/api'
 import {
   AuthActionCreatorsType,
   AuthI,
@@ -76,47 +75,4 @@ export const authMeTC = (): ThunkAction<void, AuthStateI, unknown, Action> => as
   //     return { userId: '', userEmail: '', userName: '' }
   //   })
   // }
-}
-
-export const signInTC = (
-  login: string,
-  password: string
-): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  await authAPI
-    .signIn(login, password)
-    .then((authUser) => {
-      localStorage.setItem('authUser', JSON.stringify(authUser))
-      dispatch(authMeTC())
-    })
-    .catch((error) => console.log(error))
-}
-
-export const signUpTC = (
-  login: string,
-  password: string
-): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  await authAPI
-    .signUp(login, password)
-    .then((authUser) => {
-      localStorage.setItem('authUser', JSON.stringify(authUser))
-      dispatch(authMeTC())
-    })
-    .catch((error) => console.log(error))
-}
-
-export const signOutTC = (): ThunkAction<void, AuthStateI, unknown, Action> => async (dispatch) => {
-  const userFromLocalStorage: string | null = localStorage.getItem('authUser')
-  if (typeof userFromLocalStorage === 'string' && userFromLocalStorage.length > 0) {
-    const userFromLocalStorageParse: UserIServer = JSON.parse(userFromLocalStorage)
-
-    await authAPI
-      .signOut(userFromLocalStorageParse.refreshToken)
-      .then(() => {
-        dispatch(signOutUser({ userId: '', userEmail: '', userName: '' }))
-        localStorage.removeItem('authUser')
-      })
-      .catch((error) => console.log(error))
-  } else {
-    console.log(`Sorry, we can't logout you, try again later :(`)
-  }
 }

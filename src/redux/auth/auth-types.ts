@@ -22,6 +22,15 @@ export interface UserIServer {
   refreshToken: string
 }
 
+export interface LogoutResponseI {
+  success: boolean
+}
+
+export interface SignInI {
+  login: string
+  password: string
+}
+
 export type setAuthUserDataActionType = {
   type: typeof SET_AUTH_USER_DATA
   payload: UserI
